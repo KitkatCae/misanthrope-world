@@ -91,19 +91,10 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    // ── Temperature mod dependencies ──────────────────────────────────────
     implementation fg.deobf("curse.maven:thermodynamica-1469308:7743758")
     implementation fg.deobf("curse.maven:cold-sweat-506194:7492468")
-
-    // ── Physics mod optional dependencies ─────────────────────────────────
-    // Create: ClockworkThermalBridge and structural stress adapters
     implementation fg.deobf("curse.maven:create-328085:7178761")
-
-    // Alex's Caves: referenced by physics registries
     implementation fg.deobf("maven.modrinth:alexs-caves:${alexscaves_version}")
-
-    // Valkyrien Skies: RackTemperatureSampler and structure ship transforms
     implementation fg.deobf("org.valkyrienskies:valkyrienskies-120-forge:${vs2_version}")
     implementation("org.valkyrienskies.core:api:${vscore_version}") {
         exclude group: 'org.joml', module: ''
@@ -118,6 +109,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:full-stop-1118198:6957594")
     implementation fg.deobf("curse.maven:flowing_fluids-1108809:7623778")
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
+    compileOnly fg.deobf("curse.maven:supplementaries-412082:7884611")
     implementation files('libs/pizzadelight-1.20.1-1.0.2.jar')
     implementation files('libs/mge-2.7.4.jar')
 }

@@ -8,6 +8,7 @@
     "crackrender.ChunkCrackInjectorMixin",
     "crackrender.ModelBlockRendererCrackMixin",
     "wet_sand.FarmlandBlockMixin",
+    "supplementaries.BellowsBlockTileMixin",
     "wet_sand.SugarCaneBlockMixin"
   ],
   "client": [
