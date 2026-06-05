@@ -1,0 +1,29 @@
+{
+  "thermal_mass": 38,
+  "conductivity": 18,
+  "insulation_r": 24,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.65,
+  "on_fire": {
+    "temp": 200,
+    "result": "misanthrope_core:witherite_hafnium_composite"
+  },
+  "on_melt": {
+    "temp": 2000,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "custom_behavior": "misanthrope_core:queen_slime_energy_behavior",
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.3,
+    "quanta": 0.25,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 95,
+  "block": "tconstruct:queens_slime_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

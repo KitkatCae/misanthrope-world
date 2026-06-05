@@ -1,0 +1,58 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 3,
+  "insulation_r": 32,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.28,
+  "adhesion": 0.35,
+  "on_melt": {
+    "temp": 1400,
+    "result": "minecraft:lava"
+  },
+  "stability_field": {
+    "variable": "atmospheric_helium_concentration",
+    "minimum_percent": 0.1
+  },
+  "light_emission": {
+    "type": "atmospheric_scaled",
+    "color": "pale_bright_yellow_587nm",
+    "source": "helium_D3_chemiluminescence",
+    "max_level": 10,
+    "min_level": 0
+  },
+  "custom_behavior": "misanthrope_core:ambrosium_helium_corrosion",
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.2,
+    "quanta": 0.3,
+    "rectification": 0.2
+  },
+  "ousia_capacity": 35,
+  "note": "Only viable Aether fuel. Glow scales with He concentration.",
+  "combustion_type": "helium_corrosion_catalytic",
+  "combustion_min_helium_pct": 5.0,
+  "conventional_fuel_in_aether": false,
+  "block": "aether:ambrosium_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 240.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 2000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

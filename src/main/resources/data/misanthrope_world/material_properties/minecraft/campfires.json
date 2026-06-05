@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 15,
+  "conductivity": 0.5,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.15,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.1,
+  "emission": {
+    "peak_celsius": 400,
+    "watts_per_block": 350,
+    "requires_oxygen": true,
+    "is_continuous": false,
+    "active_when_property": "lit",
+    "active_when_value": "true"
+  },
+  "tag": "minecraft:campfires",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 300000,
+    "tensile_strength_kpa": 30000,
+    "shear_strength_kpa": 60000,
+    "fracture_toughness": 0.6,
+    "density_kg_m3": 3000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

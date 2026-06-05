@@ -1,0 +1,52 @@
+{
+  "thermal_mass": 45,
+  "conductivity": 20,
+  "insulation_r": 20,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.14,
+  "on_melt": {
+    "temp": 1668,
+    "result": "minecraft:lava"
+  },
+  "on_ignite": {
+    "trigger": "gunpowder_contact",
+    "result": "explosion_tier_4"
+  },
+  "radiation": {
+    "type": "alpha_beta",
+    "intensity": 0.7,
+    "half_life": "24.1_days"
+  },
+  "custom_behavior": "misanthrope_core:ultimate_alloy_behavior",
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.2,
+    "quanta": 0.2,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 120,
+  "block": "craziness_awakened:ultimate_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 2200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "thermal_mass": 44,
+  "conductivity": 10,
+  "insulation_r": 26,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 140,
+    "result": "minecraft:lava"
+  },
+  "custom_behavior": "misanthrope_core:desolum_curse_behavior",
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.6,
+    "quanta": 0.2,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 140,
+  "note": "Lead-bismuth eutectic. Ritual mana for soul-lattice disruption.",
+  "ousia_state": "ritual_configured_soul_lattice_disruption",
+  "melt_note": "Lead-bismuth eutectic ~125C — destroyed by campfire proximity",
+  "block": "mythictinkers:desolum_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 15000,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.7,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.65
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.3
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.05
+      }
+    ],
+    "density_kg_m3": 8000,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

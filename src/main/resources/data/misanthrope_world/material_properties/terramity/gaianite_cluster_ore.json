@@ -1,0 +1,30 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 8,
+  "insulation_r": 22,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.28,
+  "adhesion": 0.4,
+  "on_fire": {
+    "temp": 180,
+    "result": "misanthrope_core:dead_gaianite_crystal"
+  },
+  "on_melt": {
+    "temp": 1000,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "piezoelectric": true,
+  "custom_behavior": "misanthrope_core:gaianite_piezoelectric_signal",
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.1,
+    "quanta": 0.3,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 45,
+  "block": "terramity:gaianite_cluster_ore",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

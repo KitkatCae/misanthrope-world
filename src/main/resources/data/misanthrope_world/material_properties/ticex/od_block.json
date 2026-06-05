@@ -1,0 +1,23 @@
+{
+  "thermal_mass": "NaN",
+  "conductivity": "random",
+  "insulation_r": "random",
+  "dissipation_rate": "random",
+  "is_airtight": "random",
+  "porousness": 0.0,
+  "adhesion": 0.0,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": "random",
+  "glitch": true,
+  "custom_behavior": "misanthrope_core:od_behavior",
+  "ousia_affinity": {
+    "eterna": "random",
+    "arcana": "random",
+    "quanta": "random",
+    "rectification": "random"
+  },
+  "ousia_capacity": 0,
+  "note": "Intentional simulation corruption. Do not normalize.",
+  "re_roll_interval_ticks": "random_2_4",
+  "block": "ticex:od_block"
+}

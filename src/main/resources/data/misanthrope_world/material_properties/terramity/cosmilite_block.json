@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 100,
+  "conductivity": 5,
+  "insulation_r": 40,
+  "dissipation_rate": 0.001,
+  "is_airtight": true,
+  "porousness": 0.01,
+  "adhesion": 0.02,
+  "on_melt": {
+    "temp": 4000,
+    "result": "misanthrope_core:microcosm_entity"
+  },
+  "custom_behavior": "misanthrope_core:cosmilite_gravity_behavior",
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.5,
+    "quanta": 0.1,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 400,
+  "gravitational_mass": "extreme",
+  "block": "terramity:cosmilite_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 2000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

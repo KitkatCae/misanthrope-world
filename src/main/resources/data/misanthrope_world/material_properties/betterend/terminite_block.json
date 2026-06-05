@@ -1,0 +1,64 @@
+{
+  "thermal_mass": 48,
+  "conductivity": 72,
+  "insulation_r": 5,
+  "dissipation_rate": 0.22,
+  "is_airtight": true,
+  "porousness": 0.02,
+  "adhesion": 0.06,
+  "custom_behavior": "misanthrope_core:terminite_cdw_behavior",
+  "ousia_affinity": {
+    "eterna": 0.4,
+    "arcana": 0.1,
+    "quanta": 0.15,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 240,
+  "cdw_electrons_initial": 140,
+  "cdw_equilibrium_earth": 105,
+  "drift_rate": "1_to_2_per_nucleus_per_day",
+  "floor_result": "weakened_terminite_not_niobium",
+  "extreme_gravity_result": "misanthrope_core:niobium_block",
+  "block": "betterend:terminite_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 200000,
+    "tensile_strength_kpa": 180000,
+    "shear_strength_kpa": 100000,
+    "fracture_toughness": 0.9,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.65
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.3
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.05
+      }
+    ],
+    "density_kg_m3": 8000,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

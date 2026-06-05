@@ -1,0 +1,45 @@
+[
+  {
+    "tag": "forge:storage_blocks/iron",
+    "thermal_mass": 80,
+    "insulation_r": 0.2,
+    "is_airtight": true,
+    "electrically_conductive": true
+  },
+  {
+    "tag": "forge:storage_blocks/copper",
+    "thermal_mass": 30,
+    "insulation_r": 0.05,
+    "is_airtight": true,
+    "electrically_conductive": true
+  },
+  {
+    "tag": "forge:storage_blocks/gold",
+    "thermal_mass": 60,
+    "insulation_r": 0.08,
+    "is_airtight": true,
+    "electrically_conductive": true
+  },
+  {
+    "tag": "forge:storage_blocks/steel",
+    "thermal_mass": 90,
+    "insulation_r": 0.18,
+    "is_airtight": true,
+    "electrically_conductive": true
+  },
+  {
+    "block": "minecraft:iron_bars",
+    "thermal_mass": 20,
+    "insulation_r": 0.05,
+    "is_airtight": false,
+    "electrically_conductive": true,
+    "thickness_fraction": 0.15
+  },
+  {
+    "block": "minecraft:cauldron",
+    "thermal_mass": 50,
+    "insulation_r": 0.15,
+    "is_airtight": false,
+    "electrically_conductive": true
+  }
+]

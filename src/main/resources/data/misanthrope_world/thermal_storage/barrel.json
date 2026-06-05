@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:barrel",
+  "insulation_r_override": 0.15,
+  "active": false,
+  "affects_nearby_blocks": false
+}

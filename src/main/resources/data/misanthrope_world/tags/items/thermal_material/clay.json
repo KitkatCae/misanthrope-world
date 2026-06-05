@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "misanthrope_core:unfired_stomping_tray",
+    "misanthrope_core:unfired_clay_mixing_bowl",
+    "misanthrope_core:unfired_clay_jug",
+    "misanthrope_core:unfired_clay_large_jug",
+    "misanthrope_core:unfired_cooking_pot",
+    "misanthrope_core:unfired_flower_pot",
+    "misanthrope_core:unfired_clay_pot",
+    "misanthrope_core:blank_unfired_ceramic_mould",
+    "minecraft:clay_ball",
+    "#minecraft:terracotta"
+  ]
+}

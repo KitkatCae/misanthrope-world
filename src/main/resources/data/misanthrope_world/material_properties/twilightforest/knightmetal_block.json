@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 32,
+  "conductivity": 28,
+  "insulation_r": 13,
+  "dissipation_rate": 0.09,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.45,
+  "on_melt": {
+    "temp": 1300,
+    "result": "tfmg:nickel_block"
+  },
+  "topologically_ordered": true,
+  "fatigue_immune": true,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.05,
+    "quanta": 0.05,
+    "rectification": 0.85
+  },
+  "ousia_capacity": 400,
+  "note": "Tesseract-phase nickel. 4D crystal. Topology lost on melt permanently.",
+  "block": "twilightforest:knightmetal_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 6000,
+    "shear_strength_kpa": 12000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

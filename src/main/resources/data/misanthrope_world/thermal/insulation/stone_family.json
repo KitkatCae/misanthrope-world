@@ -1,0 +1,80 @@
+[
+  {
+    "block": "minecraft:stone",
+    "thermal_mass": 50,
+    "insulation_r": 0.45,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:cobblestone",
+    "thermal_mass": 40,
+    "insulation_r": 0.4,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:stone_bricks",
+    "thermal_mass": 60,
+    "insulation_r": 0.55,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:cracked_stone_bricks",
+    "thermal_mass": 50,
+    "insulation_r": 0.4,
+    "is_airtight": false
+  },
+  {
+    "block": "minecraft:deepslate_bricks",
+    "thermal_mass": 70,
+    "insulation_r": 0.6,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:bricks",
+    "thermal_mass": 60,
+    "insulation_r": 0.55,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:nether_bricks",
+    "thermal_mass": 80,
+    "insulation_r": 0.65,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:basalt",
+    "thermal_mass": 65,
+    "insulation_r": 0.58,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:polished_basalt",
+    "thermal_mass": 70,
+    "insulation_r": 0.6,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:granite",
+    "thermal_mass": 55,
+    "insulation_r": 0.5,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:diorite",
+    "thermal_mass": 55,
+    "insulation_r": 0.5,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:andesite",
+    "thermal_mass": 55,
+    "insulation_r": 0.5,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:obsidian",
+    "thermal_mass": 120,
+    "insulation_r": 0.75,
+    "is_airtight": true
+  }
+]

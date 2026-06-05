@@ -1,0 +1,10 @@
+{
+  "_comment": "Alex's Caves diving suit — full suit required, provides 70% crush damage reduction",
+  "required_pieces": [
+    "alexscaves:diving_helmet",
+    "alexscaves:diving_chestplate",
+    "alexscaves:diving_leggings",
+    "alexscaves:diving_boots"
+  ],
+  "damage_reduction": 0.70
+}

@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:campfire",
+  "internal_temperature": 400.0,
+  "active": true,
+  "affects_nearby_blocks": true
+}

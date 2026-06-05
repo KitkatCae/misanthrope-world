@@ -1,0 +1,45 @@
+[
+  {
+    "tag": "minecraft:logs",
+    "thermal_mass": 20,
+    "insulation_r": 0.7,
+    "is_airtight": true
+  },
+  {
+    "tag": "minecraft:planks",
+    "thermal_mass": 12,
+    "insulation_r": 0.65,
+    "is_airtight": true
+  },
+  {
+    "tag": "minecraft:leaves",
+    "thermal_mass": 2,
+    "insulation_r": 0.2,
+    "is_airtight": false,
+    "thickness_fraction": 0.1
+  },
+  {
+    "tag": "minecraft:wool",
+    "thermal_mass": 8,
+    "insulation_r": 0.9,
+    "is_airtight": false
+  },
+  {
+    "block": "minecraft:hay_block",
+    "thermal_mass": 6,
+    "insulation_r": 0.92,
+    "is_airtight": false
+  },
+  {
+    "block": "minecraft:dirt",
+    "thermal_mass": 35,
+    "insulation_r": 0.55,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:grass_block",
+    "thermal_mass": 30,
+    "insulation_r": 0.5,
+    "is_airtight": true
+  }
+]

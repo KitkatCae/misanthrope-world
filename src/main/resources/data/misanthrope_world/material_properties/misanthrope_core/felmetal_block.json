@@ -1,0 +1,37 @@
+{
+  "thermal_mass": "null_casimir",
+  "conductivity": "null_electronless",
+  "insulation_r": 0,
+  "dissipation_rate": 0.0,
+  "is_airtight": true,
+  "porousness": 0.01,
+  "adhesion": 0.01,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "negative_temperature_regime": true,
+  "light_emission": {
+    "type": "static",
+    "level": 4,
+    "color": "near_black_deep_green",
+    "source": "quantum_vacuum_photon_mode_suppression"
+  },
+  "custom_behavior": "misanthrope_core:felmetal_casimir_behavior",
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 0,
+  "note": "Element 172. Casimir bonding. Thermally invisible. Exists only below -273C.",
+  "operating_range_celsius": {
+    "min": -3300,
+    "max": -273
+  },
+  "on_exceed_temp": {
+    "temp": -273,
+    "result": "misanthrope_core:felmetal_vapor"
+  },
+  "glitch_thermal": true,
+  "block": "misanthrope_core:felmetal_block"
+}

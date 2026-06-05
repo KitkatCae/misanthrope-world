@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:trapped_chest",
+  "insulation_r_override": 0.12,
+  "active": false,
+  "affects_nearby_blocks": false
+}

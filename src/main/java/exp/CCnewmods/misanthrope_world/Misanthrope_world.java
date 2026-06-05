@@ -1,118 +1,113 @@
 package exp.CCnewmods.misanthrope_world;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
+import exp.CCnewmods.misanthrope_world.altitude.AltitudeSetup;
+import exp.CCnewmods.misanthrope_world.config.MisWorldConfig;
+import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
+import exp.CCnewmods.misanthrope_world.physics.WorldSimulation;
+import exp.CCnewmods.misanthrope_world.physics.clockwork.ClockworkThermalBridge;
+import exp.CCnewmods.misanthrope_world.physics.collapse.network.CollapseNetwork;
+import exp.CCnewmods.misanthrope_world.physics.offgas.OffGasHandler;
+import exp.CCnewmods.misanthrope_world.physics.structural.MinecollapseBypassHandler;
+import exp.CCnewmods.misanthrope_world.physics.structural.StructuralStressField;
+import exp.CCnewmods.misanthrope_world.crackrender.CrackRenderSetup;
+import exp.CCnewmods.misanthrope_world.objects.MisWorldBlockEntityRegistry;
+import exp.CCnewmods.misanthrope_world.wet_sand.WaterConsumptionSystem;
+import exp.CCnewmods.misanthrope_world.wet_sand.WetSandRegistration;
+import exp.CCnewmods.misanthrope_world.wet_sand.WetSandRegistry;
+import exp.CCnewmods.misanthrope_world.objects.MisWorldBlocks;
+import net.minecraftforge.event.AddReloadListenerEvent;
+import exp.CCnewmods.misanthrope_world.temperature.TemperatureSystemSetup;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import org.slf4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Misanthrope_world.MODID)
 public class Misanthrope_world {
 
-    // Define mod id in a common place for everything to reference
     public static final String MODID = "misanthrope_world";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
-    // Create a Deferred Register to hold Blocks which will all be registered under the "misanthrope_world" namespace
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "misanthrope_world" namespace
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "misanthrope_world" namespace
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-    // Creates a new Block with the id "misanthrope_world:example_block", combining the namespace and path
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    // Creates a new BlockItem with the id "misanthrope_world:example_block", combining the namespace and path
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
-
-    // Creates a new food item with the id "misanthrope_world:example_id", nutrition 1 and saturation 2
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().nutrition(1).saturationMod(2f).build())));
-
-    // Creates a creative tab with the id "misanthrope_world:example_tab" for the example item, that is placed after the combat tab
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder().withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> EXAMPLE_ITEM.get().getDefaultInstance()).displayItems((parameters, output) -> {
-        output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-    }).build());
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public Misanthrope_world() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register the commonSetup method for modloading
+        // ── Unified config (must be first) ────────────────────────────────────
+        // Registers misanthrope_world-server.toml with Forge's config system.
+        // Values are available after FMLCommonSetupEvent fires.
+        MisWorldConfig.register();
+
+        // ── Block / BE registration ───────────────────────────────────────────
+        MisWorldBlocks.DEF_REG.register(modEventBus);
+        WetSandRegistration.register(modEventBus);
+        MisWorldBlockEntityRegistry.DEF_REG.register(modEventBus);
+
+        // ── Temperature (always on — core purpose of this mod) ────────────────
+        TemperatureSystemSetup.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
-        BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
-        ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
-        CREATIVE_MODE_TABS.register(modEventBus);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> MisanthropeWorldClient::init);
+    }
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
-
-        // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    private void onAddReloadListeners(AddReloadListenerEvent event) {
+        // Wet sand registry is a data-driven reload listener; we only add it
+        // here even if the system is disabled — the registry itself is harmless
+        // when empty. The actual block registration is gated below.
+        event.addListener(WetSandRegistry.INSTANCE);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        // Log system state now that the config has been loaded by Forge
+        MisWorldConfig.logSystemState();
 
-        if (Config.logDirtBlock) LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+        // ── Crack render setup (client mesh injection) ────────────────────────
+        // CrackRenderSetup sets up the client-side mesh injector regardless of
+        // the crack toggle — the client doesn't know the server's config state
+        // at this point. The actual propagator simply won't fire events when
+        // crackSystem = false, so no cracks will appear anyway.
+        CrackRenderSetup.commonSetup(event);
 
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
+        event.enqueueWork(() -> {
+            // ── Always-on physics infrastructure ─────────────────────────────
+            // BlockPhysicsRegistry is the material_properties JSON loader used by
+            // many systems (offgas, thermal simulation, etc.) — always needed.
+            BlockPhysicsRegistry.INSTANCE.getClass();
 
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-    }
+            // OffGasHandler and thermal systems are part of the temperature bridge
+            // (always on).
+            OffGasHandler.class.getName();
+            ClockworkThermalBridge.class.getName();
+            WorldSimulation.class.getName();
 
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) event.accept(EXAMPLE_BLOCK_ITEM);
-    }
+            // ── Crack / structural system ─────────────────────────────────────
+            if (MisWorldConfig.isCrackSystemEnabled() || MisWorldConfig.isCollapseSystemEnabled()) {
+                StructuralStressField.class.getName();
+                MinecollapseBypassHandler.class.getName();
+            }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
-    }
+            // ── Collapse / lattice system ─────────────────────────────────────
+            if (MisWorldConfig.isCollapseSystemEnabled()) {
+                CollapseNetwork.register();
+            }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
+            // ── Wet sand system ───────────────────────────────────────────────
+            if (MisWorldConfig.isWetSandEnabled()) {
+                WetSandRegistration.registerWetSandEntries();
+                WetSandRegistration.registerModCompatEntries();
+                MinecraftForge.EVENT_BUS.register(WaterConsumptionSystem.class);
+            } else {
+                LOGGER.info("[MisWorld] Wet sand system disabled — skipping block registration.");
+            }
+        });
 
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-        }
+        // ── Altitude temperature system ───────────────────────────────────────
+        // AltitudeSetup checks MisWorldConfig.isAltitudeTemperatureEnabled() itself.
+        AltitudeSetup.commonSetup(event);
     }
 }

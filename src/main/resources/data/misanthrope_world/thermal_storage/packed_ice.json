@@ -1,0 +1,7 @@
+{
+  "block": "minecraft:packed_ice",
+  "internal_temperature": -5.0,
+  "insulation_r_override": 0.65,
+  "active": false,
+  "affects_nearby_blocks": true
+}

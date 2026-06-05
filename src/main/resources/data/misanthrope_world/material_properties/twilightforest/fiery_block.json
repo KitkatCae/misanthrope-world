@@ -1,0 +1,66 @@
+{
+  "thermal_mass": 40,
+  "conductivity": 35,
+  "insulation_r": 15,
+  "dissipation_rate": 0.02,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.12,
+  "on_melt": {
+    "temp": 2800,
+    "result": "misanthrope_core:antimatter_annihilation_event"
+  },
+  "passive_heat_output": true,
+  "antimatter_fraction": 0.15,
+  "custom_behavior": "misanthrope_core:fiery_metal_corona",
+  "ousia_affinity": {
+    "eterna": 0.4,
+    "arcana": 0.2,
+    "quanta": 0.2,
+    "rectification": 0.2
+  },
+  "ousia_capacity": 120,
+  "note": "Stable antimatter metal — edge corona reaction",
+  "block": "twilightforest:fiery_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 400000,
+    "tensile_strength_kpa": 350000,
+    "shear_strength_kpa": 180000,
+    "fracture_toughness": 0.95,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.65
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.3
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.05
+      }
+    ],
+    "density_kg_m3": 9000,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

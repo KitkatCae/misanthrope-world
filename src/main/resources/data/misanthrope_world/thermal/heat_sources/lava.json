@@ -1,0 +1,23 @@
+[
+  {
+    "block": "minecraft:lava",
+    "peak_celsius": 1200,
+    "watts_per_block": 800,
+    "requires_oxygen": false,
+    "is_continuous": true
+  },
+  {
+    "block": "minecraft:magma_block",
+    "peak_celsius": 600,
+    "watts_per_block": 400,
+    "requires_oxygen": false,
+    "is_continuous": true
+  },
+  {
+    "block": "minecraft:lava_cauldron",
+    "peak_celsius": 900,
+    "watts_per_block": 600,
+    "requires_oxygen": false,
+    "is_continuous": true
+  }
+]

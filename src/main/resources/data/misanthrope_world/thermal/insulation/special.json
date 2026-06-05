@@ -1,0 +1,38 @@
+[
+  {
+    "block": "minecraft:air",
+    "thermal_mass": 1,
+    "insulation_r": 0.0,
+    "is_airtight": false
+  },
+  {
+    "block": "minecraft:water",
+    "thermal_mass": 200,
+    "insulation_r": 0.1,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:lava",
+    "thermal_mass": 150,
+    "insulation_r": 0.05,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:ice",
+    "thermal_mass": 80,
+    "insulation_r": 0.35,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:sand",
+    "thermal_mass": 25,
+    "insulation_r": 0.3,
+    "is_airtight": true
+  },
+  {
+    "block": "minecraft:gravel",
+    "thermal_mass": 30,
+    "insulation_r": 0.28,
+    "is_airtight": false
+  }
+]

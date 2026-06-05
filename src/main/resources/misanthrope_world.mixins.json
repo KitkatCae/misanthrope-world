@@ -2,16 +2,21 @@
   "required": true,
   "minVersion": "0.8",
   "package": "exp.CCnewmods.misanthrope_world.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "refmap": "misanthrope_world.refmap.json",
   "mixins": [
+    "crackrender.ChunkCrackInjectorMixin",
+    "crackrender.ModelBlockRendererCrackMixin",
+    "wet_sand.FarmlandBlockMixin",
+    "wet_sand.SugarCaneBlockMixin"
   ],
   "client": [
+    "temperature.ItemTemperatureTintMixin",
+    "farmersdelight.CookingPotTickMixin",
+    "farmersdelight.HeatableBlockEntityMixin",
+    "farmersdelight.RawPizzaBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "overwrites": {
-    "requireAnnotations": true
   }
 }

@@ -1,0 +1,31 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 28,
+  "insulation_r": 25,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.1,
+  "on_fire": {
+    "temp": 180,
+    "result": "terramity:dead_virentium_block"
+  },
+  "on_melt": {
+    "temp": 1100,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "piezoelectric": true,
+  "custom_behavior": "misanthrope_core:virentium_behavior",
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.1,
+    "quanta": 0.3,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 80,
+  "note": "Gaianite+mystic vines 1:1 — plague capture/release",
+  "block": "terramity:virentium_alloy_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

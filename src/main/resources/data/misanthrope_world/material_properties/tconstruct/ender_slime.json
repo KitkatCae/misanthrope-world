@@ -1,0 +1,24 @@
+{
+  "thermal_mass": 16,
+  "conductivity": 10,
+  "insulation_r": 22,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.58,
+  "adhesion": 0.75,
+  "on_fire": {
+    "temp": 210,
+    "result": "minecraft:air"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.25,
+    "arcana": 0.1,
+    "quanta": 0.35,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 18,
+  "block": "tconstruct:ender_slime",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

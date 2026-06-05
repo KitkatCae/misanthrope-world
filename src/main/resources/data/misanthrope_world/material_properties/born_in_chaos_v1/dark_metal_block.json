@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 28,
+  "conductivity": 22,
+  "insulation_r": 18,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.07,
+  "adhesion": 0.15,
+  "on_melt": {
+    "temp": 1580,
+    "result": "minecraft:lava"
+  },
+  "lava_immune": true,
+  "custom_behavior": "misanthrope_core:dark_metal_infected_resonance",
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.1,
+    "quanta": 0.4,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 95,
+  "note": "Co-Ti with chaos mana. Extra damage to infected.",
+  "ousia_state": "chaos_quanta_eterna_blend",
+  "block": "born_in_chaos_v1:dark_metal_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 6000,
+    "shear_strength_kpa": 12000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

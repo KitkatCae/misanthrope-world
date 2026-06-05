@@ -1,0 +1,149 @@
+[
+  {
+    "input": "minecraft:beef",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380,
+    "burned_item": "minecraft:cooked_beef"
+  },
+  {
+    "input": "minecraft:porkchop",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380,
+    "burned_item": "minecraft:cooked_porkchop"
+  },
+  {
+    "input": "minecraft:chicken",
+    "burn_threshold_celsius": 185,
+    "char_threshold_celsius": 360,
+    "burned_item": "minecraft:cooked_chicken"
+  },
+  {
+    "input": "minecraft:mutton",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380,
+    "burned_item": "minecraft:cooked_mutton"
+  },
+  {
+    "input": "minecraft:rabbit",
+    "burn_threshold_celsius": 185,
+    "char_threshold_celsius": 360,
+    "burned_item": "minecraft:cooked_rabbit"
+  },
+  {
+    "input": "minecraft:cod",
+    "burn_threshold_celsius": 175,
+    "char_threshold_celsius": 340,
+    "burned_item": "minecraft:cooked_cod"
+  },
+  {
+    "input": "minecraft:salmon",
+    "burn_threshold_celsius": 175,
+    "char_threshold_celsius": 340,
+    "burned_item": "minecraft:cooked_salmon"
+  },
+  {
+    "input": "farmersdelight:bacon",
+    "burn_threshold_celsius": 180,
+    "char_threshold_celsius": 360
+  },
+  {
+    "input": "farmersdelight:ham",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380
+  },
+  {
+    "input": "farmersdelight:chicken_cuts",
+    "burn_threshold_celsius": 185,
+    "char_threshold_celsius": 360
+  },
+  {
+    "input": "farmersdelight:mutton_chops",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380
+  },
+  {
+    "input": "farmersdelight:beef_patty",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 380
+  },
+  {
+    "input": "minecraft:cooked_beef",
+    "burn_threshold_celsius": 350,
+    "char_threshold_celsius": 550
+  },
+  {
+    "input": "minecraft:cooked_porkchop",
+    "burn_threshold_celsius": 350,
+    "char_threshold_celsius": 550
+  },
+  {
+    "input": "minecraft:cooked_chicken",
+    "burn_threshold_celsius": 330,
+    "char_threshold_celsius": 520
+  },
+  {
+    "input": "minecraft:baked_potato",
+    "burn_threshold_celsius": 300,
+    "char_threshold_celsius": 480
+  },
+  {
+    "input": "minecraft:bread",
+    "burn_threshold_celsius": 280,
+    "char_threshold_celsius": 450
+  },
+  {
+    "input": "minecraft:cookie",
+    "burn_threshold_celsius": 260,
+    "char_threshold_celsius": 420
+  },
+  {
+    "input": "minecraft:pumpkin_pie",
+    "burn_threshold_celsius": 260,
+    "char_threshold_celsius": 420
+  },
+  {
+    "input": "minecraft:cake",
+    "burn_threshold_celsius": 280,
+    "char_threshold_celsius": 450
+  },
+  {
+    "input": "minecraft:potato",
+    "burn_threshold_celsius": 220,
+    "char_threshold_celsius": 400
+  },
+  {
+    "input": "minecraft:carrot",
+    "burn_threshold_celsius": 220,
+    "char_threshold_celsius": 400
+  },
+  {
+    "input": "minecraft:beetroot",
+    "burn_threshold_celsius": 220,
+    "char_threshold_celsius": 400
+  },
+  {
+    "input": "minecraft:kelp",
+    "burn_threshold_celsius": 180,
+    "char_threshold_celsius": 340
+  },
+  {
+    "input": "farmersdelight:cabbage",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 370
+  },
+  {
+    "input": "farmersdelight:onion",
+    "burn_threshold_celsius": 200,
+    "char_threshold_celsius": 370
+  },
+  {
+    "input": "farmersdelight:tomato",
+    "burn_threshold_celsius": 190,
+    "char_threshold_celsius": 360
+  },
+  {
+    "input": "farmersdelight:rice",
+    "burn_threshold_celsius": 210,
+    "char_threshold_celsius": 380
+  }
+]

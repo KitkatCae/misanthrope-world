@@ -1,0 +1,11 @@
+[
+  {
+    "block": "misanthrope_core:bloomery_trapdoor",
+    "peak_celsius": 1538,
+    "watts_per_block": 1000,
+    "requires_oxygen": true,
+    "is_continuous": false,
+    "active_when_property": "open",
+    "active_when_value": "false"
+  }
+]

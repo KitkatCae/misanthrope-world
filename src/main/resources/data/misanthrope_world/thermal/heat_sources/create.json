@@ -1,0 +1,11 @@
+[
+  {
+    "block": "create:blaze_burner",
+    "peak_celsius": 1400,
+    "watts_per_block": 1000,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "heat_level",
+    "active_when_value": "kindled"
+  }
+]

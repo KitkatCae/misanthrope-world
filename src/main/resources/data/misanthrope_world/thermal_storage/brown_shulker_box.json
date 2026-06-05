@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:brown_shulker_box",
+  "insulation_r_override": 0.6,
+  "active": false,
+  "affects_nearby_blocks": false
+}

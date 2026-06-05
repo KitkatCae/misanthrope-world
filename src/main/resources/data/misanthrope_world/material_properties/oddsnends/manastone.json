@@ -1,0 +1,21 @@
+{
+  "thermal_mass": 0,
+  "conductivity": 0,
+  "insulation_r": 0,
+  "dissipation_rate": 0.0,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.0,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 0,
+  "stub": true,
+  "pending": "ousia_lifecycle_document",
+  "block": "oddsnends:manastone",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

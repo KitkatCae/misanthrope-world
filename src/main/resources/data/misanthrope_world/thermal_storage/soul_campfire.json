@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:soul_campfire",
+  "internal_temperature": 600.0,
+  "active": true,
+  "affects_nearby_blocks": true
+}

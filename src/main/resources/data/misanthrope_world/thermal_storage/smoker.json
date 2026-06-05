@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:smoker",
+  "dynamic_temperature_provider": "misanthrope_core:vanilla_furnace",
+  "active": true,
+  "affects_nearby_blocks": true
+}

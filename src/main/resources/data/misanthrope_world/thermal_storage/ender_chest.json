@@ -1,0 +1,6 @@
+{
+  "block": "minecraft:ender_chest",
+  "insulation_r_override": 99.0,
+  "active": false,
+  "affects_nearby_blocks": false
+}

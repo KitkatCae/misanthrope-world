@@ -1,0 +1,28 @@
+{
+  "thermal_mass": 24,
+  "conductivity": 14,
+  "insulation_r": 26,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.7,
+  "on_fire": {
+    "temp": 180,
+    "result": "misanthrope_core:hafnium_particulate"
+  },
+  "on_melt": {
+    "temp": 2233,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.2,
+    "arcana": 0.25,
+    "quanta": 0.35,
+    "rectification": 0.2
+  },
+  "ousia_capacity": 40,
+  "block": "tconstruct:cinderslime_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false
+}

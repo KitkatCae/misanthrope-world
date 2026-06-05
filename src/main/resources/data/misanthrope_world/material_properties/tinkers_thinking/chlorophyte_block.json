@@ -1,0 +1,79 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 15,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.06,
+  "on_fire": {
+    "temp": 200,
+    "result": "misanthrope_core:dead_chlorophyte_husk"
+  },
+  "on_melt": {
+    "temp": 980,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "light_emission": {
+    "type": "static",
+    "level": 3,
+    "color": "soft_green",
+    "source": "fluorescence"
+  },
+  "custom_behavior": "misanthrope_core:chlorophyte_growth",
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.1,
+    "quanta": 0.25,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 45,
+  "growth_conditions": {
+    "substrate": "#forge:mud",
+    "requires_light": true,
+    "min_light": 8
+  },
+  "block": "tinkers_thinking:chlorophyte_block",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 120000,
+    "tensile_strength_kpa": 100000,
+    "shear_strength_kpa": 60000,
+    "fracture_toughness": 0.85,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.65
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.3
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.05
+      }
+    ],
+    "density_kg_m3": 8500,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

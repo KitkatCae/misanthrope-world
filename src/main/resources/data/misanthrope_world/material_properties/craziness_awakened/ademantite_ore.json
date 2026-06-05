@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 6,
+  "insulation_r": 25,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.32,
+  "on_fire_smelt": {
+    "temp": 1650,
+    "result": "craziness_awakened:ademantite_block"
+  },
+  "on_melt": {
+    "temp": 1580,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.45,
+    "quanta": 0.12,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 25,
+  "block": "craziness_awakened:ademantite_ore",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 2200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

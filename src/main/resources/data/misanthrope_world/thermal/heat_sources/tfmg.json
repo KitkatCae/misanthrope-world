@@ -1,0 +1,9 @@
+[
+  {
+    "block": "tfmg:blast_furnace_bricks",
+    "peak_celsius": 1600,
+    "watts_per_block": 900,
+    "requires_oxygen": true,
+    "is_continuous": false
+  }
+]
