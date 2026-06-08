@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 11,
+  "conductivity": 52,
+  "insulation_r": 2,
+  "dissipation_rate": 0.12,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.4,
+    "quanta": 0.18,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 8,
+  "thickness_fraction": 0.3,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 100.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 5000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 90000,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 7200,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.015
+  },
+  "block": "railways:gray_single_pane_locometal_window",
+  "note": "Gray single-pane locometal window \u2014 locometal locomotive component, painted cast iron/mild steel"
+}

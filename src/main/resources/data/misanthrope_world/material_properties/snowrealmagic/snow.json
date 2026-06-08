@@ -1,0 +1,50 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 0.05,
+  "insulation_r": 20.0,
+  "dissipation_rate": 0.03,
+  "is_airtight": true,
+  "porousness": 0.18,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.2,
+    "quanta": 0.51,
+    "rectification": 0.34
+  },
+  "ousia_capacity": 8,
+  "note": "Snow (1-8 layers) \u2014 SRM reimplementation of vanilla layered snow. Full 8-layer (1 block) values here. For partial layers scale insulation_r and thermal_mass by (layers/8).",
+  "block": "snowrealmagic:snow",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 25.0,
+  "thermal_crack_rate": 0.015,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 20,
+    "shear_strength_kpa": 15,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 260,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.85
+  },
+  "snowlog_modifier": {
+    "ins_r_add": 20.0,
+    "thermal_mass_add": 12,
+    "porousness_subtract": 0.1,
+    "force_airtight": false,
+    "layer_scale": true
+  }
+}

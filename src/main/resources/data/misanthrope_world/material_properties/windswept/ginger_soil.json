@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 13,
+  "conductivity": 0.5,
+  "insulation_r": 7,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.44,
+  "adhesion": 0.65,
+  "ousia_affinity": {
+    "eterna": 0.18,
+    "arcana": 0.14,
+    "quanta": 0.42,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 12,
+  "note": "Ginger soil \u2014 dark humus-rich tilled soil, primed for root crop growth, high organic activity",
+  "block": "windswept:ginger_soil",
+  "thickness_fraction": 0.9375,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 80,
+    "tensile_strength_kpa": 30,
+    "shear_strength_kpa": 20,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 1150,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.88,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.2,
+    "shockwave_absorption": 0.68
+  }
+}

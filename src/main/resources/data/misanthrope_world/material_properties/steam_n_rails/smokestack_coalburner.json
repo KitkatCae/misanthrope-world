@@ -1,0 +1,49 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 52,
+  "insulation_r": 2,
+  "dissipation_rate": 0.12,
+  "is_airtight": false,
+  "porousness": 0.45,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.4,
+    "quanta": 0.2,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 4,
+  "note": "smokestack coalburner \u2014 locomotive exhaust chimney",
+  "block": "railways:smokestack_coalburner",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 48000,
+    "shear_strength_kpa": 30000,
+    "fracture_toughness": 0.65,
+    "density_kg_m3": 2100,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.4,
+    "shockwave_absorption": 0.15
+  },
+  "thermal_offgas": {
+    "gas": "mge:carbon_dioxide",
+    "rate_mbar_per_tick": 0.08,
+    "rate_scales_with_temp": true,
+    "threshold_celsius": 100
+  }
+}

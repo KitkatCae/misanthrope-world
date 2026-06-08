@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 0.58,
+  "insulation_r": 6,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.5,
+  "adhesion": 0.75,
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.12,
+    "quanta": 0.48,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 11,
+  "note": "Mud \u2014 waterlogged clay-silt mix, very high quanta from amorphous water-saturated structure, excellent blast absorption",
+  "block": "minecraft:mud",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 20,
+    "shear_strength_kpa": 15,
+    "fracture_toughness": 0.03,
+    "density_kg_m3": 1600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.75
+  }
+}

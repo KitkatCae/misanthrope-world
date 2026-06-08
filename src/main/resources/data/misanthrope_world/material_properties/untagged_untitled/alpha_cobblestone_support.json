@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 4,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.35,
+  "adhesion": 0.38,
+  "on_melt": {
+    "temp": 850,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.34,
+    "quanta": 0.32,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 18,
+  "note": "Alpha cobblestone support \u2014 load-bearing column, structural frame",
+  "block": "untagged_mobs:alpha_cobblestone_support",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 168.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 27000,
+    "tensile_strength_kpa": 2700,
+    "shear_strength_kpa": 6750,
+    "fracture_toughness": 0.36,
+    "density_kg_m3": 2310,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.12
+  }
+}

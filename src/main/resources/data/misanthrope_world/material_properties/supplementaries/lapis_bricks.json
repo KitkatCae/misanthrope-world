@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 4,
+  "insulation_r": 15,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.26,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.48,
+    "quanta": 0.15,
+    "rectification": 0.45
+  },
+  "ousia_capacity": 24,
+  "note": "Lapis bricks \u2014 cut lapis lazuli masonry, deep blue, high arcana from stable lazurite crystal lattice",
+  "block": "supplementaries:lapis_bricks",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 160.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 30000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.38,
+    "density_kg_m3": 2700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.58,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.12
+  }
+}

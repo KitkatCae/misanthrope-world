@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 0.45,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.52,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.08,
+    "quanta": 0.48,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 6,
+  "note": "Jelly torch \u2014 bioluminescent jellyfish gel on a stick, cold biological light source, no combustion, eterna from active luciferin chemistry in the gel, adhesion elevated from sticky gel",
+  "block": "tide:jelly_torch",
+  "thickness_fraction": 0.12,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 30,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 50,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 150,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.65
+  }
+}

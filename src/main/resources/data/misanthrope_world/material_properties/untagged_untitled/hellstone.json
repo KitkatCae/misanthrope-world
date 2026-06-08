@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 28,
+  "conductivity": 3.0,
+  "insulation_r": 20,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 1600,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.2,
+    "arcana": 0.35,
+    "quanta": 0.18,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 26,
+  "note": "Hellstone \u2014 nether-origin dense volcanic rock, extremely heat-tolerant, high thermal mass from dense mineral content",
+  "block": "untagged_mobs:hellstone",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "lava_immune": true,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 8000,
+    "shear_strength_kpa": 20000,
+    "fracture_toughness": 0.48,
+    "density_kg_m3": 2900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.07
+  }
+}

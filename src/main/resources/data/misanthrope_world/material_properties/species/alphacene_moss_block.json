@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.08,
+  "insulation_r": 2,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.52,
+  "adhesion": 0.65,
+  "biological": true,
+  "on_fire": {
+    "temp": 220,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.28,
+    "arcana": 0.1,
+    "quanta": 0.52,
+    "rectification": 0.12
+  },
+  "ousia_capacity": 10,
+  "note": "Alphacene moss block \u2014 thick primordial moss biological block, high eterna from dense living biology",
+  "block": "species:alphacene_moss_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 80,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 40,
+    "fracture_toughness": 0.06,
+    "density_kg_m3": 400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.7
+  }
+}

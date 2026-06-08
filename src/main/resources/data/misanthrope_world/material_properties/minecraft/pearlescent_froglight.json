@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 1.0,
+  "insulation_r": 6,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.12,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_capacity": 10,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.45,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.1,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  },
+  "block": "minecraft:pearlescent_froglight",
+  "note": "Pearlescent froglight \u2014 pale iridescent crystal, highest rectification of the three from ordered nacre-like layers",
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.15,
+    "quanta": 0.2,
+    "rectification": 0.3
+  }
+}

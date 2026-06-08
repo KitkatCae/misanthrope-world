@@ -1,0 +1,61 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 0.27,
+  "insulation_r": 7,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.18,
+  "adhesion": 0.25,
+  "on_soften": {
+    "temp": 115,
+    "result": "vanillabackport:sulfur"
+  },
+  "on_fire": {
+    "temp": 250,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.1,
+    "quanta": 0.68,
+    "rectification": 0.22
+  },
+  "ousia_capacity": 4,
+  "note": "Sulfur spike \u2014 natural volcanic sulfur speleothem, tapered growth axis, highest quanta of sulfur family from directional crystal growth",
+  "block": "vanillabackport:sulfur_spike",
+  "thickness_fraction": 0.25,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 45.0,
+  "thermal_crack_rate": 0.012,
+  "thermal_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.025,
+    "rate_scales_with_temp": true,
+    "threshold_celsius": 60,
+    "requires_oxygen": false
+  },
+  "ambient_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.002,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 1000,
+    "tensile_strength_kpa": 100,
+    "shear_strength_kpa": 200,
+    "fracture_toughness": 0.06,
+    "density_kg_m3": 2070,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 0.8,
+    "crack_threshold_fraction": 0.35,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.08
+  }
+}

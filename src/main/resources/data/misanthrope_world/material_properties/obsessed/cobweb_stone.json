@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 0.04,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.9,
+  "adhesion": 0.72,
+  "on_fire": {
+    "temp": 200,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.08,
+    "quanta": 0.52,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 2,
+  "note": "Cobweb stone",
+  "block": "the_obsessed:cobweb_stone",
+  "thickness_fraction": 0.1,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 5,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 10,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 50,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.5
+  }
+}

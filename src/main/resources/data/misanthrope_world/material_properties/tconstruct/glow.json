@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.4,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.28,
+  "adhesion": 0.65,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.38,
+    "arcana": 0.1,
+    "quanta": 0.52,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 10,
+  "note": "Glow block \u2014 bioluminescent slime, high eterna from active luminescent biology",
+  "block": "tconstruct:glow",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 80,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.8
+  }
+}

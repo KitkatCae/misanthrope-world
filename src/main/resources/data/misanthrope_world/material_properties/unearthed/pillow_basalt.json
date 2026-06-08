@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 8,
+  "insulation_r": 18,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.16,
+  "adhesion": 0.26,
+  "on_melt": {
+    "temp": 1050,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.35,
+    "quanta": 0.18,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 22,
+  "note": "Pillow basalt \u2014 submarine lava extrusion lobes, water-quenched",
+  "block": "unearthed:pillow_basalt",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 45000,
+    "tensile_strength_kpa": 4500,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 2800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 2,
+  "insulation_r": 10,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.22,
+  "adhesion": 0.2,
+  "ousia_affinity": {
+    "eterna": 0.32,
+    "arcana": 0.35,
+    "quanta": 0.28,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 22,
+  "note": "Phobotite mantle outcrop \u2014 deep mantle phobotite exposure",
+  "block": "thermal_shock:phobotite_mantle_outcrop",
+  "thickness_fraction": 0.4,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 150.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 15000,
+    "tensile_strength_kpa": 1200,
+    "shear_strength_kpa": 2500,
+    "fracture_toughness": 0.28,
+    "density_kg_m3": 2800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.1,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

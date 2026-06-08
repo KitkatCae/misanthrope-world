@@ -1,0 +1,66 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 4,
+  "insulation_r": 14,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1042,
+    "result": "minecraft:lava",
+    "note": "PbFe2(AsO4)2(OH)2 decomposition temperature"
+  },
+  "pleochroic": true,
+  "pleochroic_response": {
+    "cool_K": {
+      "temp": 10000,
+      "color": "pale_yellowish_red"
+    },
+    "neutral_K": {
+      "temp": 6500,
+      "color": "dark_carmine_red"
+    },
+    "warm_K": {
+      "temp": 2700,
+      "color": "dark_carmine_red"
+    }
+  },
+  "ambient_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.001,
+    "rate_scales_with_temp": true,
+    "condition": null,
+    "note": "Proxy for arsenic/lead vapour \u2014 uses SO2 as closest MGE gas analogue for toxic heavy metal offgassing"
+  },
+  "ousia_affinity": {
+    "eterna": 0.18,
+    "arcana": 0.55,
+    "quanta": 0.22,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 28,
+  "note": "Carminite builder \u2014 carminite-powered construction device housing, same material as carminite_block with iron/redstone electronics",
+  "block": "twilightforest:carminite_builder",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.18,
+    "density_kg_m3": 5100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.48,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.07
+  }
+}

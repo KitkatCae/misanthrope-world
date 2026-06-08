@@ -1,0 +1,49 @@
+{
+  "thermal_mass": 9,
+  "conductivity": 0.16,
+  "insulation_r": 0.8,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.38,
+  "adhesion": 0.42,
+  "on_fire": {
+    "temp": 235,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_char": {
+    "temp": 190,
+    "result": "minecraft:air",
+    "requires_oxygen": false
+  },
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.18,
+    "quanta": 0.48,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 7,
+  "note": "Dead log \u2014 dried decaying wood, cellulose degraded, high porousness and quanta from irregular rot channels, ignites more easily than fresh wood",
+  "block": "untagged_mobs:dead_log",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 100.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 10000,
+    "shear_strength_kpa": 2500,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.38
+  }
+}

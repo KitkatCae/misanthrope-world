@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 0.55,
+  "insulation_r": 10,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.16,
+  "adhesion": 0.48,
+  "on_fire": {
+    "temp": 280,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_soften": {
+    "temp": 120,
+    "result": "windswept:gingerbread_block"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.5,
+    "quanta": 0.22,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 12,
+  "note": "Glazed gingerbread brick wall",
+  "block": "windswept:glazed_gingerbread_brick_wall",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.007,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 1000,
+    "shear_strength_kpa": 2500,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.165
+  }
+}

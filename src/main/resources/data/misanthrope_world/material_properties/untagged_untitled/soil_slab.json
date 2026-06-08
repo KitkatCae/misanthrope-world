@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.48,
+  "insulation_r": 7,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.52,
+  "adhesion": 0.62,
+  "ousia_affinity": {
+    "eterna": 0.14,
+    "arcana": 0.14,
+    "quanta": 0.4,
+    "rectification": 0.09
+  },
+  "ousia_capacity": 6,
+  "note": "Soil slab",
+  "block": "untagged_mobs:soil_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 90,
+    "tensile_strength_kpa": 40,
+    "shear_strength_kpa": 25,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.88,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.2,
+    "shockwave_absorption": 0.325
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 30,
+  "conductivity": 1,
+  "insulation_r": 20,
+  "dissipation_rate": 0.02,
+  "is_airtight": true,
+  "porousness": 0.18,
+  "adhesion": 0.2,
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.38,
+    "quanta": 0.42,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 30,
+  "note": "Decayed bedrock \u2014 bedrock corroded by decay energy, still very hard but compromised",
+  "block": "terramity:decayed_bedrock",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 1000.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 9000000,
+    "tensile_strength_kpa": 9000000,
+    "shear_strength_kpa": 9000000,
+    "fracture_toughness": 0.98,
+    "density_kg_m3": 15000,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 9999.0,
+    "crack_threshold_fraction": 1.0,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 1.0
+  }
+}

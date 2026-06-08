@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.45,
+  "insulation_r": 2,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.3,
+  "adhesion": 0.72,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.48,
+    "arcana": 0.06,
+    "quanta": 0.52,
+    "rectification": 0.06
+  },
+  "ousia_capacity": 18,
+  "note": "Large jellercel \u2014 oversized jellercel colony",
+  "block": "thermal_shock:large_jellercel",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 80,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 1020,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.82
+  }
+}

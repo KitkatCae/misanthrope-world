@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 9,
+  "conductivity": 2,
+  "insulation_r": 18,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.16,
+  "adhesion": 0.32,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.18,
+    "arcana": 0.38,
+    "quanta": 0.28,
+    "rectification": 0.4
+  },
+  "ousia_capacity": 9,
+  "note": "Small bauxite brick slab",
+  "block": "tfmg:small_bauxite_brick_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 1600,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.09
+  }
+}

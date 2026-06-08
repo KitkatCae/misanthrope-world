@@ -1,0 +1,50 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.05,
+  "insulation_r": 10.0,
+  "dissipation_rate": 0.03,
+  "is_airtight": true,
+  "porousness": 0.14,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.16,
+    "quanta": 0.43,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 4,
+  "note": "Snow slab \u2014 SRM snow conforming to a slab surface, ~4 layers depth (0.5 block).",
+  "block": "snowrealmagic:slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 25.0,
+  "thermal_crack_rate": 0.015,
+  "structural": {
+    "compressive_strength_kpa": 25,
+    "tensile_strength_kpa": 10,
+    "shear_strength_kpa": 8,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 180,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.7
+  },
+  "snowlog_modifier": {
+    "ins_r_add": 10.0,
+    "thermal_mass_add": 6,
+    "porousness_subtract": 0.07,
+    "force_airtight": true,
+    "layer_scale": false
+  }
+}

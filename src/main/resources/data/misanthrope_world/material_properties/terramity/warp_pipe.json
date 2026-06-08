@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 1,
+  "conductivity": 0,
+  "insulation_r": 999,
+  "dissipation_rate": 0.0,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.0,
+  "ousia_affinity": {
+    "eterna": 0.5,
+    "arcana": 0.5,
+    "quanta": 0.4,
+    "rectification": 0.4
+  },
+  "ousia_capacity": 0,
+  "note": "Warp Pipe \u2014 dimensional transport pipe, portal material",
+  "block": "terramity:warp_pipe",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermally_indestructible": true,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 9999999,
+    "tensile_strength_kpa": 9999999,
+    "shear_strength_kpa": 9999999,
+    "fracture_toughness": 1.0,
+    "density_kg_m3": 0,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 9999.0,
+    "crack_threshold_fraction": 1.0,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 1.0
+  }
+}

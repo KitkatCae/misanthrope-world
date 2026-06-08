@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.5,
+  "insulation_r": 1,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.85,
+  "adhesion": 0.1,
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.32,
+    "quanta": 0.45,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 8,
+  "note": "Liquid asphalt \u2014 molten bitumen",
+  "block": "tfmg:liquid_asphalt",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 0,
+    "tensile_strength_kpa": 0,
+    "shear_strength_kpa": 0,
+    "fracture_toughness": 0.0,
+    "density_kg_m3": 1000,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 1.0,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 0.95
+  }
+}

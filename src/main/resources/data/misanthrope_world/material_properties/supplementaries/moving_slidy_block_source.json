@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.14,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.1,
+  "adhesion": 0.22,
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.25,
+    "quanta": 0.2,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 3,
+  "note": "Moving slidy block source \u2014 same material as slidy block, source position",
+  "block": "supplementaries:moving_slidy_block_source",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 0,
+    "shear_strength_kpa": 0,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

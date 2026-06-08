@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.3,
+  "insulation_r": 2,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.32,
+  "adhesion": 0.48,
+  "biological": true,
+  "on_ignite": {
+    "trigger": "spark_or_fire",
+    "result": "explosion_tier_1"
+  },
+  "ousia_affinity": {
+    "eterna": 0.38,
+    "arcana": 0.1,
+    "quanta": 0.52,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 16,
+  "note": "Creeper spore sack \u2014 biological sac packed with creeper spores, will explode if ignited, high eterna from active biological chemistry",
+  "block": "savage_and_ravage:creeper_spore_sack",
+  "thickness_fraction": 0.8,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 300,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.06,
+    "density_kg_m3": 400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.88,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.5,
+    "shockwave_absorption": 0.05
+  }
+}

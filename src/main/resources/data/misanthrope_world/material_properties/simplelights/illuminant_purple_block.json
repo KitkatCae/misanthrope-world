@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 2,
+  "insulation_r": 4,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.1,
+  "on_melt": {
+    "temp": 800,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.18,
+    "arcana": 0.32,
+    "quanta": 0.38,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 16,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 2000,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 400,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 2600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.45,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  },
+  "block": "simplylight:illuminant_purple_block",
+  "note": "Illuminant purple block (inactive) \u2014 coloured glass crystal light block"
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 52,
+  "insulation_r": 2,
+  "dissipation_rate": 0.14,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.35,
+    "quanta": 0.2,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 2,
+  "note": "Copper-encased cast iron pipe",
+  "block": "tfmg:copper_encased_cast_iron_pipe",
+  "thickness_fraction": 0.3,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 320.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 80000,
+    "shear_strength_kpa": 50000,
+    "fracture_toughness": 0.65,
+    "density_kg_m3": 2880,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.4,
+    "shockwave_absorption": 0.35
+  }
+}

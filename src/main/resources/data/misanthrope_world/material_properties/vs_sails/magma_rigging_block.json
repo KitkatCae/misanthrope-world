@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 55,
+  "insulation_r": 3,
+  "dissipation_rate": 0.13,
+  "is_airtight": false,
+  "porousness": 0.45,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.4,
+    "quanta": 0.2,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 32,
+  "note": "Magma rigging block \u2014 heat-resistant rigging hardware, fire-rated iron alloy, higher thermal crack threshold",
+  "block": "vs_sails:magma_rigging_block",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 600.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 130000,
+    "tensile_strength_kpa": 190000,
+    "shear_strength_kpa": 85000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 7400,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

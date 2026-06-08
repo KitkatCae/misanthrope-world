@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 0.62,
+  "insulation_r": 9,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.28,
+  "adhesion": 0.65,
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.25,
+    "quanta": 0.32,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 16,
+  "note": "Packed mud \u2014 dried compressed mud adobe, significantly higher arcana and structural than wet mud",
+  "block": "minecraft:packed_mud",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 5000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 1200,
+    "fracture_toughness": 0.18,
+    "density_kg_m3": 1750,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.45
+  }
+}

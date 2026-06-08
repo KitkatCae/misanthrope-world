@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 38,
+  "conductivity": 52,
+  "insulation_r": 2,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1600,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.38,
+    "quanta": 0.22,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 42,
+  "note": "Flame steel block \u2014 fire-infused steel, high eterna from heat",
+  "block": "tinkers_ingenuity:flame_steel_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 400.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 220000,
+    "tensile_strength_kpa": 176000,
+    "shear_strength_kpa": 110000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 7700,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

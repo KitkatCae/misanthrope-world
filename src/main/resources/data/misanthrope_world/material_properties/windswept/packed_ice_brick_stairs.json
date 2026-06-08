@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 28,
+  "insulation_r": 10,
+  "dissipation_rate": 0.16,
+  "is_airtight": false,
+  "porousness": 0.03,
+  "adhesion": 0.06,
+  "on_melt": {
+    "temp": -2,
+    "result": "minecraft:water"
+  },
+  "freeze_temp": -3,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.15,
+    "quanta": 0.05,
+    "rectification": 0.79
+  },
+  "ousia_capacity": 14,
+  "block": "windswept:packed_ice_brick_stairs",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 200000,
+    "tensile_strength_kpa": 20000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 2700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.075
+  },
+  "note": "Packed ice brick stairs"
+}

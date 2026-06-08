@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 30,
+  "insulation_r": 6,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.06,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 2000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.45,
+    "quanta": 0.18,
+    "rectification": 0.48
+  },
+  "ousia_capacity": 25,
+  "note": "Void tile slab",
+  "block": "terramity:void_tile_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 500.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 300000,
+    "tensile_strength_kpa": 240000,
+    "shear_strength_kpa": 150000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 8000,
+    "is_structural_frame": true,
+    "load_transfer_range": 4,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.025
+  }
+}

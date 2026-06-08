@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 25,
+  "conductivity": 180,
+  "insulation_r": 4,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 1085,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.32,
+    "quanta": 0.28,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 24,
+  "note": "Raw copper block \u2014 unrefined malachite/chalcopyrite ore chunks, heterogeneous, lower conductivity than refined copper_block",
+  "block": "minecraft:raw_copper_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 180.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 15000,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 3500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

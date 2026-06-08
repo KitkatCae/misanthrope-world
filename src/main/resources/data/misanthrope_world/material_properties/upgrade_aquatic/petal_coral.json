@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 1.5,
+  "insulation_r": 4,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.25,
+  "adhesion": 0.35,
+  "ousia_affinity": {
+    "eterna": 0.28,
+    "arcana": 0.12,
+    "quanta": 0.45,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 4,
+  "note": "Live petal coral \u2014 foliate petal-shaped plates",
+  "block": "upgrade_aquatic:petal_coral",
+  "thickness_fraction": 0.25,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 150.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 2000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 800,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

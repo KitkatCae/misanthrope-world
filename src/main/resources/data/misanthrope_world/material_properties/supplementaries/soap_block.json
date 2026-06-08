@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.18,
+  "insulation_r": 2,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.15,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 70,
+    "result": "minecraft:water"
+  },
+  "on_fire": {
+    "temp": 300,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.18,
+    "quanta": 0.5,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 6,
+  "note": "Soap block \u2014 compressed soap bar block, very low adhesion (slippery), high quanta from complex surfactant polymer chains",
+  "block": "supplementaries:soap_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 30.0,
+  "thermal_crack_rate": 0.015,
+  "structural": {
+    "compressive_strength_kpa": 500,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.06,
+    "density_kg_m3": 900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.82,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.42
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 25,
+  "insulation_r": 5,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.15,
+  "adhesion": 0.35,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.35,
+    "quanta": 0.28,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 7,
+  "note": "Small simple wheel \u2014 compact rubber-tyred wheel for lighter vehicles \u2014 partial block (multiblock assembly half)",
+  "block": "trackwork:small_simple_wheel_part",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 50000,
+    "tensile_strength_kpa": 30000,
+    "shear_strength_kpa": 20000,
+    "fracture_toughness": 0.62,
+    "density_kg_m3": 1500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.48
+  }
+}

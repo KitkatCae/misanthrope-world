@@ -1,0 +1,53 @@
+{
+  "thermal_mass": 10,
+  "conductivity": 0.35,
+  "insulation_r": 2,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.22,
+  "adhesion": 0.9,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.58,
+    "arcana": 0.02,
+    "quanta": 0.7,
+    "rectification": 0.02
+  },
+  "ousia_capacity": 12,
+  "note": "Withered phlegm block \u2014 wither storm corrosive secretion, viscous semi-solid, near-maximum quanta from chaotic polymer structure, extreme adhesion",
+  "block": "witherstormmod:withered_phlegm_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.018,
+    "rate_scales_with_temp": true,
+    "condition": null
+  },
+  "thermal_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.03,
+    "rate_scales_with_temp": true,
+    "threshold_celsius": 40,
+    "requires_oxygen": false
+  },
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 800,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.72
+  }
+}

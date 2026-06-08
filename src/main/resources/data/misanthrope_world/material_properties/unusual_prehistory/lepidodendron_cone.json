@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 3,
+  "conductivity": 0.1,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.45,
+  "on_fire": {
+    "temp": 230,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.1,
+    "quanta": 0.55,
+    "rectification": 0.12
+  },
+  "ousia_capacity": 4,
+  "note": "Lepidodendron cone \u2014 spore-bearing strobilus, biological eterna from active spore production",
+  "block": "unusual_prehistory:lepidodendron_cone",
+  "thickness_fraction": 0.35,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 300,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.5
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 55,
+  "insulation_r": 1,
+  "dissipation_rate": 0.14,
+  "is_airtight": false,
+  "porousness": 0.65,
+  "adhesion": 0.18,
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.35,
+    "quanta": 0.2,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 5,
+  "note": "Sconce wall green",
+  "block": "supplementaries:sconce_wall_green",
+  "thickness_fraction": 0.2,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 12000,
+    "shear_strength_kpa": 8000,
+    "fracture_toughness": 0.62,
+    "density_kg_m3": 700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.14
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "thermal_mass": 9,
+  "conductivity": 5,
+  "insulation_r": 22,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.12,
+  "adhesion": 0.28,
+  "on_melt": {
+    "temp": 850,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.15,
+    "quanta": 0.3,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 7,
+  "note": "Tainted stone slab",
+  "block": "witherstormmod:tainted_stone_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 105.0,
+  "thermal_crack_rate": 0.0045,
+  "structural": {
+    "compressive_strength_kpa": 18750,
+    "tensile_strength_kpa": 2250,
+    "shear_strength_kpa": 4500,
+    "fracture_toughness": 0.23,
+    "density_kg_m3": 2200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 0.9,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  },
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.004,
+    "rate_scales_with_temp": false,
+    "condition": null
+  }
+}

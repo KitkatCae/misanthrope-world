@@ -1,0 +1,55 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 0.55,
+  "insulation_r": 14,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.88,
+  "on_soften": {
+    "temp": 45,
+    "result": "untagged_mobs:tar"
+  },
+  "on_fire": {
+    "temp": 290,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "thermal_offgas": {
+    "gas": "mge:carbon_dioxide",
+    "rate_mbar_per_tick": 0.005,
+    "rate_scales_with_temp": true,
+    "threshold_celsius": 50,
+    "requires_oxygen": false
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.35,
+    "quanta": 0.38,
+    "rectification": 0.14
+  },
+  "ousia_capacity": 16,
+  "note": "Tar block \u2014 natural bituminous pitch, extremely high adhesion, softens in warm conditions, offgasses CO2 when heated",
+  "block": "untagged_mobs:tar",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 40.0,
+  "thermal_crack_rate": 0.007,
+  "structural": {
+    "compressive_strength_kpa": 6000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 1100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.45
+  }
+}

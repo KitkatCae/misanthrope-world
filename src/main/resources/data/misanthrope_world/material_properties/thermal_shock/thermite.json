@@ -1,0 +1,47 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 30,
+  "insulation_r": 5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.3,
+  "on_melt": {
+    "temp": 2500,
+    "result": "minecraft:lava"
+  },
+  "on_ignite": {
+    "trigger": "spark_or_impact",
+    "result": "explosion_tier_3"
+  },
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.38,
+    "quanta": 0.22,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 28,
+  "note": "Thermite \u2014 aluminum-iron oxide reactive mixture, 2500\u00b0C iron-alumina slag product",
+  "block": "thermal_shock:thermite",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 1200,
+    "shear_strength_kpa": 2400,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 4000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.5,
+    "shockwave_absorption": 0.05
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 120,
+  "insulation_r": 4,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 2730,
+    "result": "minecraft:lava",
+    "note": "SiC decomposes rather than truly melting"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.48,
+    "quanta": 0.1,
+    "rectification": 0.72
+  },
+  "ousia_capacity": 35,
+  "note": "Purple carborundum block \u2014 purple SiC variant, same physics",
+  "block": "thermal_shock:purple_carborundum_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.0005,
+  "structural": {
+    "compressive_strength_kpa": 200000,
+    "tensile_strength_kpa": 16000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 3200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.3,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  }
+}

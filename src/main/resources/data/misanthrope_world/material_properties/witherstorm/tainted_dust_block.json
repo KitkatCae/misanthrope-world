@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.5,
+  "insulation_r": 4,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.55,
+  "adhesion": 0.25,
+  "ousia_affinity": {
+    "eterna": 0.55,
+    "arcana": 0.02,
+    "quanta": 0.6,
+    "rectification": 0.02
+  },
+  "ousia_capacity": 10,
+  "note": "Compressed tainted dust block \u2014 packed corruption particulate, higher emission rate",
+  "block": "witherstormmod:tainted_dust_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.025,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 80,
+    "tensile_strength_kpa": 20,
+    "shear_strength_kpa": 20,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

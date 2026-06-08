@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 0.6,
+  "insulation_r": 8,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.15,
+  "adhesion": 0.32,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.18,
+    "quanta": 0.38,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 20,
+  "note": "Petrified egg \u2014 mineralized/petrified creature egg, calcium carbonate shell hardened to stone",
+  "block": "species:petrified_egg",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 6250,
+    "shear_strength_kpa": 8750,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 1300,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.28
+  }
+}

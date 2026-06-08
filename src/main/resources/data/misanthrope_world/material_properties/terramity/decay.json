@@ -1,0 +1,42 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0,
+  "insulation_r": 100,
+  "dissipation_rate": 0.0,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.0,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 0,
+  "note": "Decay \u2014 active dimensional decay block, spreads entropy",
+  "block": "terramity:decay",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "glitch": true,
+  "four_dimensional": true,
+  "thermally_indestructible": true,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 9999999,
+    "tensile_strength_kpa": 9999999,
+    "shear_strength_kpa": 9999999,
+    "fracture_toughness": 1.0,
+    "density_kg_m3": 1,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 9999.0,
+    "crack_threshold_fraction": 1.0,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 1.0
+  }
+}

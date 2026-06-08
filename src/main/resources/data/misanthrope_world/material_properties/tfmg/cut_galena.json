@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 20,
+  "insulation_r": 12,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1114,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.52,
+    "quanta": 0.1,
+    "rectification": 0.62
+  },
+  "ousia_capacity": 24,
+  "note": "Cut galena \u2014 dressed cut face, accentuates cubic cleavage",
+  "block": "tfmg:cut_galena",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 15000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 7600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

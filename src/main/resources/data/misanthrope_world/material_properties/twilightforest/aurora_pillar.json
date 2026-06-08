@@ -1,0 +1,50 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 2.5,
+  "insulation_r": 22,
+  "dissipation_rate": 0.03,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.12,
+  "on_melt": {
+    "temp": 80,
+    "result": "minecraft:water",
+    "note": "Dimensional ice \u2014 melts higher than regular ice from four-dimensional substrate ordering"
+  },
+  "on_freeze": {
+    "temp": -40,
+    "result": "twilightforest:aurora_block"
+  },
+  "gravitational_anomaly": true,
+  "gravity_tolerance": "unconditional",
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.52,
+    "quanta": 0.08,
+    "rectification": 0.68
+  },
+  "ousia_capacity": 32,
+  "note": "Aurora pillar \u2014 columnar aurora crystal, structural frame orientation",
+  "block": "twilightforest:aurora_pillar",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 45.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 1050,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.1,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.12
+  }
+}

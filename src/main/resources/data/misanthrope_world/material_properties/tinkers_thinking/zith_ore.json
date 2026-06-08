@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 55,
+  "insulation_r": 7,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.15,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": -80,
+    "result": "tinkers_thinking:zith_fluid"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.28,
+    "quanta": 0.38,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 10,
+  "note": "Zith ore \u2014 moon puddle fluid ore",
+  "block": "tinkers_thinking:zith_ore",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 50.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 3000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 900,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

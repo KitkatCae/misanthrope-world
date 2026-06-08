@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 7,
+  "conductivity": 205,
+  "insulation_r": 1,
+  "dissipation_rate": 0.15,
+  "is_airtight": false,
+  "porousness": 0.62,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 660,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.35,
+    "quanta": 0.2,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 5,
+  "note": "Aluminum scaffolding \u2014 lightweight temporary structure",
+  "block": "tfmg:aluminum_scaffolding",
+  "thickness_fraction": 0.4,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 320.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 60000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.62,
+    "density_kg_m3": 945,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

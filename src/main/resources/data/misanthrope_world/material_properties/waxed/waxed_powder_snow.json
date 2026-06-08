@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.08,
+  "insulation_r": 3,
+  "dissipation_rate": 0.08,
+  "is_airtight": true,
+  "porousness": 0.26,
+  "adhesion": 0.25,
+  "on_melt": {
+    "temp": 1,
+    "result": "minecraft:water"
+  },
+  "freeze_temp": -1,
+  "ousia_affinity": {
+    "eterna": 0.02,
+    "arcana": 0.14,
+    "quanta": 0.25,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 4,
+  "note": "Wax-sealed powder snow \u2014 wax binder holds loose snow granules together, entities no longer sink through",
+  "block": "waxed:waxed_powder_snow",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 30.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 30,
+    "tensile_strength_kpa": 10,
+    "shear_strength_kpa": 8,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 150,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.7
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 38,
+  "conductivity": 52,
+  "insulation_r": 3,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1400,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.38,
+    "quanta": 0.2,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 25,
+  "note": "Cast iron fluid tank",
+  "block": "tfmg:cast_iron_fluid_tank",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 320.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 180000,
+    "tensile_strength_kpa": 144000,
+    "shear_strength_kpa": 90000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 7000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

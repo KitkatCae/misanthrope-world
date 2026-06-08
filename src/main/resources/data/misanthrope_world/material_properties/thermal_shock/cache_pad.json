@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 5,
+  "insulation_r": 18,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.25,
+  "on_melt": {
+    "temp": 1000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.45,
+    "quanta": 0.18,
+    "rectification": 0.4
+  },
+  "ousia_capacity": 18,
+  "note": "Cache pad \u2014 flat cache marker tile",
+  "block": "thermal_shock:cache_pad",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 50000,
+    "tensile_strength_kpa": 5000,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 2400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.62,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

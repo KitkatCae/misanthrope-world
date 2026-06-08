@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 25,
+  "insulation_r": 4,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.3,
+    "quanta": 0.25,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 10,
+  "note": "Navigation light panel \u2014 weatherproof light housing with glass lens, mixed metal-glass composite",
+  "block": "vs_waterworks:nav_light_panel",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 30000,
+    "shear_strength_kpa": 20000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2500,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

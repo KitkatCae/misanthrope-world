@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 16,
+  "conductivity": 52,
+  "insulation_r": 1,
+  "dissipation_rate": 0.13,
+  "is_airtight": false,
+  "porousness": 0.45,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.38,
+    "quanta": 0.2,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 3,
+  "note": "Cast iron frame",
+  "block": "tfmg:cast_iron_frame",
+  "thickness_fraction": 0.4,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 100000,
+    "shear_strength_kpa": 65000,
+    "fracture_toughness": 0.7,
+    "density_kg_m3": 2880,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

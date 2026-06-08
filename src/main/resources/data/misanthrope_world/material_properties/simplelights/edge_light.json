@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 1,
+  "conductivity": 2,
+  "insulation_r": 1,
+  "dissipation_rate": 0.09,
+  "is_airtight": false,
+  "porousness": 0.12,
+  "adhesion": 0.1,
+  "on_melt": {
+    "temp": 700,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.28,
+    "quanta": 0.35,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 5,
+  "note": "Edge light \u2014 thin glass light strip, edge-mounted",
+  "block": "simplylight:edge_light",
+  "thickness_fraction": 0.1,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 20,
+    "shear_strength_kpa": 50,
+    "fracture_toughness": 0.06,
+    "density_kg_m3": 150,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.38,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  }
+}

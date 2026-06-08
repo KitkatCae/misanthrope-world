@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.45,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.78,
+  "adhesion": 0.82,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.1,
+    "quanta": 0.55,
+    "rectification": 0.06
+  },
+  "ousia_capacity": 14,
+  "note": "Ichor \u2014 viscous supernatural biological fluid, very high adhesion, very high eterna from active supernatural chemistry, high quanta from complex polymer chains",
+  "block": "species:ichor",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 30,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 1150,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.95,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 0.92
+  }
+}

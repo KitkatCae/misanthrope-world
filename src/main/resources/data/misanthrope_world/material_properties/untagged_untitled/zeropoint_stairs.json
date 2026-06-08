@@ -1,0 +1,41 @@
+{
+  "thermal_mass": 0,
+  "conductivity": 0,
+  "insulation_r": 999,
+  "dissipation_rate": 0.0,
+  "is_airtight": true,
+  "porousness": 0.5,
+  "adhesion": 0.0,
+  "glitch": true,
+  "four_dimensional": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 0,
+  "note": "Zeropoint stairs",
+  "block": "untagged_mobs:zeropoint_stairs",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 0.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 0,
+    "tensile_strength_kpa": 0,
+    "shear_strength_kpa": 0,
+    "fracture_toughness": 0.0,
+    "density_kg_m3": 0,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 0.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 1.0
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 0.05,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.48,
+  "adhesion": 0.25,
+  "biological": true,
+  "on_fire": {
+    "temp": 205,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.1,
+    "quanta": 0.5,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 2,
+  "note": "Awning orange",
+  "block": "supplementaries:awning_orange",
+  "thickness_fraction": 0.08,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 40,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 60,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.92,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.65
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 35,
+  "conductivity": 2.0,
+  "insulation_r": 14,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.04,
+  "adhesion": 0.15,
+  "ousia_affinity": {
+    "eterna": 0.8,
+    "arcana": 0.2,
+    "quanta": 0.3,
+    "rectification": 0.2
+  },
+  "ousia_capacity": 180,
+  "note": "Super beacon \u2014 wither star amplified beacon, extreme eterna output from wither energy core, ousia capacity far exceeds normal beacon",
+  "block": "witherstormmod:super_beacon",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermally_indestructible": true,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.01,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 20000,
+    "shear_strength_kpa": 25000,
+    "fracture_toughness": 0.65,
+    "density_kg_m3": 4000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.8,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 13,
+  "conductivity": 45.6,
+  "insulation_r": 1.4,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.12,
+  "adhesion": 0.38,
+  "on_melt": {
+    "temp": 2500,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.6,
+    "quanta": 0.32,
+    "rectification": 0.52
+  },
+  "ousia_capacity": 52,
+  "note": "Netherite backpack \u2014 netherite-trimmed backpack, lava and fire immune, highest tier",
+  "block": "sophisticatedbackpacks:netherite_backpack",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 24000,
+    "shear_strength_kpa": 16000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 4320,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  },
+  "lava_immune": true
+}

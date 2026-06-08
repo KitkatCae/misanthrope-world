@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 2,
+  "insulation_r": 18,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.15,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.32,
+    "quanta": 0.18,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 14,
+  "note": "Frigid crate \u2014 cold-insulated storage crate",
+  "block": "thermal_shock:frigid_crate",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 40.0,
+  "thermal_crack_rate": 0.01,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 1000,
+    "shear_strength_kpa": 2000,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

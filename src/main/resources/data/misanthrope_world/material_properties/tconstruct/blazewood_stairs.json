@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 9,
+  "conductivity": 0.14,
+  "insulation_r": 1.0,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.26,
+  "adhesion": 0.5,
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.22,
+    "quanta": 0.32,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 9,
+  "note": "Blazewood stairs",
+  "block": "tconstruct:blazewood_stairs",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 500.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 32000,
+    "tensile_strength_kpa": 28000,
+    "shear_strength_kpa": 8000,
+    "fracture_toughness": 0.48,
+    "density_kg_m3": 750,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.225
+  },
+  "emission": {
+    "peak_celsius": 200,
+    "watts_per_block": 150,
+    "requires_oxygen": false,
+    "is_continuous": true
+  },
+  "lava_immune": true
+}

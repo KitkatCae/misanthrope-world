@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 1.8,
+  "insulation_r": 26,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.16,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 1000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.42,
+    "quanta": 0.2,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 22,
+  "note": "Himmel pillar",
+  "block": "outer_end:himmel_pillar",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 32000,
+    "tensile_strength_kpa": 3200,
+    "shear_strength_kpa": 6400,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 1900,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 26,
+  "conductivity": 4,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.11,
+  "adhesion": 0.26,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.44,
+    "quanta": 0.18,
+    "rectification": 0.4
+  },
+  "ousia_capacity": 24,
+  "note": "Reinforced red nether bricks \u2014 nether brick with metal reinforcement, lava immune",
+  "block": "terramity:reinforced_red_nether_bricks",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 65000,
+    "tensile_strength_kpa": 6500,
+    "shear_strength_kpa": 13000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 2600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  },
+  "lava_immune": true
+}

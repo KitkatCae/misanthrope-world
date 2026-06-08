@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 55,
+  "insulation_r": 2,
+  "dissipation_rate": 0.13,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.38,
+    "quanta": 0.32,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 14,
+  "note": "Cracked bell \u2014 bronze bell with crack damage, still resonates but compromised, higher quanta from crack geometry",
+  "block": "supplementaries:cracked_bell",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 35000,
+    "shear_strength_kpa": 25000,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 4800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.45,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

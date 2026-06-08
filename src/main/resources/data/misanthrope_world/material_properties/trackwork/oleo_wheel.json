@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 30,
+  "conductivity": 30,
+  "insulation_r": 6,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.32,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.38,
+    "quanta": 0.22,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 30,
+  "note": "Oleo wheel \u2014 pneumatic oleo strut combined with rubber tyre, maximum shock absorption, used for aircraft/heavy vehicle landing applications in VS2",
+  "block": "trackwork:oleo_wheel",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 120000,
+    "tensile_strength_kpa": 80000,
+    "shear_strength_kpa": 55000,
+    "fracture_toughness": 0.7,
+    "density_kg_m3": 2800,
+    "is_structural_frame": false,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.65
+  }
+}

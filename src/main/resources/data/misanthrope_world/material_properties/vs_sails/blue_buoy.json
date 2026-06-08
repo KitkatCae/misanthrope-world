@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 30,
+  "insulation_r": 6,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.04,
+  "adhesion": 0.15,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.35,
+    "quanta": 0.18,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 10,
+  "note": "Blue buoy \u2014 same hollow iron float, paint color only",
+  "block": "vs_sails:blue_buoy",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 280.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 30000,
+    "shear_strength_kpa": 15000,
+    "fracture_toughness": 0.5,
+    "density_kg_m3": 500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.3,
+    "shockwave_absorption": 0.35
+  }
+}

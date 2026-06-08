@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 11,
+  "conductivity": 3.2,
+  "insulation_r": 16,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.18,
+  "adhesion": 0.45,
+  "on_melt": {
+    "temp": 1650,
+    "result": "minecraft:glass"
+  },
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.34,
+    "quanta": 0.28,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 9,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 48.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 3000,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 800,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 1600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.45
+  },
+  "block": "waxed:waxed_white_concrete_powder",
+  "note": "Wax-sealed white concrete powder \u2014 pigmented silica powder bound with wax binder, holds form without water hardening"
+}

@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 10,
+  "conductivity": 0.5,
+  "insulation_r": 1.8,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.28,
+  "adhesion": 0.7,
+  "biological": true,
+  "on_fire": {
+    "temp": 250,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.05,
+    "quanta": 0.48,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 14,
+  "note": "Flesh block \u2014 compressed biological tissue, extremely high eterna from active living mass",
+  "block": "untagged_mobs:flesh_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 800,
+    "tensile_strength_kpa": 1200,
+    "shear_strength_kpa": 400,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 1050,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.52
+  }
+}

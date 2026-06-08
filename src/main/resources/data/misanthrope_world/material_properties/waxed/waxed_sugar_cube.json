@@ -1,0 +1,52 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.28,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.4,
+  "on_soften": {
+    "temp": 100,
+    "result": "waxed:waxed_sugar_cube"
+  },
+  "on_fire": {
+    "temp": 255,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_melt": {
+    "temp": 186,
+    "result": "minecraft:air"
+  },
+  "ousia_affinity": {
+    "eterna": 0.03,
+    "arcana": 0.55,
+    "quanta": 0.08,
+    "rectification": 0.4
+  },
+  "ousia_capacity": 6,
+  "note": "Waxed sugar cube \u2014 compressed sucrose crystal block sealed with wax, high arcana from dense crystalline sugar lattice, moderate rectification from ordered monoclinic crystal structure",
+  "block": "waxed:waxed_sugar_cube",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 55.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 10000,
+    "tensile_strength_kpa": 600,
+    "shear_strength_kpa": 2500,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 1580,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.42,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 0.9,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.06
+  }
+}

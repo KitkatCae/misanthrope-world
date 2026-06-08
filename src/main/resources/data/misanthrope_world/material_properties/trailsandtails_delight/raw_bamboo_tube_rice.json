@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.55,
+  "insulation_r": 1.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.28,
+  "adhesion": 0.35,
+  "on_fire": {
+    "temp": 240,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.1,
+    "quanta": 0.45,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 7,
+  "note": "Raw bamboo tube rice \u2014 uncooked rice in bamboo tube, higher eterna from living grain, less cohesive",
+  "block": "trailandtales_delight:raw_bamboo_tube_rice",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 15,
+  "conductivity": 1.0,
+  "insulation_r": 22,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.35,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.38,
+    "quanta": 0.32,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 12,
+  "thickness_fraction": 0.75,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 45000,
+    "tensile_strength_kpa": 25000,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 2300,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.165
+  },
+  "block": "tfmg:cyan_rebar_concrete_stairs",
+  "note": "Cyan rebar concrete stairs"
+}

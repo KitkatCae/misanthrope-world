@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 0.2,
+  "insulation_r": 0.55,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.52,
+  "adhesion": 0.68,
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.12,
+    "quanta": 0.38,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 5,
+  "note": "Pale moss block \u2014 colour-drained pale garden bryophyte, lower eterna than green moss but higher rectification from pale ordered structure",
+  "block": "vanillabackport:pale_moss_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 40,
+    "tensile_strength_kpa": 25,
+    "shear_strength_kpa": 12,
+    "fracture_toughness": 0.03,
+    "density_kg_m3": 280,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.88,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.58
+  }
+}

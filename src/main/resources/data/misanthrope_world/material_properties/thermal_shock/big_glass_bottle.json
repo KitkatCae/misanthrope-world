@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 1.5,
+  "insulation_r": 2,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 700,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.22,
+    "quanta": 0.48,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 6,
+  "note": "Big glass bottle \u2014 oversized glass container, quanta from curved geometry",
+  "block": "thermal_shock:big_glass_bottle",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 60.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 500,
+    "tensile_strength_kpa": 50,
+    "shear_strength_kpa": 120,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.4,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  }
+}

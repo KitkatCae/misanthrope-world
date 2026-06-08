@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 250,
+  "conductivity": 3,
+  "insulation_r": 10,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.14,
+  "on_melt": {
+    "temp": 50000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.55,
+    "arcana": 0.72,
+    "quanta": 0.1,
+    "rectification": 0.58
+  },
+  "ousia_capacity": 75,
+  "note": "Stellar remnant \u2014 compressed stellar material from a dead star, extreme density and temperature resistance, highest arcana of any block in this mod",
+  "block": "terramity:stellar_remnant",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 500000,
+    "tensile_strength_kpa": 40000,
+    "shear_strength_kpa": 75000,
+    "fracture_toughness": 0.32,
+    "density_kg_m3": 50000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.52,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.08
+  }
+}

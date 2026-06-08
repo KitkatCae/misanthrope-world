@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 40,
+  "insulation_r": 4,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.25,
+  "adhesion": 0.38,
+  "biological": true,
+  "on_melt": {
+    "temp": 1300,
+    "result": "minecraft:lava",
+    "note": "Juvenile iron crystal, lower mineral density than mature ironwood"
+  },
+  "ousia_affinity": {
+    "eterna": 0.52,
+    "arcana": 0.35,
+    "quanta": 0.45,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 30,
+  "note": "Liveroot block \u2014 juvenile ironwood seed and root structure. Biologically active iron extraction root network. Highest eterna of the ironwood family \u2014 continuously mining iron ions from surrounding substrate and depositing them as metallic iron into growing crystal. Branching root geometry gives high quanta.",
+  "block": "twilightforest:liveroot_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 250.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 100000,
+    "shear_strength_kpa": 45000,
+    "fracture_toughness": 0.52,
+    "density_kg_m3": 5500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.62,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.15
+  }
+}

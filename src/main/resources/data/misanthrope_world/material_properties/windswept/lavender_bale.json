@@ -1,0 +1,49 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.07,
+  "insulation_r": 0.8,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.45,
+  "adhesion": 0.55,
+  "on_fire": {
+    "temp": 210,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_char": {
+    "temp": 170,
+    "result": "minecraft:air",
+    "requires_oxygen": false
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.15,
+    "quanta": 0.58,
+    "rectification": 0.17
+  },
+  "ousia_capacity": 6,
+  "note": "Lavender bale \u2014 compressed dried lavender, rich essential oil content gives slightly higher arcana than plain hay, fragrant volatile oils add quanta",
+  "block": "windswept:lavender_bale",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 100.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 150,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

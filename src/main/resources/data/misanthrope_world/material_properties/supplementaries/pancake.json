@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 3,
+  "conductivity": 0.2,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.35,
+  "adhesion": 0.48,
+  "biological": true,
+  "on_fire": {
+    "temp": 250,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.1,
+    "quanta": 0.45,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 4,
+  "note": "Pancake block \u2014 flat griddle cake, high adhesion from syrup/butter, biological food block",
+  "block": "supplementaries:pancake",
+  "thickness_fraction": 0.2,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 150,
+    "shear_strength_kpa": 50,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.9,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

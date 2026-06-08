@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 3,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.2,
+  "adhesion": 0.3,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.45,
+    "quanta": 0.28,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 20,
+  "note": "Fossilstone \u2014 fossil-bearing sedimentary rock, eterna elevated from biological remains preserved in matrix",
+  "block": "tfmg:fossilstone",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 130.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 2500,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 2200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.58,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.15
+  }
+}

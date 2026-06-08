@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 21,
+  "conductivity": 20,
+  "insulation_r": 8,
+  "dissipation_rate": 0.09,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.22,
+  "on_melt": {
+    "temp": 2000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.55,
+    "arcana": 0.42,
+    "quanta": 0.25,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 25,
+  "note": "Daemonium slab",
+  "block": "terramity:daemonium_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 450.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 250000,
+    "tensile_strength_kpa": 200000,
+    "shear_strength_kpa": 125000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 8500,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.025
+  },
+  "lava_immune": true
+}

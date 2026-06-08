@@ -5,19 +5,20 @@
   "dissipation_rate": 0.05,
   "is_airtight": true,
   "porousness": 0.08,
-  "adhesion": 0.22,
+  "adhesion": 0.26,
   "on_melt": {
     "temp": 1100,
     "result": "minecraft:lava"
   },
-  "custom_behavior": "misanthrope_core:mazestone_structure",
+  "custom_behavior": "misanthrope_world:mazestone_structure",
   "ousia_affinity": {
     "eterna": 0.05,
-    "arcana": 0.5,
-    "quanta": 0.1,
+    "arcana": 0.52,
+    "quanta": 0.12,
     "rectification": 0.35
   },
   "ousia_capacity": 24,
+  "note": "Mazestone \u2014 Twilight Forest labyrinth construction stone, pale cream, very old and stable",
   "block": "twilightforest:mazestone",
   "thickness_fraction": 1.0,
   "electrically_conductive": false,

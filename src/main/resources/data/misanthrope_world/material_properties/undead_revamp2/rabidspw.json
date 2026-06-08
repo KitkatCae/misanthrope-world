@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 10,
+  "conductivity": 0.5,
+  "insulation_r": 2,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.3,
+  "adhesion": 0.65,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.12,
+    "quanta": 0.48,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 16,
+  "note": "Rabid spawn block \u2014 corrupted biological mass serving as spawn point for rabid creatures, high eterna from dark biological corruption",
+  "block": "undead_revamp2:rabidspw",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 400,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 200,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 1100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.6
+  }
+}

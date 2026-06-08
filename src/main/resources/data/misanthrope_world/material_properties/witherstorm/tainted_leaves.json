@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 0.1,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.7,
+  "adhesion": 0.65,
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.03,
+    "quanta": 0.5,
+    "rectification": 0.03
+  },
+  "ousia_capacity": 3,
+  "note": "Tainted leaves \u2014 dead corrupted foliage, wither energy keeps them from decomposing normally, high miasma emission surface",
+  "block": "witherstormmod:tainted_leaves",
+  "thickness_fraction": 0.25,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.008,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 20,
+    "tensile_strength_kpa": 30,
+    "shear_strength_kpa": 10,
+    "fracture_toughness": 0.04,
+    "density_kg_m3": 100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.95,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.45
+  }
+}

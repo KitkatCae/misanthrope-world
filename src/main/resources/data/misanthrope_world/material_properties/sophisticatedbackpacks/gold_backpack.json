@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 11,
+  "conductivity": 155.1,
+  "insulation_r": 2.0,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.12,
+  "adhesion": 0.38,
+  "on_melt": {
+    "temp": 1064,
+    "result": "minecraft:lava"
+  },
+  "on_fire": {
+    "temp": 285,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.55,
+    "quanta": 0.32,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 26,
+  "note": "Gold backpack \u2014 gold-plated leather backpack, high arcana from gold coating",
+  "block": "sophisticatedbackpacks:gold_backpack",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 10000,
+    "tensile_strength_kpa": 6000,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 2825,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

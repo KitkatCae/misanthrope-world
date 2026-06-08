@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 40,
+  "insulation_r": 3,
+  "dissipation_rate": 0.12,
+  "is_airtight": false,
+  "porousness": 0.25,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1400,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.42,
+    "quanta": 0.12,
+    "rectification": 0.82
+  },
+  "ousia_capacity": 12,
+  "note": "Knightmetal cluster \u2014 budding 4D crystal fragment, partial topological order",
+  "block": "tconstruct:knightmetal_cluster",
+  "thickness_fraction": 0.3,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 300.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 30000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 8000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 4000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.07
+  },
+  "topologically_ordered": true,
+  "four_dimensional": true
+}

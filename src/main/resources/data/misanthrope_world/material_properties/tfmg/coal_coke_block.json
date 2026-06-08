@@ -1,0 +1,49 @@
+{
+  "thermal_mass": 28,
+  "conductivity": 5,
+  "insulation_r": 8,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.32,
+  "adhesion": 0.32,
+  "on_fire": {
+    "temp": 700,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_melt": {
+    "temp": 3600,
+    "result": "minecraft:air",
+    "note": "Coke sublimates rather than melting"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.35,
+    "quanta": 0.38,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 16,
+  "note": "Coal coke block \u2014 metallurgical coke, used in blast furnaces, burns at very high temperature, high porousness from coking process",
+  "block": "tfmg:coal_coke_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 400.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 1600,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 1000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.62,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.38
+  }
+}

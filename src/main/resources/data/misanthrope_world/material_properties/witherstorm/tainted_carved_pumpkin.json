@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 0.5,
+  "insulation_r": 0.6,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.45,
+  "adhesion": 0.55,
+  "ousia_affinity": {
+    "eterna": 0.38,
+    "arcana": 0.05,
+    "quanta": 0.48,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 4,
+  "note": "Tainted carved pumpkin \u2014 hollow, higher miasma leakage",
+  "block": "witherstormmod:tainted_carved_pumpkin",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 300.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 210,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.45
+  },
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.004,
+    "rate_scales_with_temp": false,
+    "condition": null
+  }
+}

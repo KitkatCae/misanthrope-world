@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 0.55,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.42,
+  "adhesion": 0.6,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.3,
+    "arcana": 0.08,
+    "quanta": 0.48,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 10,
+  "note": "Kelp block \u2014 compressed fresh kelp biomass, very high water content, high biological eterna from living algae network, high quanta from complex polymer structure",
+  "block": "upgrade_aquatic:kelp_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 300,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 200,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 1050,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "thermal_mass": 10,
+  "conductivity": 4,
+  "insulation_r": 18,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.72,
+    "arcana": 0.5,
+    "quanta": 0.2,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 35,
+  "note": "Black hole bomb \u2014 singularity-generating explosive",
+  "block": "terramity:black_hole_bomb",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 5000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 1000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 2.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 2.5,
+    "shockwave_absorption": 0.05
+  },
+  "on_ignite": {
+    "trigger": "spark_or_impact",
+    "result": "explosion_tier_5"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.04,
+  "insulation_r": 3.5,
+  "dissipation_rate": 0.03,
+  "is_airtight": false,
+  "porousness": 0.48,
+  "adhesion": 0.35,
+  "biological": true,
+  "on_fire": {
+    "temp": 210,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.1,
+    "quanta": 0.5,
+    "rectification": 0.2
+  },
+  "ousia_capacity": 5,
+  "note": "Night bag \u2014 insulated sleeping bag, low conductivity from fibre fill, higher insulation than hammock from closed construction",
+  "block": "sleep_tight:night_bag",
+  "thickness_fraction": 0.4,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 600,
+    "shear_strength_kpa": 40,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 80,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.92,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.68
+  }
+}

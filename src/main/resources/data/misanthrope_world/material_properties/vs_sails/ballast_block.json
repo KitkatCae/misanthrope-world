@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 70,
+  "conductivity": 30,
+  "insulation_r": 4,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.15,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.55,
+    "quanta": 0.1,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 60,
+  "note": "Ballast block \u2014 dense iron/lead ballast, maximises mass for VS2 ship stability",
+  "block": "vs_sails:ballast_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 150000,
+    "tensile_strength_kpa": 50000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.6,
+    "density_kg_m3": 9000,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

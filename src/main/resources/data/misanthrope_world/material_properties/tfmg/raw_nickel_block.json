@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 38,
+  "conductivity": 91,
+  "insulation_r": 2,
+  "dissipation_rate": 0.13,
+  "is_airtight": true,
+  "porousness": 0.14,
+  "adhesion": 0.16,
+  "on_melt": {
+    "temp": 1455,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.42,
+    "quanta": 0.12,
+    "rectification": 0.45
+  },
+  "ousia_capacity": 35,
+  "note": "raw nickel block",
+  "block": "tfmg:raw_nickel_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 160000,
+    "tensile_strength_kpa": 128000,
+    "shear_strength_kpa": 80000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 8900,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

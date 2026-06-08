@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 2,
+  "insulation_r": 12,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.06,
+  "adhesion": 0.14,
+  "ousia_affinity": {
+    "eterna": 0.5,
+    "arcana": 0.58,
+    "quanta": 0.08,
+    "rectification": 0.55
+  },
+  "ousia_capacity": 65,
+  "note": "Soul heart top indestructible \u2014 upper half of sealed soul heart",
+  "block": "theinkarena:soul_heart_top_indestructible",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 9999999,
+    "tensile_strength_kpa": 800000,
+    "shear_strength_kpa": 1500000,
+    "fracture_toughness": 0.98,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 9999.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.08
+  },
+  "thermally_indestructible": true
+}

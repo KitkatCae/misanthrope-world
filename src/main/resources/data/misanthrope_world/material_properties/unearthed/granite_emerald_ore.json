@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 21,
+  "conductivity": 6,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.11,
+  "adhesion": 0.28,
+  "on_melt": {
+    "temp": 1050,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.3,
+    "quanta": 0.12,
+    "rectification": 0.52
+  },
+  "ousia_capacity": 21,
+  "block": "unearthed:granite_emerald_ore",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 55000,
+    "tensile_strength_kpa": 5500,
+    "shear_strength_kpa": 11000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  },
+  "note": "Vanilla granite hosting emerald ore vein"
+}

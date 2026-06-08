@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 205,
+  "insulation_r": 3,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.25,
+  "adhesion": 0.2,
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.32,
+    "quanta": 0.22,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 8,
+  "note": "Aluminum lamp \u2014 lightweight aluminum-housed industrial light fixture",
+  "block": "tfmg:aluminum_lamp",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 10000,
+    "tensile_strength_kpa": 8000,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.5,
+    "density_kg_m3": 2000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.15
+  }
+}

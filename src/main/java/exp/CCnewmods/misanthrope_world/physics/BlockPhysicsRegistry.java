@@ -6,13 +6,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsData.*;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.EmptyBlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -250,8 +254,22 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
         if (j.has("stub"))
             b.stub = gb(j, "stub");
 
+        // ── Snowlog modifier ──────────────────────────────────────────────────
+        // Present only on Snow Real Magic overlay blocks (snowrealmagic:snow,
+        // snowrealmagic:slab, etc.). Silently ignored on all other blocks.
+        if (j.has("snowlog_modifier") && j.get("snowlog_modifier").isJsonObject()) {
+            JsonObject sm = j.getAsJsonObject("snowlog_modifier");
+            b.snowlogModifier = new BlockPhysicsData.SnowlogModifier(
+                    gd(sm, "ins_r_add",           0.0),
+                    gd(sm, "thermal_mass_add",    0.0),
+                    gd(sm, "porousness_subtract", 0.0),
+                    gb(sm, "force_airtight"),
+                    gb(sm, "layer_scale")
+            );
+        }
+
         // Silently ignore: ousia_affinity, ousia_capacity, ousia_state,
-        // ousia_suppression_*, and any other unknown keys.
+        // ousia_suppression_*, note_snowlog, and any other unknown keys.
 
         return b.build();
     }
@@ -417,10 +435,130 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
 
         // 3. Heuristics
         if (state.isAir()) return BlockPhysicsData.AIR;
-        if (state.isSolidRender(null, null)) return BlockPhysicsData.GENERIC_SOLID;
+        // Option B — defensive catch for blocks that misbehave like SampleBlock:
+        try {
+            if (state.isSolidRender(EmptyBlockGetter.INSTANCE, BlockPos.ZERO)) return BlockPhysicsData.GENERIC_SOLID;
+        } catch (Exception e) {
+            return BlockPhysicsData.GENERIC_SOLID; // assume solid if the block can't tell us
+        }
 
         // 4. Partial blocks (slabs, stairs, fences) — half insulation, not airtight
         return BlockPhysicsData.GENERIC_SOLID.asSlab();
+    }
+
+    /**
+     * Returns physics for a position that holds a Snow Real Magic snow-overlay
+     * block — combining the <em>contained</em> host block's data with the
+     * SRM modifier additively applied.
+     *
+     * <h3>SRM overlay architecture</h3>
+     * Snow Real Magic replaces the host block (e.g. a fence, slab) with its own
+     * overlay block ({@code snowrealmagic:fence}, etc.) at the same position.
+     * The original host {@link BlockState} is stored in a {@link BlockEntity}
+     * ({@code snownee.snow.block.entity.SnowBlockEntity}) at that same position,
+     * accessible via the method named {@code getContainedState()} in that class.
+     *
+     * <p>This method retrieves the contained state by calling
+     * {@code level.getBlockEntity(pos)} and reflectively invoking
+     * {@code getContainedState()} on it. If the block entity is absent or is not
+     * a {@code SnowBlockEntity}, we fall back to {@link #get(BlockState)} on the
+     * SRM block state itself (degraded but non-crashing).
+     *
+     * <p>If the block at {@code pos} is not a SRM block (no
+     * {@link BlockPhysicsData.SnowlogModifier}), this delegates straight to
+     * {@link #get(BlockState)} — making it safe to call unconditionally whenever
+     * SRM may be loaded.
+     *
+     * <h3>Modifier application rules</h3>
+     * <ol>
+     *   <li>{@code insulationR += mod.insRAdd()} — scaled by {@code layers/8}
+     *       if {@code mod.layerScale()} is true (only {@code snowrealmagic:snow}).</li>
+     *   <li>{@code thermalMass += mod.thermalMassAdd()} — same scaling.</li>
+     *   <li>{@code porousness = max(0, porousness - mod.porousnessSubtract())}.</li>
+     *   <li>If {@code mod.forceAirtight()} and resulting porousness ≤ 0.05,
+     *       {@code isAirtight} is forced to {@code true}.</li>
+     * </ol>
+     *
+     * <p>All other fields (conductivity, structural data, emission, etc.) are
+     * copied from the host block unchanged — snow does not alter host material
+     * conductivity or strength.
+     *
+     * @param srmState the SRM blockstate at {@code pos} (e.g. {@code snowrealmagic:fence})
+     * @param level    the level, used to retrieve the {@code SnowBlockEntity}
+     * @param pos      the block position
+     * @return composite physics data; never null
+     */
+    public static BlockPhysicsData getWithSnowlog(BlockState srmState,
+                                                   BlockGetter level,
+                                                   BlockPos pos) {
+        // Look up the SRM overlay block's registered data
+        ResourceLocation srmId = ForgeRegistries.BLOCKS.getKey(srmState.getBlock());
+        BlockPhysicsData srmData = srmId != null ? BY_BLOCK.get(srmId) : null;
+
+        // Not a SRM block — delegate to normal lookup
+        if (srmData == null || srmData.snowlogModifier == null) {
+            return get(srmState);
+        }
+
+        // Retrieve the contained (host) BlockState from the SnowBlockEntity.
+        // SRM stores the original block inside the BE at the same position.
+        // We use reflection to avoid a compile-time dependency on SRM.
+        BlockState containedState = null;
+        try {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be != null) {
+                // SnowBlockEntity.getContainedState() → BlockState
+                java.lang.reflect.Method m =
+                        be.getClass().getMethod("getContainedState");
+                Object result = m.invoke(be);
+                if (result instanceof BlockState bs) {
+                    containedState = bs;
+                }
+            }
+        } catch (Exception ignored) {
+            // SRM not present, reflection failure, or wrong BE type —
+            // fall through to degrade gracefully below.
+        }
+
+        // If we couldn't get the contained state, fall back: use the SRM block's
+        // own physics as a reasonable approximation (it's snow-like anyway).
+        BlockPhysicsData host = containedState != null
+                ? get(containedState)
+                : srmData;
+
+        BlockPhysicsData.SnowlogModifier mod = srmData.snowlogModifier;
+
+        // Layer scaling: only snowrealmagic:snow has layerScale=true.
+        // It reuses the vanilla "layers" IntegerProperty (1–8).
+        double scale = 1.0;
+        if (mod.layerScale()) {
+            try {
+                net.minecraft.world.level.block.state.properties.IntegerProperty layersProp =
+                        (net.minecraft.world.level.block.state.properties.IntegerProperty)
+                        srmState.getBlock().getStateDefinition().getProperty("layers");
+                if (layersProp != null) {
+                    scale = srmState.getValue(layersProp) / 8.0;
+                }
+            } catch (Exception ignored) {
+                // Keep scale = 1.0 (full 8-layer equivalent) on any failure
+            }
+        }
+
+        // Build composite: host properties + snow delta
+        BlockPhysicsData.Builder b = new BlockPhysicsData.Builder(host);
+        b.insulationR = host.insulationR + mod.insRAdd() * scale;
+        b.thermalMass = host.thermalMass + mod.thermalMassAdd() * scale;
+
+        double newPorous = Math.max(0.0, host.porousness - mod.porousnessSubtract());
+        b.porousness = newPorous;
+        if (mod.forceAirtight() && newPorous <= 0.05) {
+            b.isAirtight = true;
+        }
+
+        // The composite result is not itself a snowlog modifier — clear the flag.
+        b.snowlogModifier = null;
+
+        return b.build();
     }
 
     /**

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 1.0,
+  "insulation_r": 0.8,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.02,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 800,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.02,
+    "arcana": 0.25,
+    "quanta": 0.42,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 3,
+  "note": "light gray stained glass pane \u2014 metal oxide pigment traces, same physics as clear glass pane",
+  "block": "minecraft:light_gray_stained_glass_pane",
+  "thickness_fraction": 0.08,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 60.0,
+  "thermal_crack_rate": 0.012,
+  "structural": {
+    "compressive_strength_kpa": 800,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 300,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 2500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.4,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 0.8,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.01
+  }
+}

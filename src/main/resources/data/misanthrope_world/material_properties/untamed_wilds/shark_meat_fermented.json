@@ -1,0 +1,51 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 0.55,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.35,
+  "adhesion": 0.55,
+  "biological": true,
+  "on_fire": {
+    "temp": 250,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.18,
+    "quanta": 0.58,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 10,
+  "note": "Fermented shark meat \u2014 ammonia-cured h\u00e1karl-style shark, urea broken down to ammonia, biological eterna reduced, fermentation complexity raises quanta, ambient ammonia emission",
+  "block": "untamedwilds:shark_meat_fermented",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 600,
+    "tensile_strength_kpa": 1800,
+    "shear_strength_kpa": 500,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 1060,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.5
+  },
+  "ambient_offgas": {
+    "gas": "mge:ammonia",
+    "rate_mbar_per_tick": 0.004,
+    "rate_scales_with_temp": true,
+    "condition": null
+  }
+}

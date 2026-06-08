@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 3,
+  "insulation_r": 6,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.35,
+    "quanta": 0.2,
+    "rectification": 0.42
+  },
+  "ousia_capacity": 28,
+  "note": "Louxia lamp \u2014 magical floor lamp, crystal light emission, high eterna from active magic",
+  "block": "threateningly_mobs:louxia_lamp",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 150.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 2000,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.48,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.08
+  }
+}

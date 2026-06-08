@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 38,
+  "conductivity": 50,
+  "insulation_r": 3,
+  "dissipation_rate": 0.13,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.4,
+    "quanta": 0.18,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 35,
+  "note": "Medium suspension track \u2014 wider gauge suspension track",
+  "block": "trackwork:med_suspension_track",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 170000,
+    "tensile_strength_kpa": 136000,
+    "shear_strength_kpa": 85000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 6200,
+    "is_structural_frame": true,
+    "load_transfer_range": 4,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.2
+  }
+}

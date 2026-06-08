@@ -1,0 +1,63 @@
+{
+  "thermal_mass": 16,
+  "conductivity": 45,
+  "insulation_r": 14,
+  "dissipation_rate": 0.13,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 1085,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.2,
+    "arcana": 0.4,
+    "quanta": 0.15,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 38,
+  "block": "minecraft:oxidized_cut_copper_stairs",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 120000,
+    "tensile_strength_kpa": 100000,
+    "shear_strength_kpa": 60000,
+    "fracture_toughness": 0.85,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.65
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.3
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.05
+      }
+    ],
+    "density_kg_m3": 8500,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.038
+  },
+  "note": "Oxidized cut copper stairs"
+}

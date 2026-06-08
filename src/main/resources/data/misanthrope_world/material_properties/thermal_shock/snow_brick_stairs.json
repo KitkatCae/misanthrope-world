@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.5,
+  "insulation_r": 5,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.36,
+  "adhesion": 0.2,
+  "on_melt": {
+    "temp": 1,
+    "result": "minecraft:water"
+  },
+  "freeze_temp": -1,
+  "ousia_affinity": {
+    "eterna": 0.02,
+    "arcana": 0.1,
+    "quanta": 0.15,
+    "rectification": 0.55
+  },
+  "ousia_capacity": 6,
+  "note": "Snow brick stairs",
+  "block": "thermal_shock:snow_brick_stairs",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 40.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 2000,
+    "tensile_strength_kpa": 100,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.375
+  }
+}

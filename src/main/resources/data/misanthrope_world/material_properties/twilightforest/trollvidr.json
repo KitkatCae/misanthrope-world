@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.1,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.5,
+  "biological": true,
+  "on_fire": {
+    "temp": 230,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.2,
+    "arcana": 0.15,
+    "quanta": 0.55,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 8,
+  "note": "Trollvidr \u2014 cave-ceiling root-like growth of the Twilight Forest, hangs downward, long fibrous biological structure. Very porous from loose fibre bundle packing. High quanta from complex hanging root geometry. Troll cave organism, source of trollber berries.",
+  "block": "twilightforest:trollvidr",
+  "thickness_fraction": 0.3,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 400,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 350,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

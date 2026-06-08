@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 0.026,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.98,
+  "adhesion": 0.0,
+  "ousia_affinity": {
+    "eterna": 0.04,
+    "arcana": 0.06,
+    "quanta": 0.45,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 2,
+  "note": "Wet air \u2014 water-saturated air block from sprinkler, near-zero structural, very high porousness, acts as MGE humidity source",
+  "block": "sliceanddice:wet_air",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:carbon_dioxide",
+    "rate_mbar_per_tick": 0.0,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 0,
+    "tensile_strength_kpa": 0,
+    "shear_strength_kpa": 0,
+    "fracture_toughness": 0.0,
+    "density_kg_m3": 1,
+    "is_structural_frame": false,
+    "load_transfer_range": 0,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 1.0,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 0.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 0.0,
+    "shockwave_absorption": 0.95
+  }
+}

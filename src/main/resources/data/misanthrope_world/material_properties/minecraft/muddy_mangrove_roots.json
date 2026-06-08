@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 0.5,
+  "insulation_r": 7,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.42,
+  "adhesion": 0.72,
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.1,
+    "quanta": 0.42,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 12,
+  "note": "Muddy mangrove roots \u2014 root-threaded mud, high biological eterna from root network, very high adhesion",
+  "block": "minecraft:muddy_mangrove_roots",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 800.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 150,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 1400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.7
+  }
+}

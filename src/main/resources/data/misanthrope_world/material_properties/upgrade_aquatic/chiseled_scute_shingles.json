@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 10,
+  "conductivity": 0.22,
+  "insulation_r": 4,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.2,
+  "adhesion": 0.5,
+  "biological": true,
+  "on_fire": {
+    "temp": 265,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.28,
+    "arcana": 0.15,
+    "quanta": 0.45,
+    "rectification": 0.22
+  },
+  "ousia_capacity": 12,
+  "note": "Chiseled scute shingles \u2014 carved face pattern",
+  "block": "upgrade_aquatic:chiseled_scute_shingles",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 15000,
+    "tensile_strength_kpa": 40000,
+    "shear_strength_kpa": 18000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

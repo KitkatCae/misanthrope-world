@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 21,
+  "conductivity": 6,
+  "insulation_r": 18,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.07,
+  "adhesion": 0.1,
+  "on_melt": {
+    "temp": 1215,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.56,
+    "quanta": 0.06,
+    "rectification": 0.55
+  },
+  "ousia_capacity": 24,
+  "note": "Cut lunalite wall",
+  "block": "windswept:cut_lunalite_wall",
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 260.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 180000,
+    "tensile_strength_kpa": 20000,
+    "shear_strength_kpa": 45000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2750,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 3,
+    "fragment_initial_velocity_scale": 1.3,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.03
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 30,
+  "conductivity": 0.9,
+  "insulation_r": 18,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.22,
+  "adhesion": 0.45,
+  "on_melt": {
+    "temp": 1250,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.42,
+    "quanta": 0.28,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 26,
+  "note": "Mud stove \u2014 fired mud brick cooking stove, terracotta-grade ceramic, high thermal mass retains heat well for cooking",
+  "block": "trailandtales_delight:mud_stove",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 95.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 1900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.22
+  }
+}

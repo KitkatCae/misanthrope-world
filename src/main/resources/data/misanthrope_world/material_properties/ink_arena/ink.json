@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.4,
+  "insulation_r": 2,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.28,
+  "adhesion": 0.75,
+  "ousia_affinity": {
+    "eterna": 0.25,
+    "arcana": 0.08,
+    "quanta": 0.58,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 10,
+  "note": "Ink \u2014 pure ink fluid in block form, very adhesive, high quanta from complex polymer",
+  "block": "theinkarena:ink",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 50,
+    "tensile_strength_kpa": 5,
+    "shear_strength_kpa": 10,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 1050,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  },
+  "biological": true
+}

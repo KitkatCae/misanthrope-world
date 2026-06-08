@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 1.5,
+  "insulation_r": 2,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 700,
+    "result": "minecraft:lava"
+  },
+  "biological": false,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.22,
+    "quanta": 0.42,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 3,
+  "note": "Goblet \u2014 glass drinking goblet",
+  "block": "supplementaries:goblet",
+  "thickness_fraction": 0.4,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 65.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 600,
+    "tensile_strength_kpa": 60,
+    "shear_strength_kpa": 150,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 480,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.42,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  }
+}

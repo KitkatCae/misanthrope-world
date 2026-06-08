@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.48,
+  "insulation_r": 1.2,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.32,
+  "adhesion": 0.68,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.2,
+    "arcana": 0.05,
+    "quanta": 0.58,
+    "rectification": 0.06
+  },
+  "ousia_capacity": 8,
+  "note": "Snail acid block \u2014 giant snail acid secretion, slightly less reactive than deathworm acid",
+  "block": "threateningly_mobs:snail_acid_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 300,
+    "shear_strength_kpa": 30,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 1100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.5
+  },
+  "ambient_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.002,
+    "rate_scales_with_temp": true,
+    "condition": null
+  }
+}

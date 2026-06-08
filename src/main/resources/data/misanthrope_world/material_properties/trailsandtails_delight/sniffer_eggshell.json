@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.55,
+  "insulation_r": 6,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.32,
+  "adhesion": 0.28,
+  "biological": true,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.32,
+    "quanta": 0.38,
+    "rectification": 0.25
+  },
+  "ousia_capacity": 10,
+  "note": "Sniffer eggshell \u2014 cracked prehistoric sniffer egg fragments, calcium carbonate shell with keratin membrane, FRAGMENT_VS2 reflecting ceramic-like shattering behaviour",
+  "block": "trailandtales_delight:sniffer_eggshell",
+  "thickness_fraction": 0.15,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 150.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 6000,
+    "tensile_strength_kpa": 800,
+    "shear_strength_kpa": 2000,
+    "fracture_toughness": 0.28,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.15
+  }
+}

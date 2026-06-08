@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 3,
+  "conductivity": 0.3,
+  "insulation_r": 3,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.15,
+  "adhesion": 0.88,
+  "on_soften": {
+    "temp": 60,
+    "result": "vanillabackport:resin_clump"
+  },
+  "on_fire": {
+    "temp": 245,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.42,
+    "quanta": 0.32,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 4,
+  "note": "Resin clump \u2014 fresh sticky resin deposit, not yet fully polymerised, extremely high adhesion, thin surface layer",
+  "block": "vanillabackport:resin_clump",
+  "thickness_fraction": 0.1,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 50.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 500,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 1500,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 1050,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.45
+  }
+}

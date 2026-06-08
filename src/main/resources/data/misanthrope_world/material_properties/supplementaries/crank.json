@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 55,
+  "insulation_r": 1,
+  "dissipation_rate": 0.12,
+  "is_airtight": false,
+  "porousness": 0.1,
+  "adhesion": 0.22,
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.38,
+    "quanta": 0.2,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 4,
+  "note": "Crank \u2014 iron hand crank mechanism",
+  "block": "supplementaries:crank",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 30000,
+    "tensile_strength_kpa": 24000,
+    "shear_strength_kpa": 15000,
+    "fracture_toughness": 0.65,
+    "density_kg_m3": 2100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

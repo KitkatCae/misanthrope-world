@@ -1,11 +1,11 @@
 {
   "thermal_mass": 18,
-  "conductivity": 5,
-  "insulation_r": 26,
+  "conductivity": 4,
+  "insulation_r": 28,
   "dissipation_rate": 0.04,
   "is_airtight": true,
   "porousness": 0.04,
-  "adhesion": 0.1,
+  "adhesion": 0.12,
   "on_melt": {
     "temp": 1650,
     "result": "minecraft:lava"
@@ -13,10 +13,10 @@
   "ousia_affinity": {
     "eterna": 0.05,
     "arcana": 0.3,
-    "quanta": 0.05,
-    "rectification": 0.6
+    "quanta": 0.1,
+    "rectification": 0.63
   },
-  "ousia_capacity": 24,
+  "ousia_capacity": 22,
   "block": "minecraft:smooth_quartz",
   "thickness_fraction": 1.0,
   "electrically_conductive": false,
@@ -38,5 +38,6 @@
     "cave_in_radius_override": -1,
     "shockwave_amplification": 1.0,
     "shockwave_absorption": 0.1
-  }
+  },
+  "note": "Smooth quartz \u2014 polished quartz block, very high rectification"
 }

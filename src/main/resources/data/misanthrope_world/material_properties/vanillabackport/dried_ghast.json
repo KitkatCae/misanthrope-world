@@ -1,0 +1,50 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.08,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.5,
+  "adhesion": 0.6,
+  "biological": true,
+  "on_water_contact": {
+    "result": "minecraft:air",
+    "note": "rehydration \u2014 dried ghast dissolves/revives on water contact"
+  },
+  "ousia_affinity": {
+    "eterna": 0.52,
+    "arcana": 0.06,
+    "quanta": 0.55,
+    "rectification": 0.05
+  },
+  "ousia_capacity": 18,
+  "note": "Dried ghast \u2014 entire desiccated fetal ghast, nether biology preserved in dried state. Extremely high eterna from preserved nether life force, high quanta from complex organ/tissue structure. Dissolves on water contact. Ambient blaze fume emission from nether organic compounds",
+  "block": "vanillabackport:dried_ghast",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.004,
+  "ambient_offgas": {
+    "gas": "mge:blaze_fume",
+    "rate_mbar_per_tick": 0.005,
+    "rate_scales_with_temp": true,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 400,
+    "tensile_strength_kpa": 600,
+    "shear_strength_kpa": 200,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 300,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.55
+  }
+}

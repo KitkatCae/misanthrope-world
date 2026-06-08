@@ -1,0 +1,40 @@
+{
+  "thermal_mass": 30,
+  "conductivity": 5,
+  "insulation_r": 12,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.2,
+  "ousia_affinity": {
+    "eterna": 0.4,
+    "arcana": 0.2,
+    "quanta": 0.25,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 80,
+  "note": "Dragon egg \u2014 unknown biomineral, active biological energy from dormant embryo, very high ousia capacity",
+  "block": "minecraft:dragon_egg",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "thermal_crack_threshold": 500.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 40000,
+    "shear_strength_kpa": 20000,
+    "fracture_toughness": 0.6,
+    "density_kg_m3": 3000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

@@ -11,16 +11,26 @@
     "result": "misanthrope_core:antimatter_annihilation_event"
   },
   "passive_heat_output": true,
+  "lava_immune": true,
+  "heat_decoupled": true,
   "antimatter_fraction": 0.15,
+  "emission": {
+    "peak_celsius": 800,
+    "watts_per_block": 2500,
+    "requires_oxygen": false,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.0,
+    "heat_profile_type": "constant"
+  },
   "custom_behavior": "misanthrope_core:fiery_metal_corona",
   "ousia_affinity": {
-    "eterna": 0.4,
-    "arcana": 0.2,
-    "quanta": 0.2,
-    "rectification": 0.2
+    "eterna": 0.72,
+    "arcana": 0.04,
+    "quanta": 0.38,
+    "rectification": 0.08
   },
   "ousia_capacity": 120,
-  "note": "Stable antimatter metal — edge corona reaction",
+  "note": "Fiery block \u2014 stable antimatter metal. Deep black body with fiery event-horizon corona where antimatter surface reacts with adjacent regular matter. 15% antimatter fraction, internally stable, edge reaction is continuous. Melt at 2800\u00b0C causes containment failure and full annihilation event. Passively hot \u2014 continuous heat emission from corona reactions.",
   "block": "twilightforest:fiery_block",
   "thickness_fraction": 1.0,
   "electrically_conductive": true,

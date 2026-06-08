@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 20,
+  "conductivity": 8,
+  "insulation_r": 8,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.05,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 271,
+    "result": "thermal_shock:bismuth_fluid",
+    "note": "Bismuth melts at 271\u00b0C, well below any stone"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.45,
+    "quanta": 0.08,
+    "rectification": 0.72
+  },
+  "ousia_capacity": 42,
+  "note": "Ruby gemlock \u2014 ruby crystal in metal mount",
+  "block": "thermal_shock:ruby_gemlock",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 60.0,
+  "thermal_crack_rate": 0.012,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 9780,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

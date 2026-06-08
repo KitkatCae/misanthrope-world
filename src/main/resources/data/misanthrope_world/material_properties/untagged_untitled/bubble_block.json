@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 1,
+  "conductivity": 0.02,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.12,
+  "is_airtight": false,
+  "porousness": 0.95,
+  "adhesion": 0.02,
+  "ousia_affinity": {
+    "eterna": 0.02,
+    "arcana": 0.02,
+    "quanta": 0.65,
+    "rectification": 0.02
+  },
+  "ousia_capacity": 1,
+  "note": "Bubble block \u2014 soap bubble film, essentially no structural mass, near-maximum quanta from spherical interference geometry",
+  "block": "untagged_mobs:bubble_block",
+  "thickness_fraction": 0.02,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 0.5,
+  "thermal_crack_rate": 1.0,
+  "structural": {
+    "compressive_strength_kpa": 1,
+    "tensile_strength_kpa": 5,
+    "shear_strength_kpa": 1,
+    "fracture_toughness": 0.01,
+    "density_kg_m3": 5,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 0.01,
+    "crack_threshold_fraction": 0.99,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.99
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 22,
+  "conductivity": 12,
+  "insulation_r": 12,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.25,
+  "on_melt": {
+    "temp": 1000,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.42,
+    "quanta": 0.22,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 22,
+  "note": "Season sensor \u2014 redstone calendar/season detection block, stone and iron composite with active sensing circuit, eterna elevated from active environmental monitoring",
+  "block": "sereneseasons:season_sensor",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 6000,
+    "shear_strength_kpa": 12000,
+    "fracture_toughness": 0.48,
+    "density_kg_m3": 3500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

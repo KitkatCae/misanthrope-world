@@ -1,0 +1,47 @@
+{
+  "thermal_mass": 26,
+  "conductivity": 7,
+  "insulation_r": 20,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.14,
+  "on_heat_above": {
+    "temp": 840,
+    "result": "misanthrope_core:quicklime_layer"
+  },
+  "on_melt": {
+    "temp": 1339,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.52,
+    "quanta": 0.06,
+    "rectification": 0.37
+  },
+  "ousia_capacity": 26,
+  "note": "Recrystallized limestone — interlocking calcite crystal mosaic, very low porousness, high arcana from stable dense lattice, fragments on failure",
+  "block": "yungscavebiomes:marble",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 7000,
+    "shear_strength_kpa": 14000,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 2700,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.2,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

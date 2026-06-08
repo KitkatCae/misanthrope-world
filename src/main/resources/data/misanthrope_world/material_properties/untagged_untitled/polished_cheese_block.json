@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 0.35,
+  "insulation_r": 6,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.35,
+  "on_soften": {
+    "temp": 32,
+    "result": "untagged_mobs:cheese_block"
+  },
+  "on_fire": {
+    "temp": 270,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.41,
+    "quanta": 0.38,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 10,
+  "note": "Polished cheese block \u2014 wax-rind coated, smooth face",
+  "block": "untagged_mobs:polished_cheese_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 30.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 1200,
+    "tensile_strength_kpa": 400,
+    "shear_strength_kpa": 600,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 1100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.42
+  }
+}

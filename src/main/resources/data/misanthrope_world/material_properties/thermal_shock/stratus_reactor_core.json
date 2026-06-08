@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 55,
+  "conductivity": 180,
+  "insulation_r": 2,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.04,
+  "adhesion": 0.15,
+  "on_melt": {
+    "temp": 2200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.45,
+    "arcana": 0.4,
+    "quanta": 0.12,
+    "rectification": 0.55
+  },
+  "ousia_capacity": 65,
+  "note": "Stratus reactor core \u2014 high-energy power core for stratus technology, extremely high eterna from active energy generation, very high thermal mass",
+  "block": "thermal_shock:stratus_reactor_core",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 500.0,
+  "thermal_crack_rate": 0.0005,
+  "structural": {
+    "compressive_strength_kpa": 300000,
+    "tensile_strength_kpa": 240000,
+    "shear_strength_kpa": 150000,
+    "fracture_toughness": 0.88,
+    "density_kg_m3": 9000,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.03
+  }
+}

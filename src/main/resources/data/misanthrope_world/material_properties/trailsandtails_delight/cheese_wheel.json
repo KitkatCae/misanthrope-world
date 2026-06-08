@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 0.38,
+  "insulation_r": 7,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.18,
+  "adhesion": 0.48,
+  "on_soften": {
+    "temp": 32,
+    "result": "trailandtales_delight:cheese_wheel"
+  },
+  "on_fire": {
+    "temp": 270,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.38,
+    "quanta": 0.4,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 14,
+  "note": "Cheese wheel \u2014 large format aged cheese wheel, rind-sealed exterior, softer interior, high arcana from stable aged protein matrix, quanta from complex curd microstructure",
+  "block": "trailandtales_delight:cheese_wheel",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 28.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 1500,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 700,
+    "fracture_toughness": 0.14,
+    "density_kg_m3": 1050,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.42
+  }
+}

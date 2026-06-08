@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 2,
+  "conductivity": 0.4,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.75,
+  "adhesion": 0.88,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.68,
+    "arcana": 0.02,
+    "quanta": 0.55,
+    "rectification": 0.02
+  },
+  "ousia_capacity": 5,
+  "note": "Tainted flesh veins \u2014 wither storm vascular spreading tissue, extremely high adhesion, thin surface layer, highest eterna density of the mod",
+  "block": "witherstormmod:tainted_flesh_veins",
+  "thickness_fraction": 0.05,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.012,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 300,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 1100,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

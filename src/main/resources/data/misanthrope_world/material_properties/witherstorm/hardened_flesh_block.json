@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 0.5,
+  "insulation_r": 2,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.55,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.72,
+    "arcana": 0.03,
+    "quanta": 0.38,
+    "rectification": 0.08
+  },
+  "ousia_capacity": 20,
+  "note": "Hardened flesh block \u2014 wither-cured biological tissue, wither energy has fully solidified it into chitinous armour plating, lowest miasma rate (sealed surface)",
+  "block": "witherstormmod:hardened_flesh_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "ambient_offgas": {
+    "gas": "mge:wither_miasma",
+    "rate_mbar_per_tick": 0.006,
+    "rate_scales_with_temp": false,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 18000,
+    "tensile_strength_kpa": 14000,
+    "shear_strength_kpa": 9000,
+    "fracture_toughness": 0.6,
+    "density_kg_m3": 1400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.42
+  }
+}

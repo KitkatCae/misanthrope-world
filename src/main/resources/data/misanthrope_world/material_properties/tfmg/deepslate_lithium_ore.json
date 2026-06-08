@@ -1,0 +1,53 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 85,
+  "insulation_r": 2,
+  "dissipation_rate": 0.14,
+  "is_airtight": true,
+  "porousness": 0.18,
+  "adhesion": 0.14,
+  "on_melt": {
+    "temp": 181,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.55,
+    "arcana": 0.22,
+    "quanta": 0.28,
+    "rectification": 0.32
+  },
+  "ousia_capacity": 22,
+  "note": "deepslate lithium ore",
+  "block": "tfmg:deepslate_lithium_ore",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 12000,
+    "tensile_strength_kpa": 9600,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.72,
+    "density_kg_m3": 530,
+    "is_structural_frame": false,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  },
+  "on_water_contact": {
+    "result": "explosion_tier_2",
+    "note": "Lithium explodes on water contact"
+  },
+  "ambient_offgas": {
+    "gas": "mge:ammonia",
+    "rate_mbar_per_tick": 0.002,
+    "rate_scales_with_temp": true,
+    "condition": "contact_air"
+  }
+}

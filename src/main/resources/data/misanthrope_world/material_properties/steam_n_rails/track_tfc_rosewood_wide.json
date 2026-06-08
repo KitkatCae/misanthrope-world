@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 12,
+  "conductivity": 25,
+  "insulation_r": 2,
+  "dissipation_rate": 0.1,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.25,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "on_fire": {
+    "temp": 280,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.35,
+    "quanta": 0.32,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 12,
+  "note": "track tfc rosewood wide \u2014 standard wooden tie iron rail track, wide gauge",
+  "block": "railways:track_tfc_rosewood_wide",
+  "thickness_fraction": 0.3,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.003,
+  "structural": {
+    "compressive_strength_kpa": 30000,
+    "tensile_strength_kpa": 80000,
+    "shear_strength_kpa": 50000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 1800,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.25
+  }
+}

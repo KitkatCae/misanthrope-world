@@ -1,0 +1,39 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 3,
+  "insulation_r": 5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.08,
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.42,
+    "quanta": 0.28,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 12,
+  "note": "Artificial lava display \u2014 sealed display of artificial lava",
+  "block": "terramity:artificial_lava_display",
+  "thickness_fraction": 0.8,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 2000,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 500,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 1200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.45,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.08
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "thermal_mass": 1,
+  "conductivity": 0.14,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.2,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 285,
+    "result": "minecraft:air"
+  },
+  "on_fire": {
+    "temp": 285,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.06,
+    "arcana": 0.22,
+    "quanta": 0.18,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 1,
+  "note": "Barricade \u2014 wooden defensive barricade",
+  "block": "survival_instinct:barricade",
+  "thickness_fraction": 0.7,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.001,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 4800,
+    "shear_strength_kpa": 2800,
+    "fracture_toughness": 0.5,
+    "density_kg_m3": 350,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.35
+  }
+}

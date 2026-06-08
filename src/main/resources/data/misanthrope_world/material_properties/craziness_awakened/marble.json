@@ -34,7 +34,7 @@
     "density_kg_m3": 2200,
     "is_structural_frame": false,
     "load_transfer_range": 1,
-    "failure_mode": "CAVE_IN",
+    "failure_mode": "FRAGMENT_VS2",
     "failure_threshold_fraction": 1.0,
     "crack_threshold_fraction": 0.6,
     "fragment_min_size": 4,

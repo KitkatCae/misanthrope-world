@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 2,
+  "insulation_r": 4,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.08,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.42,
+    "quanta": 0.27,
+    "rectification": 0.45
+  },
+  "ousia_capacity": 17,
+  "note": "cobalt crystal glass",
+  "block": "outer_end:cobalt_crystal_glass",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 176.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 1500,
+    "tensile_strength_kpa": 150,
+    "shear_strength_kpa": 350,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 2600,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.42,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.04
+  }
+}

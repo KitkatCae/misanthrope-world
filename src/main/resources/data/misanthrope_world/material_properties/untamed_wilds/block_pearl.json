@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 18,
+  "conductivity": 1.5,
+  "insulation_r": 10,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.5,
+    "quanta": 0.12,
+    "rectification": 0.52
+  },
+  "ousia_capacity": 22,
+  "note": "Pearl block \u2014 compressed nacre (mother-of-pearl), alternating aragonite platelet and protein matrix layers, very high rectification from ordered brick-and-mortar crystal structure, iridescent",
+  "block": "untamedwilds:block_pearl",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 250.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 50000,
+    "tensile_strength_kpa": 8000,
+    "shear_strength_kpa": 12000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 2900,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.1,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.07
+  }
+}

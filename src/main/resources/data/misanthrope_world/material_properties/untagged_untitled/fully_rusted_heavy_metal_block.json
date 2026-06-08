@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 28,
+  "conductivity": 18,
+  "insulation_r": 7,
+  "dissipation_rate": 0.1,
+  "is_airtight": true,
+  "porousness": 0.32,
+  "adhesion": 0.28,
+  "on_melt": {
+    "temp": 1538,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.24,
+    "quanta": 0.38,
+    "rectification": 0.18
+  },
+  "ousia_capacity": 20,
+  "note": "Fully rusted heavy steel block",
+  "block": "untagged_mobs:fully_rusted_heavy_metal_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 160.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 110000,
+    "tensile_strength_kpa": 88000,
+    "shear_strength_kpa": 55000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 7200,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.75,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.05
+  }
+}

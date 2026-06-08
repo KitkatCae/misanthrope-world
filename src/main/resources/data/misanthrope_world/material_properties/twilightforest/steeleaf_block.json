@@ -1,67 +1,45 @@
 {
-  "thermal_mass": 12,
-  "conductivity": 22,
-  "insulation_r": 10,
-  "dissipation_rate": 0.18,
+  "thermal_mass": 28,
+  "conductivity": 65,
+  "insulation_r": 2,
+  "dissipation_rate": 0.15,
   "is_airtight": false,
-  "porousness": 0.06,
-  "adhesion": 0.14,
-  "on_fire": {
-    "temp": 350,
-    "result": "minecraft:air"
-  },
+  "porousness": 0.12,
+  "adhesion": 0.16,
+  "biological": true,
   "on_melt": {
-    "temp": 1538,
+    "temp": 1450,
     "result": "minecraft:lava"
   },
-  "biological": true,
   "ousia_affinity": {
-    "eterna": 0.2,
-    "arcana": 0.25,
-    "quanta": 0.25,
-    "rectification": 0.3
+    "eterna": 0.42,
+    "arcana": 0.45,
+    "quanta": 0.08,
+    "rectification": 0.72
   },
-  "ousia_capacity": 30,
+  "ousia_capacity": 38,
+  "self_repair_rate": 0.015,
+  "note": "Steeleaf block \u2014 leaf of the ironwood tree. Thin flat iron crystal sheet with photosensitive mineral planes for photosynthesis. Crystallographic termination at leaf margin produces naturally blade-sharp edges. Emits low-level electromagnetic growth signal that activates crystal repair chemistry in worked steeleaf. Self-repair rate active when living steeleaf present nearby.",
   "block": "twilightforest:steeleaf_block",
-  "thickness_fraction": 1.0,
+  "thickness_fraction": 0.15,
   "electrically_conductive": true,
+  "thermal_crack_threshold": 350.0,
+  "thermal_crack_rate": 0.002,
   "structural": {
-    "compressive_strength_kpa": 250000,
-    "tensile_strength_kpa": 250000,
-    "shear_strength_kpa": 130000,
-    "fracture_toughness": 0.9,
-    "strength_retention_curve": [
-      {
-        "celsius": 20,
-        "fraction": 1.0
-      },
-      {
-        "celsius": 300,
-        "fraction": 0.9
-      },
-      {
-        "celsius": 600,
-        "fraction": 0.65
-      },
-      {
-        "celsius": 900,
-        "fraction": 0.3
-      },
-      {
-        "celsius": 1200,
-        "fraction": 0.05
-      }
-    ],
-    "density_kg_m3": 7800,
-    "is_structural_frame": true,
-    "load_transfer_range": 2,
-    "failure_mode": "CRUMBLE",
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 120000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 6800,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
     "failure_threshold_fraction": 1.0,
-    "crack_threshold_fraction": 0.85,
-    "fragment_min_size": 4,
-    "fragment_initial_velocity_scale": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.4,
     "cave_in_radius_override": -1,
     "shockwave_amplification": 1.0,
-    "shockwave_absorption": 0.05
+    "shockwave_absorption": 0.03
   }
 }

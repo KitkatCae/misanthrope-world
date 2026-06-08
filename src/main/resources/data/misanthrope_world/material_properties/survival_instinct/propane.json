@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 50,
+  "insulation_r": 2,
+  "dissipation_rate": 0.12,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.18,
+  "on_ignite": {
+    "trigger": "spark_or_fire",
+    "result": "explosion_tier_3"
+  },
+  "ousia_affinity": {
+    "eterna": 0.28,
+    "arcana": 0.3,
+    "quanta": 0.38,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 12,
+  "note": "Propane tank \u2014 pressurised propane gas cylinder, BLEVE risk on fire exposure",
+  "block": "survival_instinct:propane",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 48000,
+    "shear_strength_kpa": 30000,
+    "fracture_toughness": 0.65,
+    "density_kg_m3": 3500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.8,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 2.2,
+    "shockwave_absorption": 0.04
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 15,
+  "conductivity": 52,
+  "insulation_r": 1,
+  "dissipation_rate": 0.13,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.18,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.12,
+    "arcana": 0.38,
+    "quanta": 0.25,
+    "rectification": 0.35
+  },
+  "ousia_capacity": 14,
+  "note": "Chaindelier \u2014 hanging iron chain chandelier with candles, open lattice chain form, high tensile from chain links",
+  "block": "species:chaindelier",
+  "thickness_fraction": 0.7,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 300.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 5000,
+    "tensile_strength_kpa": 50000,
+    "shear_strength_kpa": 30000,
+    "fracture_toughness": 0.62,
+    "density_kg_m3": 3500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.72,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.12
+  }
+}

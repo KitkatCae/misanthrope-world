@@ -175,6 +175,25 @@ public final class BlockPhysicsData {
     public final String disambiguation;
     public final boolean stub;
 
+    // ── Snowlogging modifier ──────────────────────────────────────────────────
+
+    /**
+     * Non-null if this block is a Snow Real Magic snow-overlay form (e.g.
+     * {@code snowrealmagic:slab}, {@code snowrealmagic:fence}).
+     *
+     * <p>When present, {@link BlockPhysicsRegistry#getWithSnowlog} uses these
+     * values to additively modify the host block's physics rather than returning
+     * this block's data standalone. The host block's data is fetched normally;
+     * these deltas are then applied on top.
+     *
+     * <p>The {@code snow} block (layers=1–8) additionally sets
+     * {@link SnowlogModifier#layerScale} {@code true}, which causes the caller
+     * to scale {@code insRAdd} and {@code thermalMassAdd} by
+     * {@code layers / 8.0} from the blockstate's {@code layers} property.
+     */
+    @Nullable
+    public final SnowlogModifier snowlogModifier;
+
     // ── Constructor ───────────────────────────────────────────────────────────
 
     private BlockPhysicsData(Builder b) {
@@ -213,6 +232,7 @@ public final class BlockPhysicsData {
         this.note = b.note;
         this.disambiguation = b.disambiguation;
         this.stub = b.stub;
+        this.snowlogModifier = b.snowlogModifier;
     }
 
     // ── Derived helpers (mirrors old InsulationData API) ─────────────────────
@@ -482,6 +502,35 @@ public final class BlockPhysicsData {
         CRUMBLE, FRAGMENT_VS2, CAVE_IN, LATTICE_COLLAPSE
     }
 
+    /**
+     * Describes how a Snow Real Magic snow-overlay block modifies its host.
+     *
+     * <p>All fields are additive deltas applied to the host block's physics
+     * when that host is snowlogged. The host's own JSON values are the base;
+     * these are stacked on top.
+     *
+     * <ul>
+     *   <li>{@code insRAdd} — R-value added to host's {@code insulationR}.</li>
+     *   <li>{@code thermalMassAdd} — J/°C added to host's {@code thermalMass}.</li>
+     *   <li>{@code porousnessSubtract} — subtracted from host's {@code porousness}
+     *       (clamped ≥ 0). Zero for fence/fence_gate which remain open.</li>
+     *   <li>{@code forceAirtight} — if {@code true} and host
+     *       {@code porousness - porousnessSubtract ≤ 0.05}, set
+     *       {@code isAirtight = true}.</li>
+     *   <li>{@code layerScale} — only {@code true} for {@code snowrealmagic:snow}.
+     *       When set, caller should scale {@code insRAdd} and {@code thermalMassAdd}
+     *       by {@code layers / 8.0} from the blockstate's {@code layers} property
+     *       before applying.</li>
+     * </ul>
+     */
+    public record SnowlogModifier(
+            double insRAdd,
+            double thermalMassAdd,
+            double porousnessSubtract,
+            boolean forceAirtight,
+            boolean layerScale
+    ) {}
+
     // ── Builder ───────────────────────────────────────────────────────────────
 
     public static Builder builder() {
@@ -534,6 +583,8 @@ public final class BlockPhysicsData {
         @Nullable
         String disambiguation;
         boolean stub = false;
+        @Nullable
+        SnowlogModifier snowlogModifier;
 
         public Builder() {
         }
@@ -576,6 +627,7 @@ public final class BlockPhysicsData {
             this.note = src.note;
             this.disambiguation = src.disambiguation;
             this.stub = src.stub;
+            this.snowlogModifier = src.snowlogModifier;
         }
 
         public Builder thermalMass(double v) {

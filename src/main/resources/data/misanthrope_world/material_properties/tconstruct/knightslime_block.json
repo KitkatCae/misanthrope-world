@@ -1,0 +1,46 @@
+{
+  "thermal_mass": 25,
+  "conductivity": 45,
+  "insulation_r": 5,
+  "dissipation_rate": 0.08,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.55,
+  "on_melt": {
+    "temp": 1100,
+    "result": "minecraft:lava"
+  },
+  "biological": true,
+  "topologically_ordered": true,
+  "fatigue_immune": true,
+  "ousia_affinity": {
+    "eterna": 0.42,
+    "arcana": 0.5,
+    "quanta": 0.22,
+    "rectification": 0.62
+  },
+  "ousia_capacity": 55,
+  "note": "Knightslime block \u2014 slimy hybrid of slime and Knightmetal. Inherits partial topological ordering from knightmetal lattice embedded in slime matrix. High eterna from biological slime, very high arcana and rectification from knightmetal character, high ousia capacity.",
+  "block": "tconstruct:knightslime_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 50000,
+    "tensile_strength_kpa": 80000,
+    "shear_strength_kpa": 40000,
+    "fracture_toughness": 0.75,
+    "density_kg_m3": 4000,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.2,
+    "crack_threshold_fraction": 0.8,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.45
+  }
+}

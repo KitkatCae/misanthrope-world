@@ -1,0 +1,41 @@
+{
+  "thermal_mass": 15,
+  "conductivity": 0.6,
+  "insulation_r": 8,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.22,
+  "adhesion": 0.3,
+  "biological": true,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.32,
+    "arcana": 0.25,
+    "quanta": 0.35,
+    "rectification": 0.28
+  },
+  "ousia_capacity": 14,
+  "structural": {
+    "compressive_strength_kpa": 15000,
+    "tensile_strength_kpa": 3000,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.42,
+    "density_kg_m3": 1400,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.65,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.25
+  },
+  "block": "trailandtales_delight:sniffer_egg_soup_block",
+  "note": "Sniffer egg soup block \u2014 sniffer egg hollowed and used as soup vessel, biological",
+  "thickness_fraction": 0.7
+}

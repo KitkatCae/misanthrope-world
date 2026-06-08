@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 5,
+  "conductivity": 0.04,
+  "insulation_r": 1.0,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.62,
+  "adhesion": 0.42,
+  "biological": true,
+  "on_melt": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "ousia_affinity": {
+    "eterna": 0.22,
+    "arcana": 0.1,
+    "quanta": 0.58,
+    "rectification": 0.15
+  },
+  "ousia_capacity": 6,
+  "note": "Frozen hair \u2014 frozen biological filament block, very high quanta from complex tangled keratin fibre geometry, very low conductivity (hair is excellent insulator)",
+  "block": "species:frozen_hair",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 35.0,
+  "thermal_crack_rate": 0.012,
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 200,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.85,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.65
+  }
+}

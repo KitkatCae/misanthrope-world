@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 8,
+  "conductivity": 2,
+  "insulation_r": 8,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.15,
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.52,
+    "arcana": 0.38,
+    "quanta": 0.18,
+    "rectification": 0.45
+  },
+  "ousia_capacity": 45,
+  "note": "Hopelight \u2014 hope-energy magical crystal light source, highest eterna of any non-animated block in this mod, extremely high ousia capacity from positive life energy",
+  "block": "species:hopelight",
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 1600,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 1500,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "FRAGMENT_VS2",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.5,
+    "fragment_min_size": 2,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}

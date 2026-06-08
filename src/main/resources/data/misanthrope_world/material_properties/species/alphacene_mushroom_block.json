@@ -1,0 +1,45 @@
+{
+  "thermal_mass": 6,
+  "conductivity": 0.3,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.32,
+  "adhesion": 0.48,
+  "biological": true,
+  "on_fire": {
+    "temp": 235,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.32,
+    "arcana": 0.12,
+    "quanta": 0.52,
+    "rectification": 0.12
+  },
+  "ousia_capacity": 10,
+  "note": "Alphacene mushroom block \u2014 primordial mushroom cap block, high eterna from fungal biological energy, high quanta from complex mycelium network",
+  "block": "species:alphacene_mushroom_block",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 9999.0,
+  "thermal_crack_rate": 0.0,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 100,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 300,
+    "is_structural_frame": false,
+    "load_transfer_range": 1,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.88,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.62
+  }
+}

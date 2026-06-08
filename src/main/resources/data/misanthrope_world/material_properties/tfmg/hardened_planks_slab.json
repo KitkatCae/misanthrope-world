@@ -1,0 +1,44 @@
+{
+  "thermal_mass": 7,
+  "conductivity": 0.2,
+  "insulation_r": 2.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.16,
+  "adhesion": 0.42,
+  "on_fire": {
+    "temp": 320,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.08,
+    "arcana": 0.28,
+    "quanta": 0.32,
+    "rectification": 0.38
+  },
+  "ousia_capacity": 6,
+  "note": "Hardened planks slab",
+  "block": "tfmg:hardened_planks_slab",
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 50000,
+    "tensile_strength_kpa": 65000,
+    "shear_strength_kpa": 18000,
+    "fracture_toughness": 0.62,
+    "density_kg_m3": 900,
+    "is_structural_frame": true,
+    "load_transfer_range": 3,
+    "failure_mode": "CRUMBLE",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.7,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.16
+  }
+}

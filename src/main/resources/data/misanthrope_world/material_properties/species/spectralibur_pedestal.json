@@ -1,0 +1,43 @@
+{
+  "thermal_mass": 25,
+  "conductivity": 5,
+  "insulation_r": 18,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.28,
+  "on_melt": {
+    "temp": 1200,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.35,
+    "arcana": 0.52,
+    "quanta": 0.18,
+    "rectification": 0.45
+  },
+  "ousia_capacity": 45,
+  "note": "Spectralibur pedestal \u2014 enchanted stone pedestal for spectralibur, high arcana from ritual inscription, high eterna from contained sword energy",
+  "block": "species:spectralibur_pedestal",
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 220.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 55000,
+    "tensile_strength_kpa": 5500,
+    "shear_strength_kpa": 11000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2500,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CAVE_IN",
+    "failure_threshold_fraction": 1.0,
+    "crack_threshold_fraction": 0.62,
+    "fragment_min_size": 4,
+    "fragment_initial_velocity_scale": 1.0,
+    "cave_in_radius_override": -1,
+    "shockwave_amplification": 1.0,
+    "shockwave_absorption": 0.1
+  }
+}
