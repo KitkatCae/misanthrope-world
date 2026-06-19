@@ -45,6 +45,19 @@ public enum CrackCause {
             0.04f,
             0,       // never heals
             0.5f
+    ),
+
+    /**
+     * Pressure-differential cracking — block hull under crush or expansion load.
+     * Wide, following-stress-lines pattern, similar to STRUCTURAL but with
+     * concentric rings near the pressure face (like a submarine bulkhead).
+     * Heals slowly when ΔP normalises (unlike STRUCTURAL which never heals),
+     * because elastic recovery can close hairline pressure cracks.
+     */
+    PRESSURE(
+            0.12f,   // deep trough — pressure cracks open wide
+            3000,    // 2.5 min per step — slow heal once pressure is relieved
+            0.75f    // strong cross-block propagation around the hull face
     );
 
     /**
@@ -74,7 +87,7 @@ public enum CrackCause {
      * Whether this cause produces an inner glow at level 3.
      */
     public boolean hasGlow() {
-        return this == THERMAL || this == MAGICAL;
+        return this == THERMAL || this == MAGICAL || this == PRESSURE;
     }
 
     /**
@@ -86,6 +99,7 @@ public enum CrackCause {
         return switch (this) {
             case THERMAL -> 0xFFD04010; // orange-red
             case MAGICAL -> 0xFF8030FF; // purple
+            case PRESSURE -> 0xFF004080; // deep blue — cold submarine crush
             default -> 0x00000000;
         };
     }
@@ -96,6 +110,7 @@ public enum CrackCause {
     public float baseLineWidth(int level) {
         float base = switch (this) {
             case STRUCTURAL -> 0.018f;
+            case PRESSURE -> 0.022f; // widest — pressure opens cracks hard
             case IMPACT -> 0.014f;
             case EROSION -> 0.010f;
             default -> 0.008f;

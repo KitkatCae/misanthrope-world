@@ -1,0 +1,70 @@
+{
+  "note": "Ignivorus dragon egg. Volcanic titan, nether-origin. Extraordinarily heat-tolerant shell evolved for lava-adjacent incubation. Optimal range is 80\u2013200\u00b0C \u2014 far higher than other dragon eggs. Sustained above 500\u00b0C the shell finally fails. Below 20\u00b0C development halts and embryo dies rapidly.",
+  "thermal_mass": 90,
+  "conductivity": 0.8,
+  "insulation_r": 1.1,
+  "dissipation_rate": 0.03,
+  "is_airtight": true,
+  "porousness": 0.02,
+  "adhesion": 0.4,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "lava_contact_stable": true,
+  "lava_contact_mechanism": "thick igneous shell withstands brief lava contact; prolonged immersion still lethal",
+  "structural": {
+    "compressive_strength_kpa": 18000,
+    "tensile_strength_kpa": 2500,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 1800,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.7,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 200,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 400,
+        "fraction": 0.9
+      },
+      {
+        "celsius": 500,
+        "fraction": 0.6
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.2
+      }
+    ]
+  },
+  "emission": {
+    "peak_celsius": 120,
+    "watts_per_block": 15,
+    "requires_oxygen": false,
+    "is_continuous": true,
+    "co2_emission_rate": 0.002
+  },
+  "on_heat_above": {
+    "temp": 500,
+    "result": "minecraft:egg",
+    "note": "shell finally cracks \u2014 embryo destroyed"
+  },
+  "on_cool_below": {
+    "temp": 20,
+    "result": "minecraft:egg",
+    "note": "embryo dies from cold shock"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.15,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.05
+  },
+  "block": "saintsdragons:ignivorus_egg"
+}

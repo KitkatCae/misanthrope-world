@@ -1,0 +1,33 @@
+{
+  "block": "refurbished_furniture:acacia_kitchen_drawer",
+  "thermal_mass": 6,
+  "conductivity": 0.14,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.15,
+  "adhesion": 0.4,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 260,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 4000,
+    "shear_strength_kpa": 3500,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 650,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.6
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Acacia kitchen drawer."
+}

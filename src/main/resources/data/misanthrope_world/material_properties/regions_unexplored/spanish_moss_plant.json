@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:spanish_moss_plant",
+  "thermal_mass": 1,
+  "conductivity": 0.05,
+  "insulation_r": 0.12,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.85,
+  "adhesion": 0.55,
+  "thickness_fraction": 0.08,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Spanish moss lower segment."
+}

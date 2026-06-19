@@ -1,0 +1,30 @@
+{
+  "block": "regions_unexplored:glister_spire",
+  "thermal_mass": 6,
+  "conductivity": 0.8,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.3,
+  "adhesion": 0.25,
+  "thickness_fraction": 0.25,
+  "electrically_conductive": false,
+  "biological": true,
+  "light_emission": {
+    "type": "pulse",
+    "min": 4,
+    "max": 9,
+    "period_ticks": 60,
+    "curve": "sinusoidal",
+    "color": "golden",
+    "source": "bioluminescent"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.2,
+    "rectification": 0.0
+  },
+  "note": "Glister spire \u2014 thin bioluminescent cave crystal.",
+  "structural": {}
+}

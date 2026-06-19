@@ -1,0 +1,24 @@
+{
+  "block": "refurbished_furniture:gray_kitchen_cabinetry",
+  "thermal_mass": 8,
+  "conductivity": 0.2,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.25,
+  "thickness_fraction": 0.9,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 250,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Gray kitchen cabinetry \u2014 lacquered finish."
+}

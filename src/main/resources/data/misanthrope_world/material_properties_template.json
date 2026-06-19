@@ -1,0 +1,565 @@
+{
+  "_comment": "MISANTHROPE CORE — Material Properties Template",
+  "_comment2": "Every field that can appear in a material_properties entry. All fields except 'block' (or 'tag') are optional.",
+  "_comment3": "ousia-related fields (ousia_affinity, ousia_capacity, etc.) belong to the ousia mod — include them here freely, they are silently ignored by BlockPhysicsRegistry and will be picked up by the ousia registry when that mod is loaded.",
+
+  "block": "namespace:block_name",
+  "_alt_identity": "Use 'tag' instead of 'block' to apply to all members of a block tag:",
+  "tag": "forge:storage_blocks/iron",
+
+  "_section_core": "=== CORE THERMAL PROPERTIES ===",
+  "_core_note": "These six fields replace the old thermal/insulation/ system. Always provide them for any block that participates in thermal simulation.",
+
+  "thermal_mass": 20,
+  "_thermal_mass_note": "J/°C — energy absorbed before surface temperature rises. air~1, stone~50, cast_iron~80, water~200",
+
+  "conductivity": 10,
+  "_conductivity_note": "W/(m·K) — intrinsic heat-flow rate through the material. copper~400, iron~80, stone~2, wood~0.15",
+
+  "insulation_r": 20,
+  "_insulation_r_note": "R-value per block thickness for wall-stack math. air~0, glass~0.1, stone~0.45, firebrick~0.85, wool~0.9",
+
+  "dissipation_rate": 0.05,
+  "_dissipation_rate_note": "Fractional heat loss to ambient per tick (0–1). Most solids ~0.03–0.08",
+
+  "is_airtight": true,
+  "_is_airtight_note": "Seals gas exchange. Solid blocks true; slabs, grates, fences false",
+
+  "porousness": 0.20,
+  "_porousness_note": "Gas permeability fraction (0 = sealed, 1 = fully open)",
+
+  "adhesion": 0.30,
+  "_adhesion_note": "Surface adhesion for particulate settling (0–1)",
+
+  "thickness_fraction": 1.0,
+  "_thickness_note": "Full block = 1.0, slab = 0.5, pane = 0.08. Applied to insulation_r and thermal_mass in wall stacking",
+
+  "electrically_conductive": false,
+  "_elec_note": "Responds to induction heaters. Metals and some minerals only",
+
+  "_section_thermal_cracking": "=== THERMAL CRACKING ===",
+  "_thermal_crack_note": "Feeds stress into the CrackPropagator when block temperature exceeds threshold. Omit both fields to disable thermal cracking for this block (metals, firebrick).",
+
+  "thermal_crack_threshold": 180.0,
+  "_tct_note": "°C above ambient at which crack stress begins accumulating. glass~80, sandstone~150, granite~200, brick~300",
+
+  "thermal_crack_rate": 0.003,
+  "_tcr_note": "Crack intensity added per tick above threshold. glass~0.008 (brittle/fast), granite~0.002, brick~0.001",
+
+  "_section_heat_emission": "=== HEAT EMISSION ===",
+  "_emission_note": "Present only if this block actively emits heat. Replaces the old thermal/heat_sources/ entry for blocks defined here. The two systems coexist — blocks only in heat_sources/ still work.",
+
+  "emission": {
+    "peak_celsius": 1400,
+    "_peak_note": "Equilibrium air temperature this source drives nearby air toward in open air",
+    "watts_per_block": 1000,
+    "_watts_note": "Heat output rate. firestarter~150, campfire~350, lava~800, blaze_burner~1000, arc_furnace~3000",
+    "requires_oxygen": false,
+    "is_induction": false,
+    "_induction_note": "Skips air heating, directly heats adjacent electrically_conductive blocks",
+    "is_continuous": false,
+    "active_when_property": "heat_level",
+    "active_when_value": "kindled",
+    "oxygen_consumption_rate": 0.0,
+    "_o2_note": "mbar/tick consumed at full output. 0 = no O2 consumption",
+    "co2_emission_rate": 0.0,
+    "_co2_note": "mbar/tick CO2 emitted as byproduct of combustion",
+    "heat_profile_type": "constant",
+    "_profile_note": "constant | linear_ramp | bell_curve | stepped. Controls how output changes over time",
+    "structural_stress_above": 1200,
+    "_stress_note": "°C above which this source begins injecting structural stress into adjacent blocks",
+    "induce_pressure_check": false,
+    "_pressure_check_note": "Whether this source triggers a StructuralStressField re-evaluation of neighbors each tick"
+  },
+
+  "_section_dynamic_emission": "=== DYNAMIC / BE-DRIVEN EMISSION ===",
+  "_dynamic_note": "For block entities whose temperature is read at runtime (Clockwork Kelvin ducts, crucibles, etc.). 'read_via' identifies the bridge. peak_celsius is omitted — the live value is read each tick.",
+
+  "emission_dynamic": {
+    "type": "dynamic_be",
+    "read_via": "clockwork_kelvin",
+    "_read_via_note": "clockwork_kelvin | misanthrope_crucible | (future bridges added here)",
+    "watts_per_block": 800,
+    "requires_oxygen": false
+  },
+
+  "_section_phase_transitions": "=== PHASE TRANSITIONS ===",
+  "_phase_note": "Each on_X key is a shorthand for a PhaseTransition entry. Multiple can coexist. All temp values are °C.",
+
+  "on_melt": {
+    "temp": 1000,
+    "result": "namespace:result_block",
+    "note": "optional description"
+  },
+  "on_freeze": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "on_fire": {
+    "temp": 300,
+    "result": "namespace:result_block",
+    "requires_oxygen": true
+  },
+  "on_char": {
+    "temp": 280,
+    "result": "namespace:result_block",
+    "requires_oxygen": false
+  },
+  "on_sublimate": {
+    "temp": -78,
+    "_sublimate_note": "Entire block immediately becomes gas — use thermal_offgas for gradual emission instead",
+    "result": null
+  },
+  "on_fire_smelt": {
+    "temp": 1200,
+    "result": "namespace:result_block",
+    "requires": "carbon"
+  },
+  "on_heat_above": {
+    "temp": 500,
+    "result": "namespace:result_block",
+    "note": "triggers at sustained temperature above threshold",
+    "releases": "mge:co2"
+  },
+  "on_cool_below": {
+    "temp": 13,
+    "result": "namespace:result_block"
+  },
+  "on_soften": {
+    "temp": 60,
+    "result": "namespace:softened_block"
+  },
+  "on_water_contact": {
+    "result": "namespace:result_block",
+    "note": "optional description"
+  },
+  "on_heat_in_oxygen": {
+    "temp": 200,
+    "result": "namespace:gas_product"
+  },
+  "on_contact_atmosphere": {
+    "requires": "oxygen",
+    "result": "namespace:behavior_or_event"
+  },
+  "on_impact": {
+    "result": "namespace:spark_or_event",
+    "ignites_nearby": false
+  },
+  "on_ignite": {
+    "trigger": "gunpowder_contact",
+    "result": "explosion_tier_4"
+  },
+  "on_field_loss": {
+    "sequence": ["gamma_burst", "potassium_deposit"],
+    "cascade_propagation": "adjacent_same_block_same_tick"
+  },
+  "on_cdw_collapse": "description_or_event_id",
+  "on_approach_melt": {
+    "temp": 1100,
+    "result": "misanthrope_core:degradation_warning_event"
+  },
+  "on_crystal_phase_disruption": "event_id",
+  "on_exceed_temp": {
+    "temp": 555537,
+    "result": "namespace:result_block"
+  },
+  "on_pressure_exceed": {
+    "pressure_kpa": 50000,
+    "result": "namespace:result_block",
+    "note": "triggers when structural compressive load exceeds this threshold — use alongside structural block"
+  },
+
+  "freeze_temp": -1,
+  "melt_temp": 1000,
+
+  "_section_offgas": "=== OFF-GASSING ===",
+  "_offgas_note": "Two distinct systems: thermal_offgas (temperature-triggered) and ambient_offgas (passive, condition-gated). Both write to MGE EnvironmentGrid. Use on_sublimate for instant full-block vaporization.",
+
+  "thermal_offgas": {
+    "gas": "mge:carbon_dioxide",
+    "_gas_note": "MGE gas registry key",
+    "rate_mbar_per_tick": 0.05,
+    "rate_scales_with_temp": true,
+    "_scale_note": "If true, rate multiplies linearly with (current_temp - threshold) / 1000",
+    "threshold_celsius": 150,
+    "_threshold_note": "°C above which emission begins",
+    "sustained_above_celsius": 840,
+    "sustained_ticks": 200,
+    "_sustained_note": "After sustained_ticks ticks above sustained_above_celsius, block converts to sustained_result",
+    "sustained_result": "misanthrope_core:quicklime_block",
+    "requires_oxygen": false
+  },
+
+  "ambient_offgas": {
+    "gas": "mge:methane",
+    "rate_mbar_per_tick": 0.001,
+    "rate_scales_with_temp": false,
+    "condition": null,
+    "_condition_note": "null (always) | 'contact_water' | 'contact_air' | 'submerged' | 'below_celsius:N'",
+    "stops_above_celsius": null,
+    "_stops_note": "°C above which ambient off-gassing ceases. null = never stops"
+  },
+
+  "_section_structural": "=== STRUCTURAL MECHANICS ===",
+  "_structural_note": "Omit this entire block for blocks with no custom structural behavior — they use vanilla Minecollapse tags (if any) and no Misanthrope tracking. Present only when you want explicit strength values, custom failure modes, or shockwave tuning.",
+
+  "structural": {
+    "_strength_note": "All strength values in kPa. Reference: dirt~100, sandstone~20000, limestone~50000, granite~200000, brick~15000, steel~250000, glass~1000, ice~3000, wood_along_grain~40000",
+
+    "compressive_strength_kpa": 40000,
+    "_compressive_note": "Axial load — columns, floors, buried blocks",
+
+    "tensile_strength_kpa": 4000,
+    "_tensile_note": "Span/ceiling load — unsupported overhangs, stalactites",
+
+    "shear_strength_kpa": 8000,
+    "_shear_note": "Lateral load — explosions, kinetic impacts, torsion from rotating shafts",
+
+    "fracture_toughness": 0.6,
+    "_toughness_note": "0–1. Low = brittle, cracks sooner relative to failure point (glass~0.1, granite~0.5, steel~0.9)",
+
+    "strength_retention_curve": [
+      { "celsius": 20,   "fraction": 1.0  },
+      { "celsius": 300,  "fraction": 0.85 },
+      { "celsius": 600,  "fraction": 0.50 },
+      { "celsius": 900,  "fraction": 0.15 },
+      { "celsius": 1200, "fraction": 0.02 }
+    ],
+    "_curve_note": "Strength as a fraction of full at each temperature anchor. Linearly interpolated between points. Omit to use default (no weakening until ~1200°C)",
+
+    "density_kg_m3": 2400,
+    "_density_note": "Used for column load calculation and VS2 mass. air~1.2, wood~600, stone~2400, iron~7800, lead~11300",
+
+    "is_structural_frame": false,
+    "_frame_note": "Steel/timber beams, brick arches — load-bearing, distributes load laterally to load_transfer_range neighbors",
+
+    "load_transfer_range": 1,
+    "_transfer_note": "Blocks. Structural frames spread load this far laterally. Increase for long beams",
+
+    "failure_mode": "CAVE_IN",
+    "_failure_note": "CRUMBLE (drops item, no chain) | CAVE_IN (Minecollapse chain reaction) | FRAGMENT_VS2 (detach as physics body) | LATTICE_COLLAPSE (internal atomic implosion)",
+
+    "failure_threshold_fraction": 1.0,
+    "_fail_thresh_note": "Fraction of strength at which failure fires. 1.0 = at the limit, 0.8 = fails before full load",
+
+    "crack_threshold_fraction": 0.6,
+    "_crack_thresh_note": "Fraction at which CrackPropagator activates — visual cracks and sounds appear before failure",
+
+    "fragment_min_size": 4,
+    "_fragment_note": "FRAGMENT_VS2 only. Groups smaller than this crumble instead of becoming physics bodies",
+
+    "fragment_initial_velocity_scale": 1.0,
+    "_frag_vel_note": "Multiplier on the initial impulse applied to the new VS2 physics body at detachment",
+
+    "cave_in_radius_override": -1,
+    "_cave_in_note": "CAVE_IN only. -1 = use Minecollapse default radius",
+
+    "lattice_collapse": {
+      "_lc_note": "LATTICE_COLLAPSE only — atomic/crystalline implosion",
+      "mode": "IMPLODE",
+      "_mode_note": "IMPLODE (shrink animation → result_block) | BLACK_HOLE (shrink → spawn entity → air)",
+      "result_block": "minecraft:gravel",
+      "black_hole_entity": null,
+      "_bhe_note": "Entity ResourceLocation for BLACK_HOLE mode. e.g. 'somemod:black_hole'. If entity not loaded, falls back to IMPLODE",
+      "implode_duration_ticks": 40,
+      "_duration_note": "Visual shrink duration before block is replaced. ~20 ticks = 1 second",
+      "chain_to_neighbors": true,
+      "_chain_note": "Whether this collapse can trigger neighboring blocks' failure checks",
+      "chain_chance": 0.4
+    },
+
+    "blast_resistance_override": null,
+    "_blast_note": "null = use vanilla getExplosionResistance(). Set explicitly to decouple from vanilla for shockwave attenuation",
+
+    "shockwave_amplification": 1.0,
+    "_sw_amp_note": "Multiplier on incoming shockwave strength. >1 for hollow blocks that focus blast inward",
+
+    "shockwave_absorption": 0.0,
+    "_sw_abs_note": "Fraction of shockwave energy absorbed rather than transmitted. packed_earth~0.6, rubber~0.8, stone~0.05"
+  },
+
+  "_section_pressure": "=== PRESSURE MECHANICS ===",
+  "_pressure_note": "Present only for blocks that participate in pressure-differential simulation (hull plates, windows, rubber, fabric, etc.). Omit entirely for blocks that should be treated as rigid with infinite pressure strength.",
+
+  "pressure": {
+    "_yield_note": "All threshold values are mbar pressure differential (ΔP = |P_internal - P_external|). Reference archetypes: stone/concrete elasticYield=800 plastic=800 ultimate=1200 stages=1 (brittle); steel elasticYield=2000 plastic=4000 ultimate=8000 stages=3 pauseTicks=120; wood elasticYield=400 plastic=600 ultimate=800 stages=2 pauseTicks=40; rubber/slime elasticYield=5 plastic=20 ultimate=60 stages=4 inflatable=true; fabric/wool elasticYield=2 plastic=10 ultimate=30 stages=4 inflatable=true maxInflation=0.9; glass elasticYield=600 plastic=600 ultimate=620 stages=1 pauseTicks=0",
+
+    "elastic_yield_mbar": 800,
+    "_elastic_yield_note": "ΔP below which deformation is fully elastic (recoverable) — block deforms visually but returns to original shape when ΔP drops",
+
+    "plastic_yield_mbar": 800,
+    "_plastic_yield_note": "ΔP at which plastic deformation stages begin — block advances through deformation_stage_count stages, each separated by stage_pause_ticks",
+
+    "ultimate_strength_mbar": 1200,
+    "_ultimate_note": "ΔP at which the block fails outright and a breach_mode event fires",
+
+    "deformation_stage_count": 1,
+    "_stages_note": "Number of discrete plastic deformation stages [1, 4]. Each stage advances the block visually (deeper inward/outward warp) and emits a sound event",
+
+    "stage_pause_ticks": 100,
+    "_pause_note": "Ticks between deformation stage advances while ΔP stays in the plastic region — the 'tension pause' that builds dread before the next crunch. 0 = instant stage progression",
+
+    "elastic_fatigue_rate": 0.0001,
+    "_fatigue_note": "Rate at which stress accumulates per tick in the elastic region as a fraction of elastic yield, used for fatigue cracking. 0.0 disables fatigue",
+
+    "inflatable": false,
+    "_inflatable_note": "Whether this block can expand outward into adjacent air under positive ΔP (internal > external) before tearing. Only meaningful for flexible materials (rubber, slime, fabric, wool, membrane blocks)",
+
+    "max_inflation_fraction": 0.7,
+    "_max_inflation_note": "Maximum outward expansion as a fraction of one block space [0, 1]. At 1.0 the block occupies the full adjacent cell. At this fraction the block tears if ΔP is still above ultimate",
+
+    "inflation_rate_per_mbar": 0.001,
+    "_inflation_rate_note": "Rate of inflation per tick per mbar above elastic yield: inflationAmount += inflationRatePerMbar × (ΔP - elasticYield)",
+
+    "breach_mode": "CRUMBLE",
+    "_breach_note": "What happens when ultimate_strength_mbar is exceeded. CRUMBLE (block destroyed inward/outward, drops items) | VENT (block destroyed, gas/fluid rushes through breach, MGE EnvironmentGrid notified) | SHATTER (brittle instant failure — glass/ceramics, particles + sound) | IMPLODE (inward catastrophic collapse when compressive, triggers LATTICE_COLLAPSE) | TEAR (fabric/membrane rip, inflatable volume collapses, gas vents, drops item if repairable)",
+
+    "compression_multiplier": 1.0,
+    "_compression_note": "Multiplier on ultimate_strength_mbar when block is in compression (external > internal). Stone/concrete are much stronger in compression than tension. Default 1.0 (symmetric); stone ~8.0",
+
+    "crack_threshold_fraction": 0.6,
+    "_crack_threshold_note": "Fraction of ultimate_strength_mbar at which crack sources are registered with CrackPropagator. Default 0.6"
+  },
+
+  "_section_stability": "=== STABILITY CONDITIONS ===",
+  "_stability_note": "For exotic materials that require external fields or conditions to remain stable.",
+
+  "stability_field": {
+    "variable": "atmospheric_charge",
+    "minimum": 180000,
+    "maximum": null,
+    "grace_ticks": 80,
+    "cascade_type": "flood_fill_single_tick",
+    "self_contribution": 2500,
+    "failure_mode": "description",
+    "recovery": true,
+    "on_expire": "misanthrope_core:event_or_behavior",
+    "note": "optional"
+  },
+  "stability_conditions": {
+    "min_temp": -395,
+    "max_temp": 555537,
+    "max_pressure_kpa": 300000,
+    "max_temp_delta_per_tick": 2.0,
+    "requires_atmosphere": "misanthrope_core:anoxic",
+    "on_exceed": "misanthrope_core:event_or_behavior"
+  },
+  "operating_range_celsius": {
+    "min": -3300,
+    "max": -273
+  },
+  "negative_temperature_regime": false,
+
+  "_section_flags": "=== MATERIAL FLAGS ===",
+
+  "biological": false,
+  "bio_precursor": false,
+  "bio_effect": "poison_contact",
+  "topologically_ordered": false,
+  "fatigue_immune": false,
+  "four_dimensional": false,
+  "thermally_indestructible": false,
+  "lava_immune": false,
+  "lava_contact_stable": false,
+  "lava_contact_mechanism": "description",
+  "passive_heat_output": false,
+  "heat_decoupled": false,
+  "glitch": false,
+  "finite_resource": false,
+  "alloying_retainer": false,
+  "atmospheric_affinity": false,
+  "stellar_matter": false,
+  "geometric_containment": false,
+  "no_casting": false,
+  "cold_worked": false,
+  "fae_bane": false,
+  "wither_immune": false,
+
+  "_section_crystal": "=== CRYSTAL PROPERTIES ===",
+
+  "crystal_phase": "emissive_active",
+  "phase_sensitive_processing": false,
+  "max_processing_temp": 800,
+  "pressure_phase_crystal": false,
+  "kagome_phase": false,
+  "cdw_glimmer": false,
+  "cdw_electrons_max": 300,
+  "cdw_electrons_min_stable": 41,
+  "pleochroic": false,
+  "pleochroic_response": {
+    "cool_K":    { "temp": 10000, "color": "color_name" },
+    "neutral_K": { "temp": 6500,  "color": "color_name" },
+    "warm_K":    { "temp": 2700,  "color": "color_name" }
+  },
+  "thermochromic": false,
+  "thermochromic_range": {
+    "cold_color": "light_purple",
+    "hot_color": "dark_purple",
+    "transition_start": 200,
+    "transition_end": 800
+  },
+
+  "_section_physics": "=== SPECIAL PHYSICS ===",
+
+  "thermal_expansion": "near_zero",
+  "_te_note": "Qualitative descriptor used by crack system. near_zero | low | moderate | high | extreme",
+
+  "gravitational_piezoelectric": false,
+  "gravitational_anomaly": false,
+  "gravity_tolerance": "unconditional",
+  "antimatter_fraction": 0.0,
+  "radiatively_transparent": false,
+  "reflective": false,
+  "hydrogen_absorption": false,
+  "hydrogen_helium_absorption": false,
+  "formation_atmosphere": "argon_helium",
+  "aether_native": false,
+  "piezoelectric": false,
+  "triboelectric": false,
+  "hygroscopic": false,
+  "self_repair_rate": 0.0,
+  "decay_into": "namespace:result_or_null",
+
+  "_section_cdw": "=== CDW DECAY BEHAVIOR ===",
+
+  "decay_behavior": {
+    "phase_1": {
+      "trigger": "gravity_gradient_above_threshold",
+      "type": "gradual_cdw_drift",
+      "reversible": true,
+      "property_scaling": "linear_with_cdw_electrons",
+      "drift_rate": "1_to_2_electrons_per_nucleus_per_day",
+      "equilibrium_floor": 105,
+      "floor_result": "weakened_not_niobium",
+      "visual": "progressive_dulling"
+    },
+    "phase_2": {
+      "trigger": "cdw_electrons_below_threshold",
+      "threshold_electrons": 85,
+      "type": "simultaneous_arc_discharge",
+      "reversible": false,
+      "cascade": "full_material_single_tick",
+      "result": "misanthrope_core:niobium_block",
+      "visual": "sustained_arc_2_to_3_seconds",
+      "audio": "misanthrope_core:thallasium_discharge"
+    }
+  },
+
+  "_section_biological": "=== BIOLOGICAL INCLUSIONS ===",
+
+  "biological_inclusions": [
+    "thermophilic_proteins",
+    "radical_stable_compounds"
+  ],
+  "growth_conditions": {
+    "substrate": "#forge:mud",
+    "requires_light": true,
+    "min_light": 8,
+    "max_light": 4,
+    "density_limit": true
+  },
+
+  "_section_light": "=== LIGHT EMISSION ===",
+
+  "light_emission": {
+    "type": "static",
+    "_type_note": "static | pulse | atmospheric_scaled | complex_multi_source",
+    "level": 10,
+    "color": "warm_gold",
+    "source": "radioluminescent",
+    "min": 4,
+    "max": 12,
+    "period_ticks": 400,
+    "curve": "sinusoidal",
+    "scales_with": "atmospheric_helium_concentration",
+    "max_level": 10,
+    "min_level": 0
+  },
+
+  "_section_radiation": "=== RADIATION ===",
+
+  "radiation": {
+    "type": "gamma_beta",
+    "_type_note": "alpha | beta | gamma | alpha_beta | gamma_beta | thermal_decay | void_energy | cherenkov_plus_radioluminescent | full_stellar_spectrum | multi_source | absorb_not_emit",
+    "intensity": 0.5,
+    "half_life": "geological",
+    "color": "teal_green",
+    "cancer_risk": 0.0,
+    "source": "description",
+    "spectrum": ["gamma", "x_ray", "ultraviolet", "visible", "infrared"],
+    "rate": "active_phase_elevated"
+  },
+
+  "_section_magnetic": "=== MAGNETIC ===",
+  "magnetic_properties": "misanthrope_core:handler_id",
+
+  "_section_proximity": "=== PROXIMITY EFFECTS ===",
+  "proximity_effect": "misanthrope_core:handler_id",
+
+  "_section_chivalry": "=== CHIVALRY (Knight Crystal) ===",
+
+  "four_dimensional_energy_storage": false,
+  "chivalry": {
+    "absorb": "impact_stress_to_piezoelectric_pulse",
+    "couple": "cobalt_gold_to_knightmetal_topological_states",
+    "store": "global_4d_quantum_state",
+    "release": "coherent_all_inclusions_simultaneously"
+  },
+
+  "_section_gravitite": "=== GRAVITITE ===",
+
+  "net_gravitational_force": "upward_proportional_to_gradient",
+  "flotation_in_aether": false,
+  "flotation_in_overworld": "reduced",
+  "contact_flotation_ticks": {
+    "stone": 40,
+    "wood": 20,
+    "metal": 60,
+    "crystal": 80
+  },
+
+  "_section_ventium": "=== VENTIUM ===",
+
+  "atmospheric_charge_self_generated": false,
+  "stability_interdependence": "total_nine_component",
+  "ventium_internally_stable": false,
+  "production_sequence_sensitive": false,
+
+  "_section_felmetal": "=== FELMETAL / OD ===",
+  "glitch_thermal": false,
+
+  "_section_ousia": "=== ousia (loaded by ousia mod, ignored by BlockPhysicsRegistry) ===",
+  "_ousia_note": "These fields are stored here for authoring convenience. BlockPhysicsRegistry silently ignores them. The ousia mod's own registry reads them from the same files.",
+
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 0,
+  "ousia_state": "description_of_ousia_configuration",
+  "ousia_suppression_radius": 0,
+  "ousia_suppression_rate": 0.0,
+  "alchemical_phase": "metastable_au3plus",
+  "alchemical_agent": false,
+  "self_consuming_improvement": false,
+  "unchained_slot": false,
+  "solar_transmutation": false,
+  "holy_beam_capable": false,
+  "enchantability_modifier": "maximum",
+  "soul_manifestation": "deferred_to_ousia_framework",
+
+  "_section_custom": "=== BEHAVIOR / MISC ===",
+
+  "custom_behavior": "misanthrope_core:handler_class_id",
+  "formation_conditions": {
+    "pressure_atm": 1000,
+    "electromagnetic_anomaly": true,
+    "atmosphere": "aether_argon_helium"
+  },
+  "disambiguation": "note about block ID conflicts",
+  "stub": false,
+  "pending": "document_name",
+  "note": "description of the material"
+}

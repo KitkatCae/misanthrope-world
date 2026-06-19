@@ -1,0 +1,38 @@
+{
+  "block": "regions_unexplored:blue_crystalite",
+  "thermal_mass": 9,
+  "conductivity": 2.0,
+  "insulation_r": 0.25,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.08,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 80.0,
+  "thermal_crack_rate": 0.009,
+  "structural": {
+    "compressive_strength_kpa": 7000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 1200,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 2700,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.38,
+    "fragment_min_size": 1
+  },
+  "light_emission": {
+    "type": "static",
+    "level": 6,
+    "color": "blue",
+    "source": "mineral_phosphorescence"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.15,
+    "quanta": 0.5,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 14,
+  "note": "Blue crystalite \u2014 deep blue gemstone crystal cluster."
+}

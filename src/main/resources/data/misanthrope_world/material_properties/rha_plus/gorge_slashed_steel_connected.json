@@ -1,0 +1,56 @@
+{
+  "block": "rha_plus:gorge_slashed_steel_connected",
+  "thermal_mass": 38,
+  "conductivity": 50,
+  "insulation_r": 0.12,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 490000,
+    "tensile_strength_kpa": 490000,
+    "shear_strength_kpa": 330000,
+    "fracture_toughness": 0.9,
+    "density_kg_m3": 7850,
+    "is_structural_frame": true,
+    "load_transfer_range": 2,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.9,
+    "strength_retention_curve": [
+      {
+        "celsius": 20,
+        "fraction": 1.0
+      },
+      {
+        "celsius": 300,
+        "fraction": 0.85
+      },
+      {
+        "celsius": 600,
+        "fraction": 0.5
+      },
+      {
+        "celsius": 900,
+        "fraction": 0.15
+      },
+      {
+        "celsius": 1200,
+        "fraction": 0.02
+      }
+    ]
+  },
+  "on_melt": {
+    "temp": 1500,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.1,
+    "rectification": 0.1
+  },
+  "note": "Connected slashed RHA steel panel, gorge paint."
+}

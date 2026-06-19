@@ -1,0 +1,29 @@
+{
+  "block": "refurbished_furniture:blue_grill",
+  "thermal_mass": 12,
+  "conductivity": 40,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.8,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": 300,
+    "watts_per_block": 120,
+    "requires_oxygen": true,
+    "is_continuous": false,
+    "active_when_property": "lit",
+    "active_when_value": "true",
+    "oxygen_consumption_rate": 0.005,
+    "co2_emission_rate": 0.004
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Blue outdoor barbecue grill. Emits heat when lit."
+}

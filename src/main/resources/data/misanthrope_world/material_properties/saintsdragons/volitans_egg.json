@@ -1,0 +1,54 @@
+{
+  "note": "Volitans dragon egg. Oceanic poison dragon. Most cold-tolerant of all dragon eggs \u2014 evolved for cold deep-water and coastal environments. Also burrows in soil. Optimal 8\u201338\u00b0C. Poison glands begin forming early; the shell has mild toxic secretions.",
+  "thermal_mass": 65,
+  "conductivity": 0.4,
+  "insulation_r": 0.8,
+  "dissipation_rate": 0.042,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.4,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "ambient_offgas": {
+    "gas": "mge:hydrogen_sulfide",
+    "rate_mbar_per_tick": 0.0003,
+    "rate_scales_with_temp": false,
+    "condition": "contact_air"
+  },
+  "structural": {
+    "compressive_strength_kpa": 11000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 1200,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.65
+  },
+  "emission": {
+    "peak_celsius": 24,
+    "watts_per_block": 7,
+    "requires_oxygen": true,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.001,
+    "co2_emission_rate": 0.001
+  },
+  "on_heat_above": {
+    "temp": 78,
+    "result": "minecraft:egg",
+    "note": "embryo dies from overheating \u2014 least heat-tolerant"
+  },
+  "on_cool_below": {
+    "temp": -2,
+    "result": "minecraft:egg",
+    "note": "embryo dies \u2014 most cold-tolerant dragon egg, survives just below 0\u00b0C"
+  },
+  "biological": true,
+  "bio_effect": "poison_contact",
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "block": "saintsdragons:volitans_egg"
+}

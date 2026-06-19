@@ -1,0 +1,30 @@
+{
+  "block": "refurbished_furniture:deepslate_stepping_stones",
+  "thermal_mass": 20,
+  "conductivity": 2.5,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.5,
+  "thickness_fraction": 0.2,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 4800,
+    "shear_strength_kpa": 10800,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 2800,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.55
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.05,
+    "rectification": 0.0
+  },
+  "note": "Deepslate stepping stone \u2014 thin garden paver, 0.2 block thickness."
+}

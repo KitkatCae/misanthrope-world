@@ -1,0 +1,34 @@
+{
+  "block": "regions_unexplored:blue_bioshroom_stem",
+  "thermal_mass": 10,
+  "conductivity": 0.08,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.1,
+  "adhesion": 0.55,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "on_fire": {
+    "temp": 240,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 3000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 800,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 350,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "blue bioshroom stem \u2014 dense fungal pillar"
+}

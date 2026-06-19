@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:mangrove_bath",
+  "thermal_mass": 20,
+  "conductivity": 1.0,
+  "insulation_r": 0.35,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.03,
+  "adhesion": 0.12,
+  "thickness_fraction": 0.9,
+  "electrically_conductive": false,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Mangrove bath \u2014 porcelain bathtub in wood surround."
+}

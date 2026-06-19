@@ -1,0 +1,31 @@
+{
+  "block": "rha_plus:gorge_bulletproof_window",
+  "thermal_mass": 18,
+  "conductivity": 1.2,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.1,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 35000,
+    "tensile_strength_kpa": 25000,
+    "shear_strength_kpa": 18000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 2600,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.55,
+    "fragment_min_size": 2
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Armoured laminated bulletproof glass, gorge tint. Full cube. Fragments on failure."
+}

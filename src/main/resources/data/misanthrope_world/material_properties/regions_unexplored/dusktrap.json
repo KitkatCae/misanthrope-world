@@ -1,0 +1,21 @@
+{
+  "block": "regions_unexplored:dusktrap",
+  "thermal_mass": 5,
+  "conductivity": 0.1,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.6,
+  "thickness_fraction": 0.4,
+  "electrically_conductive": false,
+  "biological": true,
+  "bio_effect": "acid_contact",
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.05,
+    "rectification": 0.0
+  },
+  "note": "Dusktrap \u2014 carnivorous cave plant with acidic interior."
+}

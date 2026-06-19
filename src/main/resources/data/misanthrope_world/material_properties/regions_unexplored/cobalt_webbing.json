@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:cobalt_webbing",
+  "thermal_mass": 1,
+  "conductivity": 0.04,
+  "insulation_r": 0.08,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.85,
+  "adhesion": 0.55,
+  "thickness_fraction": 0.08,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Cobalt webbing \u2014 fine filamentous cave growth."
+}

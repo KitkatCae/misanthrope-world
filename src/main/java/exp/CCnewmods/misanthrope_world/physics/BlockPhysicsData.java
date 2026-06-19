@@ -154,6 +154,14 @@ public final class BlockPhysicsData {
     @Nullable
     public final StructuralData structural;
 
+    /**
+     * Pressure-differential response data. {@code null} = block does not
+     * participate in pressure simulation (treated as rigid with infinite
+     * strength for pressure purposes).
+     */
+    @Nullable
+    public final PressureData pressure;
+
     // ── Misc flags ────────────────────────────────────────────────────────────
 
     public final boolean biological;
@@ -218,6 +226,7 @@ public final class BlockPhysicsData {
         this.radiation = b.radiation;
         this.lightEmission = b.lightEmission;
         this.structural = b.structural;
+        this.pressure = b.pressure;
         this.biological = b.biological;
         this.passiveHeatOutput = b.passiveHeatOutput;
         this.heatDecoupled = b.heatDecoupled;
@@ -502,6 +511,175 @@ public final class BlockPhysicsData {
         CRUMBLE, FRAGMENT_VS2, CAVE_IN, LATTICE_COLLAPSE
     }
 
+    // =========================================================================
+    // PRESSURE MECHANICS
+    // =========================================================================
+
+    /**
+     * Pressure-differential response data for a block.
+     *
+     * <p>Controls how the block behaves when internal and external gas/fluid
+     * pressures differ. Present only for blocks that participate in the
+     * pressure simulation (hull plates, windows, fabric, rubber, etc.).
+     *
+     * <h3>Yield curve model</h3>
+     * Pressure response follows a material-specific yield curve:
+     * <ul>
+     *   <li><b>Below {@code elasticYieldMbar}</b> — elastic region.
+     *       Block deforms visually (vertex displacement proportional to ΔP)
+     *       but returns to original shape when ΔP drops. No permanent damage.</li>
+     *   <li><b>Between {@code elasticYieldMbar} and {@code plasticYieldMbar}</b>
+     *       — plastic region. Block advances to the next deformation stage.
+     *       Stages tick up toward {@code deformationStageCount}. Between stages
+     *       there is a configurable pause ({@code stagePauseTicks}) during which
+     *       stress accumulates but the block does not change — the "tension pause"
+     *       that builds dread before the next crunch.</li>
+     *   <li><b>Above {@code ultimateStrengthMbar}</b> — immediate structural
+     *       failure. Block is destroyed at the breach point and a
+     *       {@link PressureBreachMode} event fires.</li>
+     * </ul>
+     *
+     * <h3>Inflation</h3>
+     * If {@code inflatable = true}, the block can expand outward into adjacent
+     * air under positive ΔP (internal > external) before tearing:
+     * <ul>
+     *   <li>Inflation fraction: {@code ΔP / ultimateStrengthMbar}, clamped [0,1].</li>
+     *   <li>At {@code maxInflationFraction}, the block occupies the full adjacent
+     *       block space — the server tracks this as expanded volume.</li>
+     *   <li>Above {@code maxInflationFraction}, the block tears (VENT failure).</li>
+     *   <li>Inflation is reversible: when ΔP drops, the block shrinks back.</li>
+     * </ul>
+     *
+     * <h3>Material archetypes in JSON</h3>
+     * <pre>
+     *   Stone/concrete:    elasticYield=800, plastic=800, ultimate=1200, stages=1 (brittle)
+     *   Steel (iron block): elasticYield=2000, plastic=4000, ultimate=8000, stages=3, pauseTicks=120
+     *   Wood:              elasticYield=400, plastic=600, ultimate=800, stages=2, pauseTicks=40
+     *   Rubber/slime:      elasticYield=5, plastic=20, ultimate=60, stages=4, inflatable=true
+     *   Fabric/wool:       elasticYield=2, plastic=10, ultimate=30, stages=4, inflatable=true, maxInflation=0.9
+     *   Glass:             elasticYield=600, plastic=600, ultimate=620, stages=1, pauseTicks=0 (instant shatter)
+     * </pre>
+     */
+    public record PressureData(
+            // ── Yield thresholds (mbar differential) ─────────────────────────
+            /** ΔP below which deformation is fully elastic (recoverable). */
+            float elasticYieldMbar,
+            /** ΔP at which plastic deformation stages begin. */
+            float plasticYieldMbar,
+            /** ΔP at which the block fails outright. */
+            float ultimateStrengthMbar,
+
+            // ── Stepped yield curve ───────────────────────────────────────────
+            /**
+             * Number of discrete plastic deformation stages [1, 4].
+             * Each stage advances the block visually (deeper inward/outward warp)
+             * and emits a sound event. Between stages: {@link #stagePauseTicks}.
+             */
+            int deformationStageCount,
+            /**
+             * Ticks between deformation stage advances while ΔP stays in the
+             * plastic region. Gives the "tension pause" effect.
+             * Default: 100 (5 seconds). Set to 0 for instant stage progression.
+             */
+            int stagePauseTicks,
+            /**
+             * Rate at which stress accumulates per tick in the elastic region
+             * (as a fraction of elastic yield). Used for fatigue cracking.
+             * Default: 0.0001 (very slow). Set to 0 to disable fatigue.
+             */
+            float elasticFatigueRate,
+
+            // ── Inflation (expansion under positive ΔP) ───────────────────────
+            /**
+             * Whether this block can inflate outward into adjacent air before tearing.
+             * Only meaningful for flexible materials (rubber, slime, fabric, wool,
+             * membrane blocks). Hard blocks ignore this field.
+             */
+            boolean inflatable,
+            /**
+             * Maximum outward expansion as a fraction of one block space [0, 1].
+             * At 1.0, the block occupies the full adjacent cell.
+             * At this fraction, the block tears if ΔP is still above ultimate.
+             * Default: 0.7 for most inflatables.
+             */
+            float maxInflationFraction,
+            /**
+             * Rate of inflation per tick per mbar above elastic yield.
+             * {@code inflationAmount += inflationRatePerMbar * (ΔP - elasticYield)}.
+             * Default: 0.001.
+             */
+            float inflationRatePerMbar,
+
+            // ── Breach / failure mode ─────────────────────────────────────────
+            /**
+             * What happens when the block exceeds {@link #ultimateStrengthMbar}.
+             */
+            PressureBreachMode breachMode,
+
+            // ── Compression vs tension asymmetry ─────────────────────────────
+            /**
+             * Multiplier applied to {@link #ultimateStrengthMbar} when the block
+             * is in compression (external > internal). Materials like concrete and
+             * stone are much stronger in compression than in tension.
+             * Default: 1.0 (symmetric). Stone: ~8.0 (compressiveStrength >> tensile).
+             */
+            float compressionMultiplier,
+
+            // ── Crack source integration ──────────────────────────────────────
+            /**
+             * Fraction of {@link #ultimateStrengthMbar} at which crack sources
+             * are registered with {@code CrackPropagator}. Default: 0.6.
+             */
+            float crackThresholdFraction
+    ) {
+        /**
+         * Returns the effective ultimate strength for the given stress sign.
+         * @param compressive true if external pressure exceeds internal (crush)
+         */
+        public float effectiveUltimate(boolean compressive) {
+            return compressive
+                    ? ultimateStrengthMbar * compressionMultiplier
+                    : ultimateStrengthMbar;
+        }
+
+        /**
+         * Returns whether ΔP (always positive, absolute value) is in the
+         * elastic, plastic, or failure region.
+         * @param absDeltaMbar absolute value of pressure differential
+         * @param compressive  true = external exceeds internal
+         */
+        public Region region(float absDeltaMbar, boolean compressive) {
+            float ultimate = effectiveUltimate(compressive);
+            if (absDeltaMbar >= ultimate)              return Region.FAILURE;
+            if (absDeltaMbar >= plasticYieldMbar)      return Region.PLASTIC;
+            if (absDeltaMbar >= elasticYieldMbar)      return Region.ELASTIC;
+            return Region.SAFE;
+        }
+
+        public enum Region { SAFE, ELASTIC, PLASTIC, FAILURE }
+    }
+
+    /**
+     * What happens when a block exceeds its ultimate pressure strength.
+     *
+     * <ul>
+     *   <li>{@code CRUMBLE} — block is destroyed inward (crush) or outward
+     *       (tension tear), drops as items. Uses existing {@link FailureDispatcher}.</li>
+     *   <li>{@code VENT} — block is destroyed, creating a pressure vent opening.
+     *       Gas/fluid rushes through the breach. MGE EnvironmentGrid is notified
+     *       at the breach point.</li>
+     *   <li>{@code SHATTER} — brittle instant failure (glass, ceramics). Sends
+     *       glass-shatter particles and sound. Drops items at high velocity.</li>
+     *   <li>{@code IMPLODE} — inward catastrophic collapse (only when compressive).
+     *       Triggers LATTICE_COLLAPSE failure mode on the FailureDispatcher.</li>
+     *   <li>{@code TEAR} — fabric/membrane rip. Block is destroyed; inflatable
+     *       volume immediately collapses. Gas vents. Drops item if repairable.</li>
+     * </ul>
+     */
+    public enum PressureBreachMode {
+        CRUMBLE, VENT, SHATTER, IMPLODE, TEAR
+    }
+
     /**
      * Describes how a Snow Real Magic snow-overlay block modifies its host.
      *
@@ -565,6 +743,8 @@ public final class BlockPhysicsData {
         LightEmissionData lightEmission;
         @Nullable
         StructuralData structural;
+        @Nullable
+        PressureData pressure;
         boolean biological = false;
         boolean passiveHeatOutput = false;
         boolean heatDecoupled = false;
@@ -613,6 +793,7 @@ public final class BlockPhysicsData {
             this.radiation = src.radiation;
             this.lightEmission = src.lightEmission;
             this.structural = src.structural;
+            this.pressure = src.pressure;
             this.biological = src.biological;
             this.passiveHeatOutput = src.passiveHeatOutput;
             this.heatDecoupled = src.heatDecoupled;
@@ -692,6 +873,11 @@ public final class BlockPhysicsData {
 
         public Builder structural(StructuralData v) {
             structural = v;
+            return this;
+        }
+
+        public Builder pressure(PressureData v) {
+            pressure = v;
             return this;
         }
 

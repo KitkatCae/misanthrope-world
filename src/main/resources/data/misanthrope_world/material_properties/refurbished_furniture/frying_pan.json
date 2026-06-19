@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:frying_pan",
+  "thermal_mass": 12,
+  "conductivity": 50,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.25,
+  "electrically_conductive": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Cast iron frying pan \u2014 wall decoration or placed utensil."
+}

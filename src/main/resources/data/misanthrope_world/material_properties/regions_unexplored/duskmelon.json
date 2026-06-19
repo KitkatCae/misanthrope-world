@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:duskmelon",
+  "thermal_mass": 10,
+  "conductivity": 0.15,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.35,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.04,
+    "rectification": 0.0
+  },
+  "note": "Duskmelon \u2014 large dusk-coloured melon fruit block."
+}

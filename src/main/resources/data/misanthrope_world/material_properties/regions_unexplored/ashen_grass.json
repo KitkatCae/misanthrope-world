@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:ashen_grass",
+  "thermal_mass": 7,
+  "conductivity": 0.2,
+  "insulation_r": 1.2,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.65,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.02,
+    "rectification": 0.0
+  },
+  "note": "Ashen grass block \u2014 sparse grass on volcanic ash soil."
+}

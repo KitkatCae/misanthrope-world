@@ -1,0 +1,31 @@
+{
+  "block": "regions_unexplored:mossy_stone",
+  "thermal_mass": 22,
+  "conductivity": 3.5,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.5,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "thermal_crack_threshold": 220.0,
+  "thermal_crack_rate": 0.002,
+  "structural": {
+    "compressive_strength_kpa": 55000,
+    "tensile_strength_kpa": 5000,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.45,
+    "density_kg_m3": 2500,
+    "failure_mode": "CAVE_IN",
+    "crack_threshold_fraction": 0.6
+  },
+  "ousia_affinity": {
+    "eterna": 0.03,
+    "arcana": 0.15,
+    "quanta": 0.1,
+    "rectification": 0.05
+  },
+  "note": "Stone with moss coverage."
+}

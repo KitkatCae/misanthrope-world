@@ -1,0 +1,31 @@
+{
+  "block": "refurbished_furniture:birch_storage_jar",
+  "thermal_mass": 8,
+  "conductivity": 0.8,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.1,
+  "thickness_fraction": 0.65,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 120.0,
+  "thermal_crack_rate": 0.007,
+  "structural": {
+    "compressive_strength_kpa": 4000,
+    "tensile_strength_kpa": 300,
+    "shear_strength_kpa": 800,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 2400,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.4,
+    "fragment_min_size": 1
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Birch storage jar \u2014 ceramic/glass body in wood frame."
+}

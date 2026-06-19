@@ -1,0 +1,25 @@
+{
+  "block": "refurbished_furniture:mangrove_hedge",
+  "thermal_mass": 5,
+  "conductivity": 0.1,
+  "insulation_r": 0.6,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.45,
+  "adhesion": 0.6,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "on_fire": {
+    "temp": 200,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.02,
+    "rectification": 0.0
+  },
+  "note": "Mangrove hedge \u2014 trimmed living shrub."
+}

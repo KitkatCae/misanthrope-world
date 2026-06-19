@@ -1,0 +1,33 @@
+{
+  "block": "regions_unexplored:maple_planks",
+  "thermal_mass": 7,
+  "conductivity": 0.14,
+  "insulation_r": 0.85,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.45,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 260,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 35000,
+    "tensile_strength_kpa": 6000,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.38,
+    "density_kg_m3": 630,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.6
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.05,
+    "rectification": 0.0
+  },
+  "note": "Maple \u2014 dense fine-grained hardwood planks."
+}

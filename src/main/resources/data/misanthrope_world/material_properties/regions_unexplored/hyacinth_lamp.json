@@ -1,0 +1,26 @@
+{
+  "block": "regions_unexplored:hyacinth_lamp",
+  "thermal_mass": 12,
+  "conductivity": 1.5,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.3,
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "biological": true,
+  "light_emission": {
+    "type": "static",
+    "level": 12,
+    "color": "warm_aqua",
+    "source": "bioluminescent"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.25,
+    "rectification": 0.1
+  },
+  "note": "Hyacinth lamp \u2014 prismarine base with living hyacinth bloom, bioluminescent."
+}

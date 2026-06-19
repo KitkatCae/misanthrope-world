@@ -1,0 +1,32 @@
+{
+  "block": "rha_plus:patton_grill",
+  "thermal_mass": 20,
+  "conductivity": 50,
+  "insulation_r": 0.05,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.2,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "structural": {
+    "compressive_strength_kpa": 200000,
+    "tensile_strength_kpa": 180000,
+    "shear_strength_kpa": 140000,
+    "fracture_toughness": 0.88,
+    "density_kg_m3": 4200,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.88
+  },
+  "on_melt": {
+    "temp": 1500,
+    "result": "minecraft:lava"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.1,
+    "rectification": 0.1
+  },
+  "note": "Armour ventilation grill, patton paint. Open lattice \u2014 high porousness, not airtight."
+}

@@ -1,0 +1,26 @@
+{
+  "block": "regions_unexplored:mycotoxic_mushrooms",
+  "thermal_mass": 3,
+  "conductivity": 0.06,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.7,
+  "adhesion": 0.6,
+  "thickness_fraction": 0.12,
+  "electrically_conductive": false,
+  "biological": true,
+  "bio_effect": "poison_contact",
+  "ambient_offgas": {
+    "gas": "mge:mycotoxin_spore",
+    "rate_mbar_per_tick": 0.0005,
+    "condition": null
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Mycotoxic mushroom cluster \u2014 toxic spore emitters."
+}

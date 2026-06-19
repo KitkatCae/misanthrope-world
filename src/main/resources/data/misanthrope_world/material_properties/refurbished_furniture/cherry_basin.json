@@ -1,0 +1,30 @@
+{
+  "block": "refurbished_furniture:cherry_basin",
+  "thermal_mass": 14,
+  "conductivity": 1.0,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.05,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 110.0,
+  "thermal_crack_rate": 0.006,
+  "structural": {
+    "compressive_strength_kpa": 25000,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.22,
+    "density_kg_m3": 2200,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Cherry basin unit \u2014 porcelain basin in wood cabinet."
+}

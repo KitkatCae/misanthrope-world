@@ -1,0 +1,31 @@
+{
+  "block": "regions_unexplored:raw_redstone_block",
+  "thermal_mass": 16,
+  "conductivity": 2.0,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.1,
+  "adhesion": 0.35,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 180.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 1500,
+    "shear_strength_kpa": 3000,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 2700,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.35,
+    "quanta": 0.4,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 14,
+  "note": "Raw redstone mineral block \u2014 dense electrical mineral matrix."
+}

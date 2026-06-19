@@ -1,0 +1,49 @@
+{
+  "note": "Raevyx dragon egg. Storm/lightning dragon, mountain origin. Shell is bioelectrically active \u2014 naturally accumulates charge. Optimal incubation 20\u201350\u00b0C; can also be 'hatched' instantly by a lightning strike (in-game mechanic). Electrically conductive shell.",
+  "thermal_mass": 60,
+  "conductivity": 0.5,
+  "insulation_r": 0.75,
+  "dissipation_rate": 0.045,
+  "is_airtight": true,
+  "porousness": 0.04,
+  "adhesion": 0.3,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": true,
+  "thermal_crack_threshold": 65.0,
+  "thermal_crack_rate": 0.005,
+  "structural": {
+    "compressive_strength_kpa": 7000,
+    "tensile_strength_kpa": 900,
+    "shear_strength_kpa": 2000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 1100,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.6
+  },
+  "emission": {
+    "peak_celsius": 32,
+    "watts_per_block": 8,
+    "requires_oxygen": true,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.001,
+    "co2_emission_rate": 0.001
+  },
+  "on_heat_above": {
+    "temp": 85,
+    "result": "minecraft:egg",
+    "note": "embryo dies from heat"
+  },
+  "on_cool_below": {
+    "temp": 5,
+    "result": "minecraft:egg",
+    "note": "embryo dies from cold"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.15,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "block": "saintsdragons:raevyx_egg"
+}

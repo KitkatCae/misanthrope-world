@@ -1,0 +1,31 @@
+{
+  "block": "regions_unexplored:blackstone_cluster",
+  "thermal_mass": 28,
+  "conductivity": 1.8,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.4,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 300.0,
+  "thermal_crack_rate": 0.001,
+  "lava_contact_stable": true,
+  "structural": {
+    "compressive_strength_kpa": 70000,
+    "tensile_strength_kpa": 4500,
+    "shear_strength_kpa": 9000,
+    "fracture_toughness": 0.2,
+    "density_kg_m3": 2800,
+    "failure_mode": "CAVE_IN",
+    "crack_threshold_fraction": 0.6
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.2,
+    "quanta": 0.1,
+    "rectification": 0.1
+  },
+  "note": "Blackstone cluster block \u2014 compressed aggregate of nether blackstone."
+}

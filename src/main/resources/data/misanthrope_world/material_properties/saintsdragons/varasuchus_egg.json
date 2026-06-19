@@ -1,0 +1,48 @@
+{
+  "note": "Varasuchus dragon egg. Coastal/amphibious beach dragon. Laid in sandy shorelines. Higher moisture content in shell matrix; more tolerant of cold damp environments. Optimal 15\u201342\u00b0C. Freeze threshold lower than inland dragon eggs due to coastal salt-water adaptation.",
+  "thermal_mass": 70,
+  "conductivity": 0.45,
+  "insulation_r": 0.65,
+  "dissipation_rate": 0.05,
+  "is_airtight": true,
+  "porousness": 0.06,
+  "adhesion": 0.45,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "structural": {
+    "compressive_strength_kpa": 9000,
+    "tensile_strength_kpa": 1200,
+    "shear_strength_kpa": 2800,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 1300,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.65
+  },
+  "emission": {
+    "peak_celsius": 30,
+    "watts_per_block": 8,
+    "requires_oxygen": true,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.001,
+    "co2_emission_rate": 0.001
+  },
+  "on_heat_above": {
+    "temp": 82,
+    "result": "minecraft:egg",
+    "note": "embryo dies from overheating"
+  },
+  "on_cool_below": {
+    "temp": 2,
+    "result": "minecraft:egg",
+    "note": "embryo dies \u2014 slightly more cold-tolerant than mountain species"
+  },
+  "biological": true,
+  "hygroscopic": true,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.05,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "block": "saintsdragons:varasuchus_egg"
+}

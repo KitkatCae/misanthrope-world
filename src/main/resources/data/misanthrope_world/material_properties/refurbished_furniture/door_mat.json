@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:door_mat",
+  "thermal_mass": 2,
+  "conductivity": 0.05,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.6,
+  "adhesion": 0.8,
+  "thickness_fraction": 0.06,
+  "electrically_conductive": false,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Woven door mat \u2014 thin textile floor piece."
+}

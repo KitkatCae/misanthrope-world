@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:brimsprout_nylium",
+  "thermal_mass": 12,
+  "conductivity": 0.5,
+  "insulation_r": 0.8,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.6,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Brimsprout nylium \u2014 warm nether fungal ground."
+}

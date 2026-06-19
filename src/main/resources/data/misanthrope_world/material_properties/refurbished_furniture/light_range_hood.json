@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:light_range_hood",
+  "thermal_mass": 10,
+  "conductivity": 30,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.7,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Light kitchen range hood \u2014 stainless steel, open exhaust duct."
+}

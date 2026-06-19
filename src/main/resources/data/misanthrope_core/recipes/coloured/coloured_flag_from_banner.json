@@ -1,0 +1,12 @@
+{
+  "type": "misanthrope_core:coloured_craft",
+  "group": "coloured_flag",
+  "ingredients": [
+    { "item": "misanthrope_core:coloured_banner" },
+    { "item": "minecraft:stick" }
+  ],
+  "result": {
+    "item": "misanthrope_core:coloured_flag",
+    "count": 1
+  }
+}

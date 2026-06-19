@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:post_box",
+  "thermal_mass": 10,
+  "conductivity": 30,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.6,
+  "electrically_conductive": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Painted metal post box."
+}

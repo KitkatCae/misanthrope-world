@@ -1,0 +1,34 @@
+{
+  "block": "regions_unexplored:icicle",
+  "thermal_mass": 4,
+  "conductivity": 2.2,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.0,
+  "adhesion": 0.05,
+  "thickness_fraction": 0.15,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 5.0,
+  "thermal_crack_rate": 0.01,
+  "on_melt": {
+    "temp": 0,
+    "result": "minecraft:water"
+  },
+  "structural": {
+    "compressive_strength_kpa": 3000,
+    "tensile_strength_kpa": 200,
+    "shear_strength_kpa": 600,
+    "fracture_toughness": 0.08,
+    "density_kg_m3": 917,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.35
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Ice icicle stalagmite/stalactite. Melts above 0\u00b0C."
+}

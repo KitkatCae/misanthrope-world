@@ -1,0 +1,32 @@
+{
+  "block": "regions_unexplored:prismaglass",
+  "thermal_mass": 10,
+  "conductivity": 1.1,
+  "insulation_r": 0.12,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.08,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 75.0,
+  "thermal_crack_rate": 0.01,
+  "structural": {
+    "compressive_strength_kpa": 9000,
+    "tensile_strength_kpa": 700,
+    "shear_strength_kpa": 1400,
+    "fracture_toughness": 0.12,
+    "density_kg_m3": 2600,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.38,
+    "fragment_min_size": 2
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.35,
+    "rectification": 0.0
+  },
+  "ousia_capacity": 10,
+  "note": "Glass fused with prismarite dust \u2014 iridescent."
+}

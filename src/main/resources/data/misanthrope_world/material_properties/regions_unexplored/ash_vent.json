@@ -1,0 +1,41 @@
+{
+  "block": "regions_unexplored:ash_vent",
+  "thermal_mass": 25,
+  "conductivity": 3.0,
+  "insulation_r": 0.4,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.9,
+  "adhesion": 0.4,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "emission": {
+    "peak_celsius": 280,
+    "watts_per_block": 80,
+    "requires_oxygen": false,
+    "is_continuous": true,
+    "co2_emission_rate": 0.05
+  },
+  "ambient_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.015,
+    "rate_scales_with_temp": true,
+    "condition": null
+  },
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 500,
+    "shear_strength_kpa": 1200,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 1400,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.1
+  },
+  "note": "Active volcanic ash vent. Emits heat, CO2 and SO2 continuously."
+}

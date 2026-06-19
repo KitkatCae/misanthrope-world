@@ -111,7 +111,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
     compileOnly fg.deobf("curse.maven:supplementaries-412082:7884611")
     implementation files('libs/pizzadelight-1.20.1-1.0.2.jar')
-    implementation files('libs/mge-2.7.4.jar')
+    implementation files('libs/mge-2.7.7.jar')
 }
 
 compileJava {

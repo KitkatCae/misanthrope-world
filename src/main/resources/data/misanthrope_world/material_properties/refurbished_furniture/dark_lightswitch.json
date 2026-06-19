@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:dark_lightswitch",
+  "thermal_mass": 2,
+  "conductivity": 5,
+  "insulation_r": 0.1,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.0,
+  "adhesion": 0.1,
+  "thickness_fraction": 0.08,
+  "electrically_conductive": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Dark wall lightswitch."
+}

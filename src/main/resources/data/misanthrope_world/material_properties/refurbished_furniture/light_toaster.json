@@ -1,0 +1,27 @@
+{
+  "block": "refurbished_furniture:light_toaster",
+  "thermal_mass": 6,
+  "conductivity": 20,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.35,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": 200,
+    "watts_per_block": 40,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "powered",
+    "active_when_value": "true"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Light toaster \u2014 small heating appliance."
+}

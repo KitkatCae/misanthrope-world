@@ -1,0 +1,38 @@
+{
+  "block": "rockyminerals:mosaic_saltstone",
+  "thermal_mass": 19,
+  "conductivity": 8,
+  "insulation_r": 18,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.13,
+  "adhesion": 0.35,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 200.0,
+  "thermal_crack_rate": 0.002,
+  "on_water_contact": {
+    "result": "misanthrope_core:crumbled_saltstone"
+  },
+  "on_melt": {
+    "temp": 900,
+    "result": "minecraft:lava"
+  },
+  "structural": {
+    "compressive_strength_kpa": 19000,
+    "tensile_strength_kpa": 1800,
+    "shear_strength_kpa": 3500,
+    "fracture_toughness": 0.3,
+    "density_kg_m3": 2160,
+    "failure_mode": "CAVE_IN",
+    "crack_threshold_fraction": 0.55
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.45,
+    "quanta": 0.2,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 19,
+  "note": "Mosaic saltstone, small tile pattern."
+}

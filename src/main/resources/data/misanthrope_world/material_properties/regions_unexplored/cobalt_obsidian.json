@@ -1,0 +1,33 @@
+{
+  "block": "regions_unexplored:cobalt_obsidian",
+  "thermal_mass": 45,
+  "conductivity": 1.5,
+  "insulation_r": 0.35,
+  "dissipation_rate": 0.03,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.3,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 300.0,
+  "thermal_crack_rate": 0.001,
+  "lava_contact_stable": true,
+  "structural": {
+    "compressive_strength_kpa": 80000,
+    "tensile_strength_kpa": 5000,
+    "shear_strength_kpa": 10000,
+    "fracture_toughness": 0.18,
+    "density_kg_m3": 2900,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.6,
+    "fragment_min_size": 3
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.3,
+    "quanta": 0.2,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 22,
+  "note": "Cobalt-tinted obsidian \u2014 same thermal durability as vanilla obsidian."
+}

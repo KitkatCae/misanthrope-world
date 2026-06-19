@@ -1,0 +1,26 @@
+{
+  "block": "regions_unexplored:prismoss",
+  "thermal_mass": 3,
+  "conductivity": 0.06,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.7,
+  "adhesion": 0.75,
+  "thickness_fraction": 0.08,
+  "electrically_conductive": false,
+  "biological": true,
+  "light_emission": {
+    "type": "static",
+    "level": 4,
+    "color": "cyan_aqua",
+    "source": "bioluminescent"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.3,
+    "rectification": 0.0
+  },
+  "note": "Prismoss \u2014 glowing mineral-infused moss, cave surface."
+}

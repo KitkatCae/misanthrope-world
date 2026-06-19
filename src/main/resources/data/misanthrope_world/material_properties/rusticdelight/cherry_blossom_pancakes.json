@@ -1,0 +1,29 @@
+{
+  "thermal_mass": 4,
+  "conductivity": 0.12,
+  "insulation_r": 0.08,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.5,
+  "adhesion": 0.6,
+  "thickness_fraction": 0.25,
+  "electrically_conductive": false,
+  "biological": true,
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 50,
+    "shear_strength_kpa": 80,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 400,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.4
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Placed food serving block. Biological organic matter. Basic physical properties; detailed food rot behavior deferred to the food rot module.",
+  "block": "rusticdelight:cherry_blossom_pancakes"
+}

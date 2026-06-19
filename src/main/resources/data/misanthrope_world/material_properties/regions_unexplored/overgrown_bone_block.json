@@ -1,0 +1,29 @@
+{
+  "block": "regions_unexplored:overgrown_bone_block",
+  "thermal_mass": 18,
+  "conductivity": 0.5,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.35,
+  "adhesion": 0.55,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 2500,
+    "shear_strength_kpa": 5000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 1900,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.55
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Bone block colonised by glistering nylium fungi."
+}

@@ -1,0 +1,29 @@
+{
+  "block": "regions_unexplored:silt_dirt",
+  "thermal_mass": 10,
+  "conductivity": 0.4,
+  "insulation_r": 1.5,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.7,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": false,
+  "structural": {
+    "compressive_strength_kpa": 150,
+    "tensile_strength_kpa": 20,
+    "shear_strength_kpa": 40,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 1200,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.4
+  },
+  "ousia_affinity": {
+    "eterna": 0.02,
+    "arcana": 0.04,
+    "quanta": 0.04,
+    "rectification": 0.0
+  },
+  "note": "Silt soil \u2014 fine-grained riverine deposit."
+}

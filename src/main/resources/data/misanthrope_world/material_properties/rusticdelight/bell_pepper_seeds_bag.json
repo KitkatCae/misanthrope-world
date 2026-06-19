@@ -1,0 +1,33 @@
+{
+  "thermal_mass": 3,
+  "conductivity": 0.08,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.55,
+  "adhesion": 0.65,
+  "thickness_fraction": 0.3,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 220,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 200,
+    "tensile_strength_kpa": 300,
+    "shear_strength_kpa": 150,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 150,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "block": "rusticdelight:bell_pepper_seeds_bag",
+  "note": "Small fabric bag of bell pepper seeds. Cloth/burlap construction."
+}

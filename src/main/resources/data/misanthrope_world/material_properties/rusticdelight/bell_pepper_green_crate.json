@@ -1,0 +1,38 @@
+{
+  "thermal_mass": 14,
+  "conductivity": 0.15,
+  "insulation_r": 0.6,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.5,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 260,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_char": {
+    "temp": 200,
+    "result": "minecraft:air",
+    "requires_oxygen": false
+  },
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 5000,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 600,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.7
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "block": "rusticdelight:bell_pepper_green_crate",
+  "note": "Wooden crate of green bell peppers. Wooden slat construction."
+}

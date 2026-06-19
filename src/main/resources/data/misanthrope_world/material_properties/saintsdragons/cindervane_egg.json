@@ -1,0 +1,49 @@
+{
+  "note": "Cindervane dragon egg. Mountain fire dragon, high-altitude origin. Relatively light shell \u2014 cindervane disperses eggs across terrain rather than nesting. Optimal incubation 30\u201355\u00b0C. Above 90\u00b0C the embryo dies from heat stress; below 10\u00b0C development halts and the egg perishes.",
+  "thermal_mass": 55,
+  "conductivity": 0.35,
+  "insulation_r": 0.7,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.05,
+  "adhesion": 0.35,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 70.0,
+  "thermal_crack_rate": 0.004,
+  "structural": {
+    "compressive_strength_kpa": 4000,
+    "tensile_strength_kpa": 600,
+    "shear_strength_kpa": 1200,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 900,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.55
+  },
+  "emission": {
+    "peak_celsius": 36,
+    "watts_per_block": 6,
+    "requires_oxygen": true,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.001,
+    "co2_emission_rate": 0.001
+  },
+  "on_heat_above": {
+    "temp": 90,
+    "result": "minecraft:egg",
+    "note": "embryo dies from heat \u2014 egg becomes inert"
+  },
+  "on_cool_below": {
+    "temp": 10,
+    "result": "minecraft:egg",
+    "note": "embryo dies from cold \u2014 egg becomes inert"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.05,
+    "rectification": 0.0
+  },
+  "block": "saintsdragons:cindervane_egg"
+}

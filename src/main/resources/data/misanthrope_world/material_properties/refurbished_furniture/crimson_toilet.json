@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:crimson_toilet",
+  "thermal_mass": 16,
+  "conductivity": 1.0,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.03,
+  "adhesion": 0.1,
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Crimson toilet \u2014 porcelain with wood seat."
+}

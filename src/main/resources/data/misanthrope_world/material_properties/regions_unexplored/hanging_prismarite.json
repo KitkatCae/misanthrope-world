@@ -1,0 +1,38 @@
+{
+  "block": "regions_unexplored:hanging_prismarite",
+  "thermal_mass": 8,
+  "conductivity": 2.5,
+  "insulation_r": 0.3,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.1,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.3,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 90.0,
+  "thermal_crack_rate": 0.008,
+  "structural": {
+    "compressive_strength_kpa": 8000,
+    "tensile_strength_kpa": 600,
+    "shear_strength_kpa": 1500,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 2800,
+    "failure_mode": "FRAGMENT_VS2",
+    "crack_threshold_fraction": 0.4,
+    "fragment_min_size": 1
+  },
+  "light_emission": {
+    "type": "static",
+    "level": 5,
+    "color": "cyan_aqua",
+    "source": "mineral_phosphorescence"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.2,
+    "quanta": 0.45,
+    "rectification": 0.1
+  },
+  "ousia_capacity": 12,
+  "note": "Hanging prismarite crystal stalactite."
+}

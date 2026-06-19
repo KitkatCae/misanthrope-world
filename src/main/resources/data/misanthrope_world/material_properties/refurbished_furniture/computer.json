@@ -1,0 +1,27 @@
+{
+  "block": "refurbished_furniture:computer",
+  "thermal_mass": 8,
+  "conductivity": 5,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.07,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.4,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": 55,
+    "watts_per_block": 15,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "powered",
+    "active_when_value": "true"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Desktop computer unit \u2014 plastic/metal electronics chassis."
+}

@@ -1,0 +1,26 @@
+{
+  "block": "regions_unexplored:deepslate_viridescent_nylium",
+  "thermal_mass": 10,
+  "conductivity": 0.4,
+  "insulation_r": 1.0,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.5,
+  "adhesion": 0.65,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "biological": true,
+  "light_emission": {
+    "type": "static",
+    "level": 3,
+    "color": "green",
+    "source": "bioluminescent"
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.1,
+    "quanta": 0.1,
+    "rectification": 0.0
+  },
+  "note": "Deepslate viridescent nylium \u2014 on deepslate."
+}

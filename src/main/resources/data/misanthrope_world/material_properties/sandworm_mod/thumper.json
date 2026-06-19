@@ -1,0 +1,26 @@
+{
+  "block": "sandworm_mod:thumper",
+
+  "thermal_mass": 18,
+  "conductivity": 50,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.15,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.375,
+  "electrically_conductive": true,
+
+  "structural": {
+    "compressive_strength_kpa": 180000,
+    "tensile_strength_kpa": 140000,
+    "shear_strength_kpa": 160000,
+    "fracture_toughness": 0.85,
+    "density_kg_m3": 7400,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.85
+  },
+
+  "custom_behavior": "misanthrope_core:seismic_pulse_emitter",
+  "note": "Redstone-powered mechanical thumper. Emits periodic low-intensity seismic pulses when active (THUMPING=true). Non-destructive but capable of triggering crack propagation in adjacent blocks already at high stress fractions. Iron mechanism, partial VoxelShape."
+}

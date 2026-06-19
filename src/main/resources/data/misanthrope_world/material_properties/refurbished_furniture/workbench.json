@@ -1,0 +1,33 @@
+{
+  "block": "refurbished_furniture:workbench",
+  "thermal_mass": 14,
+  "conductivity": 5,
+  "insulation_r": 0.6,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.1,
+  "adhesion": 0.4,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": true,
+  "on_fire": {
+    "temp": 280,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 30000,
+    "tensile_strength_kpa": 5000,
+    "shear_strength_kpa": 4000,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 700,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.65
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Heavy workshop workbench \u2014 wood top with metal vice and fittings."
+}

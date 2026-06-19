@@ -1,6 +1,6 @@
 package exp.CCnewmods.misanthrope_world.physics.structural;
 
-import exp.CCnewmods.mge.compat.MisCoreBridge;
+import exp.CCnewmods.mge.compat.MisWorldBridge;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsData;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
 import exp.CCnewmods.misanthrope_world.crackrender.world.CrackPropagator;
@@ -13,23 +13,23 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Registers Misanthrope Core as the {@link MisCoreBridge.StructuralAdapter}
+ * Registers Misanthrope Core as the {@link MisWorldBridge.StructuralAdapter}
  * for MGE's shockwave system, and handles all shockwave / kinetic stress
  * injection into {@link StructuralStressField}.
  *
  * <p>Registered on {@link FMLLoadCompleteEvent} — after both mods are fully
  * loaded — so MGE's class is guaranteed to exist when we call
- * {@link MisCoreBridge#register}.
+ * {@link MisWorldBridge#register}.
  */
 @Mod.EventBusSubscriber(modid = "misanthrope_world", bus = Mod.EventBusSubscriber.Bus.MOD)
-public final class ShockwaveStressAdapter implements MisCoreBridge.StructuralAdapter {
+public final class ShockwaveStressAdapter implements MisWorldBridge.StructuralAdapter {
 
     private static final boolean MGE_LOADED = ModList.get().isLoaded("mge");
 
     @SubscribeEvent
     public static void onLoadComplete(FMLLoadCompleteEvent event) {
         if (!MGE_LOADED) return;
-        MisCoreBridge.register(new ShockwaveStressAdapter());
+        MisWorldBridge.register(new ShockwaveStressAdapter());
     }
 
     // ── StructuralAdapter ─────────────────────────────────────────────────────

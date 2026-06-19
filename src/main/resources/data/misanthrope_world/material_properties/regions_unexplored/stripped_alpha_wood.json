@@ -1,0 +1,38 @@
+{
+  "block": "regions_unexplored:stripped_alpha_wood",
+  "thermal_mass": 8,
+  "conductivity": 0.12,
+  "insulation_r": 0.9,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.08,
+  "adhesion": 0.5,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 260,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "on_char": {
+    "temp": 200,
+    "result": "minecraft:air",
+    "requires_oxygen": false
+  },
+  "structural": {
+    "compressive_strength_kpa": 40000,
+    "tensile_strength_kpa": 8000,
+    "shear_strength_kpa": 6000,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 570,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.65
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.1,
+    "quanta": 0.05,
+    "rectification": 0.0
+  },
+  "note": "Stripped Alpha wood \u2014 pale soft wood wood."
+}

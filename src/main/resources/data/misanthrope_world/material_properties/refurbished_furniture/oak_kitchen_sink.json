@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:oak_kitchen_sink",
+  "thermal_mass": 18,
+  "conductivity": 15,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.07,
+  "is_airtight": false,
+  "porousness": 0.05,
+  "adhesion": 0.1,
+  "thickness_fraction": 0.8,
+  "electrically_conductive": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Oak kitchen sink \u2014 stainless steel basin in wood cabinet."
+}

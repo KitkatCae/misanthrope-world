@@ -1,0 +1,29 @@
+{
+  "block": "regions_unexplored:saguaro_cactus_corner",
+  "thermal_mass": 12,
+  "conductivity": 0.12,
+  "insulation_r": 0.6,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.2,
+  "adhesion": 0.3,
+  "thickness_fraction": 0.75,
+  "electrically_conductive": false,
+  "biological": true,
+  "structural": {
+    "compressive_strength_kpa": 500,
+    "tensile_strength_kpa": 100,
+    "shear_strength_kpa": 200,
+    "fracture_toughness": 0.15,
+    "density_kg_m3": 400,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Saguaro cactus arm junction."
+}

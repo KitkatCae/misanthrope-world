@@ -1,0 +1,39 @@
+{
+  "block": "regions_unexplored:polished_chalk_slab",
+  "thermal_mass": 14,
+  "conductivity": 3,
+  "insulation_r": 30,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.12,
+  "adhesion": 0.45,
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "thermal_crack_threshold": 180.0,
+  "thermal_crack_rate": 0.003,
+  "on_heat_above": {
+    "temp": 840,
+    "result": "misanthrope_core:quicklime_layer"
+  },
+  "on_melt": {
+    "temp": 1300,
+    "result": "minecraft:lava"
+  },
+  "structural": {
+    "compressive_strength_kpa": 20000,
+    "tensile_strength_kpa": 2000,
+    "shear_strength_kpa": 4500,
+    "fracture_toughness": 0.28,
+    "density_kg_m3": 1700,
+    "failure_mode": "CAVE_IN",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.05,
+    "arcana": 0.5,
+    "quanta": 0.15,
+    "rectification": 0.3
+  },
+  "ousia_capacity": 14,
+  "note": "Polished chalk slab."
+}

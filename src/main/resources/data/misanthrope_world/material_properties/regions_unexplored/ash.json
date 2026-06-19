@@ -1,0 +1,34 @@
+{
+  "block": "regions_unexplored:ash",
+  "thermal_mass": 5,
+  "conductivity": 0.1,
+  "insulation_r": 1.8,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.75,
+  "adhesion": 0.8,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "ambient_offgas": {
+    "gas": "mge:sulfur_dioxide",
+    "rate_mbar_per_tick": 0.0002,
+    "rate_scales_with_temp": false,
+    "condition": "contact_air"
+  },
+  "structural": {
+    "compressive_strength_kpa": 100,
+    "tensile_strength_kpa": 10,
+    "shear_strength_kpa": 20,
+    "fracture_toughness": 0.05,
+    "density_kg_m3": 700,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.3
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.05,
+    "quanta": 0.0,
+    "rectification": 0.05
+  },
+  "note": "Volcanic ash deposit, fine particulate."
+}

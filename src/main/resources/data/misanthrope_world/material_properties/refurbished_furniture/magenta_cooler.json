@@ -1,0 +1,19 @@
+{
+  "block": "refurbished_furniture:magenta_cooler",
+  "thermal_mass": 18,
+  "conductivity": 0.04,
+  "insulation_r": 2.0,
+  "dissipation_rate": 0.02,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": false,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Magenta insulated cooler box \u2014 foam-lined, excellent insulation."
+}

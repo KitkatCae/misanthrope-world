@@ -1,0 +1,47 @@
+{
+  "note": "Stegonaut dragon egg. Armored ground-dwelling lush-cave dragon. Densest, most heavily armored shell of all six dragon eggs \u2014 the stegonaut's protective instinct begins even before hatching. Optimal incubation 18\u201345\u00b0C. Very resistant to physical damage.",
+  "thermal_mass": 100,
+  "conductivity": 0.3,
+  "insulation_r": 0.95,
+  "dissipation_rate": 0.035,
+  "is_airtight": true,
+  "porousness": 0.03,
+  "adhesion": 0.5,
+  "thickness_fraction": 1.0,
+  "electrically_conductive": false,
+  "structural": {
+    "compressive_strength_kpa": 35000,
+    "tensile_strength_kpa": 4000,
+    "shear_strength_kpa": 9000,
+    "fracture_toughness": 0.55,
+    "density_kg_m3": 2200,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.75
+  },
+  "emission": {
+    "peak_celsius": 28,
+    "watts_per_block": 7,
+    "requires_oxygen": true,
+    "is_continuous": true,
+    "oxygen_consumption_rate": 0.001,
+    "co2_emission_rate": 0.001
+  },
+  "on_heat_above": {
+    "temp": 80,
+    "result": "minecraft:egg",
+    "note": "embryo dies from overheating"
+  },
+  "on_cool_below": {
+    "temp": 8,
+    "result": "minecraft:egg",
+    "note": "embryo dies from cold"
+  },
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.1,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.1
+  },
+  "block": "saintsdragons:stegonaut_egg"
+}

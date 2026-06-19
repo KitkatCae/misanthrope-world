@@ -233,6 +233,11 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
             b.structural(parseStructural(j.getAsJsonObject("structural")));
         }
 
+        // ── Pressure mechanics ────────────────────────────────────────────
+        if (j.has("pressure") && j.get("pressure").isJsonObject()) {
+            b.pressure(parsePressure(j.getAsJsonObject("pressure")));
+        }
+
         // ── Flags ─────────────────────────────────────────────────────────
         if (j.has("biological")) b.biological = gb(j, "biological");
         if (j.has("passive_heat_output")) b.passiveHeatOutput = gb(j, "passive_heat_output");
@@ -387,6 +392,34 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
                         ? s.get("blast_resistance_override").getAsDouble() : null,
                 gd(s, "shockwave_amplification", 1.0),
                 gd(s, "shockwave_absorption", 0.0)
+        );
+    }
+
+    // ── Pressure data parser ─────────────────────────────────────────────────
+
+    private static BlockPhysicsData.PressureData parsePressure(com.google.gson.JsonObject p) {
+        // Parse breach mode
+        String breachStr = gs(p, "breach_mode", "CRUMBLE").toUpperCase();
+        BlockPhysicsData.PressureBreachMode breachMode;
+        try {
+            breachMode = BlockPhysicsData.PressureBreachMode.valueOf(breachStr);
+        } catch (IllegalArgumentException e) {
+            breachMode = BlockPhysicsData.PressureBreachMode.CRUMBLE;
+        }
+
+        return new BlockPhysicsData.PressureData(
+                gf(p, "elastic_yield_mbar",       200f),
+                gf(p, "plastic_yield_mbar",        400f),
+                gf(p, "ultimate_strength_mbar",   1000f),
+                gi(p, "deformation_stage_count",    2),
+                gi(p, "stage_pause_ticks",         100), // 5 seconds default
+                gf(p, "elastic_fatigue_rate",     0.0001f),
+                gb(p, "inflatable"),
+                gf(p, "max_inflation_fraction",   0.7f),
+                gf(p, "inflation_rate_per_mbar",  0.001f),
+                breachMode,
+                gf(p, "compression_multiplier",   1.0f),
+                gf(p, "crack_threshold_fraction", 0.6f)
         );
     }
 

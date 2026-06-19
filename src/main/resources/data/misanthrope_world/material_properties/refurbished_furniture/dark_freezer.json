@@ -1,0 +1,27 @@
+{
+  "block": "refurbished_furniture:dark_freezer",
+  "thermal_mass": 30,
+  "conductivity": 0.02,
+  "insulation_r": 3.5,
+  "dissipation_rate": 0.06,
+  "is_airtight": true,
+  "porousness": 0.0,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": -15,
+    "watts_per_block": 10,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "powered",
+    "active_when_value": "true"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Dark freezer \u2014 heavily insulated cold storage."
+}

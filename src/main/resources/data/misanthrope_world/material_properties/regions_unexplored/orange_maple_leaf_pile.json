@@ -1,0 +1,25 @@
+{
+  "block": "regions_unexplored:orange_maple_leaf_pile",
+  "thermal_mass": 1,
+  "conductivity": 0.05,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.8,
+  "adhesion": 0.5,
+  "thickness_fraction": 0.06,
+  "electrically_conductive": false,
+  "biological": true,
+  "on_fire": {
+    "temp": 180,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.02,
+    "rectification": 0.0
+  },
+  "note": "Fallen leaf pile, thin biodegradable organic layer."
+}

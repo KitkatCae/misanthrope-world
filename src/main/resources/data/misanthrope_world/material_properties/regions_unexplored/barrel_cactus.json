@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:barrel_cactus",
+  "thermal_mass": 8,
+  "conductivity": 0.1,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.25,
+  "adhesion": 0.25,
+  "thickness_fraction": 0.6,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.03,
+    "rectification": 0.0
+  },
+  "note": "Barrel cactus \u2014 squat water-storing cactus."
+}

@@ -1,0 +1,33 @@
+{
+  "block": "refurbished_furniture:brown_stool",
+  "thermal_mass": 2,
+  "conductivity": 0.05,
+  "insulation_r": 0.5,
+  "dissipation_rate": 0.04,
+  "is_airtight": false,
+  "porousness": 0.3,
+  "adhesion": 0.45,
+  "thickness_fraction": 0.5,
+  "electrically_conductive": false,
+  "on_fire": {
+    "temp": 220,
+    "result": "minecraft:air",
+    "requires_oxygen": true
+  },
+  "structural": {
+    "compressive_strength_kpa": 300,
+    "tensile_strength_kpa": 80,
+    "shear_strength_kpa": 150,
+    "fracture_toughness": 0.1,
+    "density_kg_m3": 80,
+    "failure_mode": "CRUMBLE",
+    "crack_threshold_fraction": 0.5
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Brown padded stool."
+}

@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,waterlogged=false": { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=south,waterlogged=false": { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=east,waterlogged=false":  { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=west,waterlogged=false":  { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=north,waterlogged=true":  { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=south,waterlogged=true":  { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=east,waterlogged=true":   { "model": "misanthrope_core:block/coloured_flag" },
+    "facing=west,waterlogged=true":   { "model": "misanthrope_core:block/coloured_flag" }
+  }
+}

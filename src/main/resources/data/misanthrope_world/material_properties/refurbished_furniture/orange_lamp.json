@@ -1,0 +1,35 @@
+{
+  "block": "refurbished_furniture:orange_lamp",
+  "thermal_mass": 5,
+  "conductivity": 0.3,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.4,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.5,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": 55,
+    "watts_per_block": 12,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "lit",
+    "active_when_value": "true"
+  },
+  "light_emission": {
+    "type": "static",
+    "level": 12,
+    "color": "warm_white",
+    "source": "incandescent",
+    "active_when_property": "lit",
+    "active_when_value": "true"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.0,
+    "rectification": 0.0
+  },
+  "note": "Orange table lamp \u2014 incandescent bulb, fabric shade."
+}

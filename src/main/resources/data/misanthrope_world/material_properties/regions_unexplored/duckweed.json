@@ -1,0 +1,20 @@
+{
+  "block": "regions_unexplored:duckweed",
+  "thermal_mass": 1,
+  "conductivity": 0.06,
+  "insulation_r": 0.05,
+  "dissipation_rate": 0.08,
+  "is_airtight": false,
+  "porousness": 0.9,
+  "adhesion": 0.2,
+  "thickness_fraction": 0.04,
+  "electrically_conductive": false,
+  "biological": true,
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.02,
+    "rectification": 0.0
+  },
+  "note": "Duckweed \u2014 floating aquatic plant mat."
+}

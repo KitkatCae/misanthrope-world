@@ -1,0 +1,33 @@
+{
+  "block": "refurbished_furniture:dark_electricity_generator",
+  "thermal_mass": 40,
+  "conductivity": 20,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.2,
+  "adhesion": 0.15,
+  "thickness_fraction": 0.85,
+  "electrically_conductive": true,
+  "emission": {
+    "peak_celsius": 150,
+    "watts_per_block": 250,
+    "requires_oxygen": false,
+    "is_continuous": false,
+    "active_when_property": "powered",
+    "active_when_value": "true"
+  },
+  "ousia_affinity": {
+    "eterna": 0.0,
+    "arcana": 0.0,
+    "quanta": 0.05,
+    "rectification": 0.05
+  },
+  "note": "Dark electricity generator \u2014 produces CO when running.",
+  "ambient_offgas": {
+    "gas": "mge:carbon_monoxide",
+    "rate_mbar_per_tick": 0.004,
+    "rate_scales_with_temp": true,
+    "condition": null
+  }
+}

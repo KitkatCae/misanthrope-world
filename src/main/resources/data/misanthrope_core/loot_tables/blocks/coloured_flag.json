@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "misanthrope_core:coloured_flag",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                { "source": "misanthrope_color", "target": "misanthrope_color", "op": "replace" },
+                { "source": "Patterns", "target": "BlockEntityTag.Patterns", "op": "replace" }
+              ]
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        { "condition": "minecraft:survives_explosion" }
+      ]
+    }
+  ]
+}
