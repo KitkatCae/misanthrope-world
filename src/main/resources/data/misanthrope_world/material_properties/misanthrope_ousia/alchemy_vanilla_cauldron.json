@@ -1,0 +1,57 @@
+{
+  "block": "misanthrope_ousia:alchemy_vanilla_cauldron",
+
+  "_comment": "Cast iron cauldron. Moderate pressure resistance — shows visible denting under brew explosions. Crushes inward under over-pressure (compressive failure), cracks under tension. Three stages of visible deformation before breach.",
+
+  "thermal_mass": 45,
+  "conductivity": 52,
+  "insulation_r": 0.15,
+  "dissipation_rate": 0.06,
+  "is_airtight": false,
+  "porousness": 0.05,
+  "electrically_conductive": true,
+
+  "structural": {
+    "compressive_strength_kpa": 180000,
+    "tensile_strength_kpa": 40000,
+    "shear_strength_kpa": 60000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 7200,
+    "failure_mode": "CRUMBLE",
+    "blast_resistance_override": 6.0,
+    "shockwave_amplification": 1.4,
+    "shockwave_absorption": 0.1
+  },
+
+  "pressure": {
+    "_note": "Cast iron: moderate yield, 3 deformation stages (visible denting stages), strong in compression. Brew explosion at 800 mbar puts this well into the plastic region.",
+    "elastic_yield_mbar": 300,
+    "plastic_yield_mbar": 550,
+    "ultimate_strength_mbar": 1100,
+    "deformation_stage_count": 3,
+    "stage_pause_ticks": 80,
+    "elastic_fatigue_rate": 0.00008,
+    "inflatable": false,
+    "max_inflation_fraction": 0.0,
+    "inflation_rate_per_mbar": 0.0,
+    "breach_mode": "CRUMBLE",
+    "compression_multiplier": 3.0,
+    "crack_threshold_fraction": 0.55
+  },
+
+  "alchemy": {
+    "ph_tolerance_min": 1.5,
+    "ph_tolerance_max": 13.0,
+    "max_temp_celsius": 600.0,
+    "can_hold_mixing": true,
+    "corrosion_fail_mode": "VESSEL_DAMAGE"
+  },
+
+  "ph_value": 7.0,
+  "ph_reactivity": {
+    "acid_corrosion_rate_per_load": 0.00004,
+    "base_corrosion_rate_per_load": 0.000005,
+    "resistance_factor": 1.0,
+    "min_strength_fraction": 0.05
+  }
+}

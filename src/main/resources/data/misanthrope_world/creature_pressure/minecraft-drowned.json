@@ -1,0 +1,9 @@
+{
+  "_comment": "Drowned — undead; waterlogged tissue is not compressible in the same way as living tissue, so crush is entirely disabled. Very slow vacuum damage (atmosphere needed for decomposition off-gassing).",
+  "entity": "minecraft:drowned",
+  "crush_threshold_mbar":  3.4028235E38,
+  "vacuum_threshold_mbar": 50.0,
+  "vacuum_damage_per_interval": 0.5,
+  "damage_interval_ticks": 100,
+  "respect_pressure_armour": false
+}

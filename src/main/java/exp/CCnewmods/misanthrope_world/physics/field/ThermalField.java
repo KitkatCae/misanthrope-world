@@ -177,11 +177,16 @@ public final class ThermalField {
                 checkThermalCracks(zone, ambient);
 
                 if (zone.structure.hasInductionSource()) tickInduction(zone, o2);
+
+                exp.CCnewmods.misanthrope_world.physics.persist.ThermalZoneStateMap
+                        .get(level).set(sourcePos, newTemp);
             }
 
             toRemove.forEach(pos -> {
                 SimZone zone = zones.remove(pos);
                 if (zone != null) clearThermalField(zone);
+                exp.CCnewmods.misanthrope_world.physics.persist.ThermalZoneStateMap
+                        .get(level).remove(pos);
             });
         }
 
@@ -240,6 +245,26 @@ public final class ThermalField {
                         && !Double.isNaN(data.thermalOffGas.thresholdCelsius())
                         && wallTempC >= data.thermalOffGas.thresholdCelsius()) {
                     WorldSimulation.onThermalOffgasThreshold(level, wallPos);
+                }
+
+                // ── Phase-transition threshold coupling ───────────────────────────────────
+                // Tell PhaseTransitionHandler to evaluate this block if any thermal
+                // transition (on_melt, on_fire, on_heat_above, on_freeze, on_cool_below)
+                // has its temperature threshold in range of current wall temperature.
+                if (!data.phaseTransitions.isEmpty()) {
+                    for (BlockPhysicsData.PhaseTransition t : data.phaseTransitions) {
+                        boolean thermallyRelevant = switch (t.trigger()) {
+                            case ON_MELT, ON_FIRE, ON_HEAT_ABOVE, ON_EXCEED_TEMP ->
+                                    !Double.isNaN(t.tempThreshold()) && wallTempC >= t.tempThreshold();
+                            case ON_FREEZE, ON_COOL_BELOW ->
+                                    !Double.isNaN(t.tempThreshold()) && wallTempC <= t.tempThreshold();
+                            default -> false;
+                        };
+                        if (thermallyRelevant) {
+                            WorldSimulation.onPhaseTransitionThermal(level, wallPos);
+                            break; // one markDirty per block per scan is enough
+                        }
+                    }
                 }
                 // ── Thermal cracking ──────────────────────────────────────────
                 double threshold = data.thermalCrackThreshold;
@@ -315,7 +340,16 @@ public final class ThermalField {
 
             double prevTemp = Double.NaN;
             SimZone existing = zones.get(sourcePos);
-            if (existing != null) prevTemp = existing.simulation.getInteriorTemp();
+            if (existing != null) {
+                // Live rescan — inherit the running simulation's current temp.
+                prevTemp = existing.simulation.getInteriorTemp();
+            } else {
+                // Cold start (server restart, or first time this source is seen
+                // this session) — recover the last saved temperature instead of
+                // re-initialising from ambient.
+                prevTemp = exp.CCnewmods.misanthrope_world.physics.persist.ThermalZoneStateMap
+                        .get(level).get(sourcePos);
+            }
 
             ThermalSimulation sim = new ThermalSimulation(structure);
             if (!Double.isNaN(prevTemp)) sim.setInteriorTemp(prevTemp);

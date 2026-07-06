@@ -1,0 +1,14 @@
+{
+  "_comment": "Squid — open-water, mid-column creature; moderate depth tolerance.",
+  "entity": "minecraft:squid",
+  "crush_threshold_mbar":              20000.0,
+  "crush_instant_kill_threshold_mbar": 60000.0,
+  "crush_damage_per_interval":         2.0,
+  "crush_instant_kill_damage":         999.0,
+  "vacuum_threshold_mbar":             400.0,
+  "vacuum_instant_kill_threshold_mbar": 100.0,
+  "vacuum_damage_per_interval":        1.0,
+  "vacuum_instant_kill_damage":        999.0,
+  "damage_interval_ticks":             40,
+  "respect_pressure_armour":           true
+}

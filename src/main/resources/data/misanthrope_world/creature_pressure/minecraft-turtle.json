@@ -1,0 +1,14 @@
+{
+  "_comment": "Turtle — hard shell provides meaningful crush resistance; can dive to moderate depth. Vacuum damages them significantly (lung-breathing reptile at low pressure).",
+  "entity": "minecraft:turtle",
+  "crush_threshold_mbar":              25000.0,
+  "crush_instant_kill_threshold_mbar": 3.4028235E38,
+  "crush_damage_per_interval":         1.0,
+  "crush_instant_kill_damage":         999.0,
+  "vacuum_threshold_mbar":             400.0,
+  "vacuum_instant_kill_threshold_mbar": 80.0,
+  "vacuum_damage_per_interval":        2.0,
+  "vacuum_instant_kill_damage":        999.0,
+  "damage_interval_ticks":             60,
+  "respect_pressure_armour":           true
+}

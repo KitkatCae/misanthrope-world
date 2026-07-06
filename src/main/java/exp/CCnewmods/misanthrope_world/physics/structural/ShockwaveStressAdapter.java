@@ -3,7 +3,6 @@ package exp.CCnewmods.misanthrope_world.physics.structural;
 import exp.CCnewmods.mge.compat.MisWorldBridge;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsData;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
-import exp.CCnewmods.misanthrope_world.crackrender.world.CrackPropagator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
@@ -66,16 +65,14 @@ public final class ShockwaveStressAdapter implements MisWorldBridge.StructuralAd
 
         stressFraction = Math.min(stressFraction, 2.0f); // cap at 200% — above that it's instant failure
 
-        if (stressFraction >= (float) data.structural.failureThresholdFraction()) {
-            FailureDispatcher.dispatch(level, pos, state, data.structural);
-        } else if (stressFraction >= (float) data.structural.crackThresholdFraction()) {
-            float pressure = stressFraction * 50f;
-            String sourceId = "misanthrope_core:shockwave:" + pos.asLong();
-            // Shockwave crack sources use STRUCTURAL cause — same visual as load cracks
-            // but identified by the "shockwave:" prefix for debugging
-            CrackPropagator.addSource(new StructuralCrackSource(pos, pressure,
-                    level.getGameTime(), sourceId));
-        }
+        // Feed the unified stress model instead of judging this hit in
+        // isolation — see DynamicStressTracker's class doc. A single hit at
+        // or above this block's own failure threshold is violent enough on
+        // its own to count as a fresh impact (bypasses the sustained-overload
+        // hysteresis in StructuralStressField); anything weaker just
+        // accumulates toward whatever else this block is already carrying.
+        boolean isImpact = stressFraction >= (float) data.structural.failureThresholdFraction();
+        DynamicStressTracker.get(level).addContribution(pos, stressFraction, isImpact);
     }
 
     @Override
@@ -94,13 +91,7 @@ public final class ShockwaveStressAdapter implements MisWorldBridge.StructuralAd
 
         float stressFraction = (float) (torqueNm / shearStrength);
 
-        if (stressFraction >= (float) data.structural.failureThresholdFraction()) {
-            FailureDispatcher.dispatch(level, pos, state, data.structural);
-        } else if (stressFraction >= (float) data.structural.crackThresholdFraction()) {
-            float pressure = stressFraction * 50f;
-            String sourceId = "misanthrope_core:kinetic:" + pos.asLong();
-            CrackPropagator.addSource(new StructuralCrackSource(pos, pressure,
-                    level.getGameTime(), sourceId));
-        }
+        boolean isImpact = stressFraction >= (float) data.structural.failureThresholdFraction();
+        DynamicStressTracker.get(level).addContribution(pos, stressFraction, isImpact);
     }
 }

@@ -31,32 +31,44 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  * {@link CrackPropagator} when stress exceeds the crack threshold, and hands
  * failures off to {@link FailureDispatcher} when the failure threshold is crossed.
  *
- * <h3>Two scan modes (Option A + B)</h3>
+ * <h3>Two scan modes (Option A + B) — same evaluation, same failure path</h3>
  * <ul>
- *   <li><b>Option A — reactive:</b> Any block change ({@code BlockEvent.NeighborNotifyEvent})
- *       or thermal weakening notification enqueues the changed block and its
- *       immediate neighbours. Processed every tick from a {@link ConcurrentLinkedDeque}.</li>
+ *   <li><b>Option A — reactive:</b> Any block change ({@code BlockEvent.NeighborNotifyEvent}),
+ *       thermal weakening notification, or dynamic stress contribution (see
+ *       below) enqueues the changed block and its immediate neighbours.
+ *       Processed every tick from a {@link ConcurrentLinkedDeque}.</li>
  *   <li><b>Option B — ambient:</b> A slow background walk through loaded chunk
  *       sections re-evaluates {@link #BACKGROUND_BLOCKS_PER_TICK} randomly
  *       selected blocks per tick. This lets naturally generated structures
  *       (stalactites, cliff overhangs) fail over time even when nothing nearby
- *       changes. When a background-selected block fails, a
- *       {@linkplain #connectedFailureBFS connected-failure BFS} propagates the
- *       collapse to all contiguous over-stressed neighbours within
- *       {@link #MAX_CONNECTED_FAILURE_RADIUS} blocks.</li>
+ *       changes.</li>
  * </ul>
+ * Both modes call the same {@link #evaluateBlock} and, on failure, both run
+ * {@linkplain #connectedFailureBFS connected-failure BFS} the same way — a
+ * stalactite falls whole and a shockwave-cracked wall section can shear off
+ * together, regardless of which mode triggered the re-evaluation.
  *
  * <h3>Stress model</h3>
  * <pre>
  *   compressiveStress = columnLoad_kN / (compressiveStrength_kPa × face_area_m2)
  *   tensileStress     = bendingMoment / (tensileStrength_kPa × section_modulus)
+ *   dynamicStress     = DynamicStressTracker.getSmoothedStress(pos)
  *   thermalFactor     = StructuralData.strengthFractionAt(blockTemp)
- *   effectiveStress   = max(compressiveStress, tensileStress) / thermalFactor
+ *   effectiveStress   = max(compressiveStress, tensileStress, dynamicStress) / thermalFactor
  * </pre>
+ * {@code dynamicStress} is an EMA-smoothed, decaying accumulator fed by
+ * {@link DynamicStressTracker} — shockwaves, kinetic impacts, and (eventually)
+ * real-time collision forces all funnel into the same value rather than each
+ * being judged in isolation and forgotten. See {@link DynamicStressTracker}'s
+ * class doc for why (repeated sub-threshold hits should be able to add up).
+ * <p>
  * When {@code effectiveStress ≥ crackThresholdFraction}, an
  * {@link StructuralCrackSource} is registered with {@link CrackPropagator}.
- * When {@code effectiveStress ≥ failureThresholdFraction},
- * {@link FailureDispatcher#dispatch} is called.
+ * When {@code effectiveStress ≥ failureThresholdFraction} for
+ * {@link #OVERLOAD_HOLD_EVALUATIONS} consecutive evaluations — or immediately,
+ * if {@link DynamicStressTracker} reports a fresh violent impact at this
+ * position — {@link FailureDispatcher#dispatchGroup} is called on the
+ * connected over-stressed group found by {@link #connectedFailureBFS}.
  */
 @Mod.EventBusSubscriber(modid = "misanthrope_world", bus = Mod.EventBusSubscriber.Bus.FORGE)
 public final class StructuralStressField {
@@ -84,6 +96,20 @@ public final class StructuralStressField {
      * When a background failure fires, BFS radius for connected failure set.
      */
     public static final int MAX_CONNECTED_FAILURE_RADIUS = 8;
+
+    /**
+     * Consecutive evaluations a block must be found at/above its failure
+     * threshold before it actually fails, unless {@link DynamicStressTracker}
+     * reports a fresh impact for this position (which bypasses this hold
+     * entirely — see class doc and {@code DynamicStressTracker}'s doc for the
+     * vox3D {@code overloadStreak}/{@code fractureHoldFrames} this mirrors).
+     * Applies uniformly to every failure source (static load, shockwave,
+     * kinetic) since they all funnel through the same {@code effectiveStress}
+     * check now — a purely static overload (e.g. a stalactite already past
+     * its limit) still fails within a handful of evaluations either way,
+     * this just prevents a single noisy tick from being decisive.
+     */
+    private static final int OVERLOAD_HOLD_EVALUATIONS = 3;
 
     /**
      * kN per block of material at standard gravity (game-scaled).
@@ -303,7 +329,7 @@ public final class StructuralStressField {
             while (!dirty.isEmpty() && budget-- > 0) {
                 BlockPos pos = dirty.poll();
                 if (pos == null || !processed.add(pos)) continue;
-                evaluateBlock(level, pos, false);
+                evaluateBlock(level, pos);
             }
         }
 
@@ -311,8 +337,13 @@ public final class StructuralStressField {
         BackgroundScanner scanner = BACKGROUND.computeIfAbsent(level, BackgroundScanner::new);
         List<BlockPos> candidates = scanner.next(BACKGROUND_BLOCKS_PER_TICK);
         for (BlockPos pos : candidates) {
-            evaluateBlock(level, pos, true); // true = allow connected-failure BFS
+            evaluateBlock(level, pos);
         }
+
+        // Ship-side sustained load — same tick, same event, its own per-ship
+        // budget-limited background scan. See ShipStressField's class doc for
+        // why this can't just reuse computeColumnLoad/BackgroundScanner as-is.
+        ShipStressField.serverTick(level);
     }
 
     // ── Block-change hook (Option A trigger) ─────────────────────────────────
@@ -332,11 +363,21 @@ public final class StructuralStressField {
     /**
      * Evaluates the structural stress at {@code pos} and either registers a
      * crack source, dispatches failure, or does nothing.
-     *
-     * @param isBackground true if called from the Option B background scan;
-     *                     enables connected-failure BFS propagation on failure.
+     * <p>
+     * Called uniformly from both the Option A reactive drain and the Option B
+     * background scan — there is no longer a distinction between them at
+     * failure time. Previously only the background scan ran
+     * {@link #connectedFailureBFS} before dispatching; reactive-triggered
+     * failures (including, as of {@link DynamicStressTracker}, every
+     * shockwave/kinetic hit) went through single-block {@code dispatch}
+     * only. That meant a shockwave strong enough to genuinely bring down a
+     * wall could only ever pop one block of it. Both paths now always BFS
+     * first — a single unsupported block simply produces a one-element
+     * group, which {@code dispatchGroup} already handles identically to
+     * {@code dispatch}, so this isn't a behavior change for the common case,
+     * only for the case that was actually missing group failure.
      */
-    private static void evaluateBlock(ServerLevel level, BlockPos pos, boolean isBackground) {
+    private static void evaluateBlock(ServerLevel level, BlockPos pos) {
         if (!level.isLoaded(pos)) return;
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return;
@@ -360,25 +401,44 @@ public final class StructuralStressField {
             tenStress = moment / sectionModulus;
         }
 
+        // ── Dynamic stress (shockwave, kinetic, future collision) ─────────────
+        // EMA-smoothed and decayed by DynamicStressTracker — see its class doc.
+        // Folded in as a third candidate for "worst stress this block sees",
+        // same as compressive/tensile, rather than as a separate side-channel.
+        DynamicStressTracker dynamicTracker = DynamicStressTracker.get(level);
+        double dynStress = dynamicTracker.getSmoothedStress(pos);
+
         // ── Thermal weakening factor ──────────────────────────────────────────
         float blockTemp = exp.CCnewmods.mge.grid.EnvironmentGrid.getTemperature(level, pos);
         double ambientTemp = 20.0;
         double tempC = Float.isNaN(blockTemp) ? ambientTemp : blockTemp;
         double thermalFactor = Math.max(0.001, sd.strengthFractionAt(tempC));
 
+        // ── pH corrosion factor ────────────────────────────────────────────────
+        double corrosionFactor = 1.0;
+        if (data.phReactivity != null) {
+            corrosionFactor = updateAndGetCorrosionFactor(level, pos, data.phReactivity);
+        }
+
         // ── Effective stress [0, ∞) — normalized to [0,1] at failure threshold ─
-        double rawStress = Math.max(compStress, tenStress);
-        double effectiveStress = rawStress / thermalFactor;
+        double rawStress = Math.max(compStress, Math.max(tenStress, dynStress));
+        double effectiveStress = rawStress / (thermalFactor * corrosionFactor);
+
+        // ── Sustained-overload hysteresis ──────────────────────────────────────
+        boolean overloaded = effectiveStress >= sd.failureThresholdFraction();
+        int streak = dynamicTracker.updateOverloadStreak(pos, overloaded);
+        boolean freshImpact = dynamicTracker.consumeImpactFlag(pos);
+        boolean shouldFail = overloaded && (freshImpact || streak >= OVERLOAD_HOLD_EVALUATIONS);
 
         // ── Dispatch ─────────────────────────────────────────────────────────
-        if (effectiveStress >= sd.failureThresholdFraction()) {
-            if (isBackground) {
-                // Propagate: find all connected over-stressed blocks and fail them together
-                Set<BlockPos> failSet = connectedFailureBFS(level, pos, sd.failureThresholdFraction());
-                FailureDispatcher.dispatchGroup(level, failSet, state, sd);
-            } else {
-                FailureDispatcher.dispatch(level, pos, state, sd);
+        if (shouldFail) {
+            Set<BlockPos> failSet = connectedFailureBFS(level, pos, sd.failureThresholdFraction());
+            for (BlockPos failPos : failSet) {
+                exp.CCnewmods.misanthrope_world.physics.persist.CorrosionStateMap
+                        .get(level).remove(failPos);
+                dynamicTracker.remove(failPos);
             }
+            FailureDispatcher.dispatchGroup(level, failSet, state, sd);
         } else if (effectiveStress >= sd.crackThresholdFraction()) {
             // Register or refresh a structural crack source
             float pressure = (float) ((effectiveStress - sd.crackThresholdFraction())
@@ -387,6 +447,58 @@ public final class StructuralStressField {
             String sourceId = "misanthrope_core:structural:" + pos.asLong();
             CrackPropagator.addSource(new StructuralCrackSource(pos, pressure, level.getGameTime(), sourceId));
         }
+    }
+
+    // ── pH corrosion ──────────────────────────────────────────────────────────
+
+    /**
+     * Reads the current ambient pH load at {@code pos}, advances the block's
+     * stored corrosion accumulation by one evaluation's worth of exposure
+     * (and self-repair, if any), persists the result to
+     * {@link exp.CCnewmods.misanthrope_world.physics.persist.CorrosionStateMap},
+     * and returns the resulting strength multiplier — the same shape as
+     * {@link StructuralData#strengthFractionAt} for thermal weakening, so the
+     * two factors combine the same way in {@link #evaluateBlock}.
+     *
+     * <p>Accumulation is a one-way ratchet by default
+     * ({@code selfRepairFraction = 0.0}): once a block has corroded, it stays
+     * corroded, mirroring how an existing structural crack only grows or fails
+     * the block outright rather than healing on its own. Materials with a
+     * non-zero {@code selfRepairFraction} (passivation layers, magical wards)
+     * are the deliberate exception, not the rule.
+     *
+     * <p>Exposure load is read once per evaluation (every 32-per-tick dirty-queue
+     * drain or background scan pass, same cadence as the rest of this class —
+     * there is no separate corrosion tick loop), so accumulation rate is tied
+     * to how often a block is actually re-evaluated, same as thermal weakening.
+     */
+    private static double updateAndGetCorrosionFactor(ServerLevel level, BlockPos pos,
+                                                       BlockPhysicsData.PhReactivity ph) {
+        float load = exp.CCnewmods.mge.grid.EnvironmentGrid.getPhLoad(level, pos);
+
+        var tracker = exp.CCnewmods.misanthrope_world.physics.persist.CorrosionStateMap.get(level);
+        float accumulation = tracker.get(pos);
+
+        double delta;
+        if (load > 0) {
+            delta = load * ph.acidCorrosionRatePerLoad() * ph.resistanceFactor();
+        } else if (load < 0) {
+            delta = -load * ph.baseCorrosionRatePerLoad() * ph.resistanceFactor();
+        } else {
+            delta = 0.0;
+        }
+
+        accumulation += delta;
+        if (ph.selfRepairFraction() > 0.0) {
+            accumulation -= accumulation * ph.selfRepairFraction();
+        }
+        accumulation = (float) Math.max(0.0, Math.min(1.0, accumulation));
+
+        if (accumulation != tracker.get(pos)) {
+            tracker.set(pos, accumulation);
+        }
+
+        return Math.max(ph.minStrengthFraction(), ph.strengthFractionAt(accumulation));
     }
 
     // ── Column load ───────────────────────────────────────────────────────────
@@ -519,8 +631,48 @@ public final class StructuralStressField {
      * entire over-stressed mass fails as a unit. A stalactite falls whole; a
      * cliff sheet shears off together.
      */
+    /**
+     * BFS outward from {@code origin} collecting all contiguous blocks whose
+     * effective stress exceeds {@code failThreshold}.
+     * Stops at {@link #MAX_CONNECTED_FAILURE_RADIUS} blocks.
+     *
+     * <p>This gives the "collapse shape" — rather than one block popping, the
+     * entire over-stressed mass fails as a unit. A stalactite falls whole; a
+     * cliff sheet shears off together.
+     *
+     * <p>Terrain convenience overload — uses {@link #computeColumnLoad}, the
+     * world-space (fixed +Y gravity) stress model. {@link ShipStressField}
+     * uses the 4-arg overload with its own ship-local stress function
+     * instead, since gravity isn't a fixed direction relative to a ship.
+     */
     static Set<BlockPos> connectedFailureBFS(ServerLevel level, BlockPos origin,
                                              double failThreshold) {
+        return connectedFailureBFS(level, origin, failThreshold, pos -> {
+            StructuralData sd = BlockPhysicsRegistry.get(level.getBlockState(pos)).structural;
+            if (sd == null) return 0.0;
+            return computeColumnLoad(level, pos) / (sd.compressiveStrengthKpa() * FACE_AREA_M2);
+        });
+    }
+
+    /**
+     * Same BFS shape as the 3-arg overload, but with the compressive-stress
+     * calculation supplied by the caller instead of hardcoded to
+     * {@link #computeColumnLoad}. This is what actually makes the "shared
+     * core, world and ship are thin callers" architecture work for group
+     * failure specifically — the connectivity walk itself (visit neighbours,
+     * respect the radius cap, collect the over-threshold set) doesn't care
+     * whether "stress at this position" comes from a fixed-+Y column load or
+     * a ship-local ray-march; only the stress source differs.
+     *
+     * @param stressFractionFn given a candidate position, returns its
+     *                         compressive stress fraction (0 if it has no
+     *                         structural data at all — the BFS already
+     *                         filters those out before calling this, but a
+     *                         defensive caller can still return 0)
+     */
+    static Set<BlockPos> connectedFailureBFS(ServerLevel level, BlockPos origin,
+                                             double failThreshold,
+                                             java.util.function.ToDoubleFunction<BlockPos> stressFractionFn) {
         Set<BlockPos> result = new LinkedHashSet<>();
         Queue<BlockPos> queue = new ArrayDeque<>();
         Set<Long> visited = new HashSet<>();
@@ -538,9 +690,7 @@ public final class StructuralStressField {
             StructuralData sd = BlockPhysicsRegistry.get(state).structural;
             if (sd == null) continue;
 
-            // Quick stress check (re-use column + span but skip thermal for speed)
-            double colLoad = computeColumnLoad(level, pos);
-            double compStress = colLoad / (sd.compressiveStrengthKpa() * FACE_AREA_M2);
+            double compStress = stressFractionFn.applyAsDouble(pos);
             if (compStress >= failThreshold) {
                 result.add(pos.immutable());
                 // Propagate to neighbours within radius

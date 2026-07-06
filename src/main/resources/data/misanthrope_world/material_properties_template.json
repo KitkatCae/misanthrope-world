@@ -6,6 +6,8 @@
   "block": "namespace:block_name",
   "_alt_identity": "Use 'tag' instead of 'block' to apply to all members of a block tag:",
   "tag": "forge:storage_blocks/iron",
+  "_alt_identity_gas": "Use 'gas' instead of 'block'/'tag' to override an MGE gas's chemistry instead of a block's physics — see the GAS PROPERTIES OVERRIDE example at the end of this file. A gas entry uses a completely different, much smaller field set (currently just ph_value) and never touches block physics; everything else in this file is meaningless on a gas entry and is silently ignored.",
+  "gas": "mge:sulfur_dioxide",
 
   "_section_core": "=== CORE THERMAL PROPERTIES ===",
   "_core_note": "These six fields replace the old thermal/insulation/ system. Always provide them for any block that participates in thermal simulation.",
@@ -321,6 +323,31 @@
     "_crack_threshold_note": "Fraction of ultimate_strength_mbar at which crack sources are registered with CrackPropagator. Default 0.6"
   },
 
+  "_section_ph": "=== PH / CHEMICAL REACTIVITY ===",
+  "_ph_note": "ph_value is always read (defaults to 7.0/neutral) — it's what the block IS. ph_reactivity is optional — it's how strongly the block RESPONDS to ambient pH that differs from ph_value. Omit ph_reactivity for chemically inert blocks (most blocks); set ph_value alone if you only need the block to register a non-neutral surface pH for some other system to read, without it corroding itself.",
+
+  "ph_value": 7.0,
+  "_ph_value_note": "0-14, 7.0 = neutral. Stone/concrete ~9-10 (alkaline, lime-bearing), most metals 7.0 (inert), organic/biological blocks ~5-6 (mildly acidic), limestone/marble ~9.5",
+
+  "ph_reactivity": {
+    "_exposure_note": "Ambient exposure is read from MGE's EnvironmentGrid as a cumulative acid/base 'load', NOT a true pH average: load = sum over all gases present of (7.0 - gas_effective_ph) * partial_pressure_mbar. This is deliberately not an average — pH is a log scale, so a trace of a strong acid and a large volume of a weak acid can produce comparable load, which is the correct gameplay behaviour. Positive load = net acidic exposure; negative = net alkaline.",
+
+    "acid_corrosion_rate_per_load": 0.00004,
+    "_acid_rate_note": "Strength-loss fraction accumulated per evaluation, per unit of positive (acidic) load. Reference: mild steel~0.00004, stainless/nickel~0.000006, copper/bronze~0.00003, limestone/marble~0.0002, cloth/fabric~0.0008, glass~0.00001 (glass resists acid)",
+
+    "base_corrosion_rate_per_load": 0.000005,
+    "_base_rate_note": "Strength-loss fraction per evaluation, per unit of negative (alkaline) load magnitude. Most materials resist base exposure far better than acid — default asymmetric. Glass is the notable exception (etched by base, not acid): glass~0.00015",
+
+    "resistance_factor": 1.0,
+    "_resistance_note": "Multiplier on BOTH rates above. 1.0 = baseline material, use rates as authored. Lower = more resistant (e.g. 0.05 for a corrosion-immune turbine fin alloy). This is the single field a 'resistant variant' of an otherwise-identical material should override — keep acid/base rates shared across a material family and only vary this",
+
+    "min_strength_fraction": 0.05,
+    "_min_strength_note": "Floor on strength fraction once corrosion accumulation reaches 1.0 (fully corroded) — mirrors how the thermal strength_retention_curve never quite reaches zero instantly. Default 0.05 (95% strength loss at full corrosion)",
+
+    "self_repair_fraction": 0.0,
+    "_self_repair_note": "Fractional self-repair of accumulated corrosion per evaluation (0-1). 0.0 = corrosion is PERMANENT (correct default — mirrors how structural cracks only grow or fail the block, never heal on their own). Non-zero = self-sealing surface, regenerating passivation layer, or magical ward. Use sparingly and intentionally"
+  },
+
   "_section_stability": "=== STABILITY CONDITIONS ===",
   "_stability_note": "For exotic materials that require external fields or conditions to remain stable.",
 
@@ -563,3 +590,42 @@
   "pending": "document_name",
   "note": "description of the material"
 }
+
+// =============================================================================
+// GAS PROPERTIES OVERRIDE — separate document shape, NOT part of the template
+// above. A real material_properties/*.json file holds either ONE block/tag
+// entry (the template object above) OR an array of entries — gas entries can
+// be mixed into that same array alongside block entries, since they're routed
+// by BlockPhysicsRegistry on the presence of a "gas" key before anything else
+// is parsed. This block is illustrative only; remove the // comments (JSON
+// doesn't support them) before using in a real file, or keep it in a .json5
+// authoring file and run it through your own JSON stripper.
+// =============================================================================
+//
+// {
+//   "gas": "mge:sulfur_dioxide",
+//   "ph_value": 1.2
+// }
+//
+// That's the ENTIRE field set currently supported on a gas entry. Gases are
+// physical-chemistry constants defined in code (MGE's GasRegistry), not
+// block-style content — this exists to let a datapack TUNE the hardcoded
+// chemistry without recompiling, not to fully redefine a gas. The override
+// is applied to MGE's GasRegistry.effectivePh(gas) at every resource reload;
+// the hand-authored value baked into GasRegistry.java remains the fallback
+// if no override is loaded. Unknown gas IDs are logged as an error and
+// silently skipped — they do not fail the whole reload.
+//
+// Multi-entry example mixing a block and a gas override in one array file:
+//
+// [
+//   {
+//     "block": "misanthrope_core:lead_lined_tank",
+//     "ph_value": 7.0,
+//     "ph_reactivity": { "resistance_factor": 0.02 }
+//   },
+//   {
+//     "gas": "mge:sulfur_dioxide",
+//     "ph_value": 1.0
+//   }
+// ]

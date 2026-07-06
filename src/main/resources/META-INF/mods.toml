@@ -41,7 +41,7 @@ side = "BOTH"
 
 [[dependencies."${mod_id}"]]
 modId = "create"
-mandatory = false
+mandatory = true
 versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
@@ -54,15 +54,8 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
-modId = "minecollapse"
-mandatory = false
-versionRange = "*"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies."${mod_id}"]]
 modId = "valkyrienskies"
-mandatory = false
+mandatory = true
 versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
@@ -80,3 +73,18 @@ mandatory = false
 versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "pizzadelight"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "supplementaries"
+mandatory = false
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+

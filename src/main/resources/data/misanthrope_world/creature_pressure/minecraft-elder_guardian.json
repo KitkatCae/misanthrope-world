@@ -1,0 +1,10 @@
+{
+  "_comment": "Elder Guardian — ancient deep-sea boss; highly adapted to extreme depth pressure. Only vacuum at very low mbar causes it distress.",
+  "entity": "minecraft:elder_guardian",
+  "crush_threshold_mbar":  3.4028235E38,
+  "vacuum_threshold_mbar": 100.0,
+  "vacuum_instant_kill_threshold_mbar": -1,
+  "vacuum_damage_per_interval": 3.0,
+  "damage_interval_ticks": 40,
+  "respect_pressure_armour": true
+}

@@ -1,0 +1,118 @@
+{
+  "entity.generic.hurt_pressure_crush": {
+    "category": "hostile",
+    "subtitle": "subtitles.misanthrope_world.entity.generic.hurt_pressure_crush",
+    "sounds": [
+      {
+        "name": "misanthrope_world:pressure/hurt_crush_1",
+        "volume": 1.0,
+        "pitch": 1.0
+      },
+      {
+        "name": "misanthrope_world:pressure/hurt_crush_2",
+        "volume": 1.0,
+        "pitch": 0.95
+      },
+      {
+        "name": "misanthrope_world:pressure/hurt_crush_3",
+        "volume": 1.0,
+        "pitch": 1.05
+      }
+    ]
+  },
+  "entity.generic.hurt_pressure_vacuum": {
+    "category": "hostile",
+    "subtitle": "subtitles.misanthrope_world.entity.generic.hurt_pressure_vacuum",
+    "sounds": [
+      {
+        "name": "misanthrope_world:pressure/hurt_vacuum_1",
+        "volume": 0.9,
+        "pitch": 1.0
+      },
+      {
+        "name": "misanthrope_world:pressure/hurt_vacuum_2",
+        "volume": 0.9,
+        "pitch": 1.1
+      },
+      {
+        "name": "misanthrope_world:pressure/hurt_vacuum_3",
+        "volume": 0.9,
+        "pitch": 0.9
+      }
+    ]
+  },
+  "entity.generic.death_pressure_crush": {
+    "category": "hostile",
+    "subtitle": "subtitles.misanthrope_world.entity.generic.death_pressure_crush",
+    "sounds": [
+      {
+        "name": "misanthrope_world:pressure/death_crush",
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "entity.generic.death_pressure_vacuum": {
+    "category": "hostile",
+    "subtitle": "subtitles.misanthrope_world.entity.generic.death_pressure_vacuum",
+    "sounds": [
+      {
+        "name": "misanthrope_world:pressure/death_vacuum",
+        "volume": 1.0,
+        "pitch": 1.0
+      }
+    ]
+  },
+  "sonic_boom_close": {
+    "category": "block",
+    "subtitle": "subtitles.misanthrope_world.sonic_boom_close",
+    "sounds": [
+      {
+        "name": "misanthrope_world:sonic_boom_close",
+        "stream": false
+      }
+    ]
+  },
+  "sonic_boom_medium": {
+    "category": "block",
+    "subtitle": "subtitles.misanthrope_world.sonic_boom_medium",
+    "sounds": [
+      {
+        "name": "misanthrope_world:sonic_boom_medium",
+        "stream": false
+      }
+    ]
+  },
+  "sonic_boom_far": {
+    "category": "block",
+    "subtitle": "subtitles.misanthrope_world.sonic_boom_far",
+    "sounds": [
+      {
+        "name": "misanthrope_world:sonic_boom_far",
+        "stream": false
+      }
+    ]
+  },
+  "supersonic_rumble": {
+    "category": "block",
+    "subtitle": "subtitles.misanthrope_world.supersonic_rumble",
+    "sounds": [
+      {
+        "name": "misanthrope_world:supersonic_rumble",
+        "stream": true,
+        "attenuation_distance": 256
+      }
+    ]
+  },
+  "reentry_roar": {
+    "category": "block",
+    "subtitle": "subtitles.misanthrope_world.reentry_roar",
+    "sounds": [
+      {
+        "name": "misanthrope_world:reentry_roar",
+        "stream": true,
+        "attenuation_distance": 512
+      }
+    ]
+  }
+}

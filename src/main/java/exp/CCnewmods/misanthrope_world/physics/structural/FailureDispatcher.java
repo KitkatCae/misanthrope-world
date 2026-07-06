@@ -18,6 +18,7 @@ import net.minecraftforge.fml.ModList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,16 +31,26 @@ import java.util.Set;
  *       Used for small-scale localized failures (a single weak block giving way).</dd>
  *
  *   <dt>{@code CAVE_IN}</dt>
- *   <dd>Triggers a Minecollapse chain reaction from the failed position(s).
- *       Minecollapse drives all propagation, debris physics, and sound from here.
- *       We bypass Minecollapse's natural trigger system by calling
- *       {@code WorldTracker.addCollapsePositions} directly — our data says
- *       when to cave, Minecollapse says how.</dd>
+ *   <dd>Minecollapse has been removed from the project. CAVE_IN now shares
+ *       {@link #executeFragment} with FRAGMENT_VS2 — the failed group is
+ *       split into its actual connected components (see below), each
+ *       surviving component is assembled into a VS2 ship and given a
+ *       downward/outward impulse, and VS2 drives the resulting physics,
+ *       debris, and (via its built-in {@code ImpactFractureHandler}) terrain
+ *       damage on landing. The two modes are kept as separate enum values
+ *       since they still express different authoring intent (a caving
+ *       ceiling vs. a sheared-off fragment) even though they now execute
+ *       identically; that also means a future divergence (e.g. different
+ *       impulse tuning per mode) doesn't require touching data files.</dd>
  *
  *   <dt>{@code FRAGMENT_VS2}</dt>
- *   <dd>Assembles the failed block group as a new VS2 physics ship, applies an
- *       initial velocity impulse in the failure direction, and lets VS2 handle
- *       all subsequent physics. Used for boulders, cliff sheets, stalactites.</dd>
+ *   <dd>Splits the failed block group into its connected components
+ *       (26-connectivity — see {@link FragmentSplitter}), culls components
+ *       smaller than {@code fragmentMinSize} to plain crumble, and assembles
+ *       each surviving component as its own VS2 physics ship with its own
+ *       initial velocity impulse in its own failure direction. Used for
+ *       boulders, cliff sheets, stalactites, and (as of the Minecollapse
+ *       removal) cave-ins as well.</dd>
  *
  *   <dt>{@code LATTICE_COLLAPSE}</dt>
  *   <dd>Atomic-lattice implosion. Replaces the block(s) with a
@@ -52,14 +63,18 @@ import java.util.Set;
  * <h3>Group dispatch</h3>
  * When called from the Option B connected-failure BFS, the {@code failureMode}
  * is determined by majority vote across the group. All blocks in the group are
- * failed together as a single event.
+ * failed together as a single event — except for FRAGMENT_VS2/CAVE_IN, which
+ * now split that group into its real connected components first (see
+ * {@link #executeFragment}) rather than assuming it's already one contiguous
+ * mass. A connectedFailureBFS result IS already one contiguous mass by
+ * construction, but other callers (crater excavation shells, future
+ * ship-vs-ship fracture) may hand over groups that aren't — this split is
+ * what makes those safe to route through the same path.
  */
 public final class FailureDispatcher {
 
     private static final Logger LOGGER = LogManager.getLogger("MisanthropeCore/FailureDispatcher");
 
-    private static final boolean MINECOLLAPSE_LOADED =
-            ModList.get().isLoaded("minecollapse");
     private static final boolean VS2_LOADED =
             ModList.get().isLoaded("valkyrienskies");
 
@@ -115,8 +130,7 @@ public final class FailureDispatcher {
 
         switch (sd.failureMode()) {
             case CRUMBLE -> executeCrumble(level, pos);
-            case CAVE_IN -> executeCaveIn(level, Set.of(pos.immutable()), sd);
-            case FRAGMENT_VS2 -> executeFragment(level, Set.of(pos.immutable()), state, sd);
+            case CAVE_IN, FRAGMENT_VS2 -> executeFragment(level, Set.of(pos.immutable()), state, sd);
             case LATTICE_COLLAPSE -> executeLatticeCollapse(level, pos, state, sd,
                     computeFailureDirection(level, Set.of(pos)));
         }
@@ -157,8 +171,7 @@ public final class FailureDispatcher {
 
         switch (mode) {
             case CRUMBLE -> group.forEach(p -> executeCrumble(level, p));
-            case CAVE_IN -> executeCaveIn(level, group, representativeSd);
-            case FRAGMENT_VS2 -> executeFragment(level, group, representativeState, representativeSd);
+            case CAVE_IN, FRAGMENT_VS2 -> executeFragment(level, group, representativeState, representativeSd);
             case LATTICE_COLLAPSE -> group.forEach(p -> {
                 BlockState bs = level.getBlockState(p);
                 StructuralData bsd = exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry
@@ -176,99 +189,61 @@ public final class FailureDispatcher {
         level.destroyBlock(pos, true); // drops items
     }
 
-    private static void executeCaveIn(ServerLevel level, Set<BlockPos> group,
-                                      StructuralData sd) {
-        if (!MINECOLLAPSE_LOADED) {
+    /**
+     * Entry point for FRAGMENT_VS2 / CAVE_IN. Splits {@code group} into its
+     * actual connected components (26-connectivity, {@link FragmentSplitter})
+     * before doing anything else — a "failing group" is not guaranteed to
+     * already be one physically contiguous mass (see class doc). Each
+     * surviving component (at or above {@code fragmentMinSize}) becomes its
+     * own VS2 ship with its own impulse; smaller components crumble
+     * individually, matching vox3D's {@code tuning.minFragment} debris
+     * cutoff exactly.
+     */
+    private static void executeFragment(ServerLevel level, Set<BlockPos> group,
+                                        BlockState representativeState, StructuralData sd) {
+        if (!VS2_LOADED) {
             group.forEach(p -> executeCrumble(level, p));
             return;
         }
-        try {
-            var capOpt = level.getCapability(
-                    net.zerodind.minecollapse.util.WorldTrackerCapability.CAPABILITY).resolve();
-            if (capOpt.isEmpty()) {
-                group.forEach(p -> executeCrumble(level, p));
-                return;
+
+        List<Set<BlockPos>> components = FragmentSplitter.splitComponents(group);
+
+        for (Set<BlockPos> component : components) {
+            if (component.size() < sd.fragmentMinSize()) {
+                component.forEach(p -> executeCrumble(level, p));
+                continue;
             }
-            var tracker = capOpt.get();
-
-            // Find centroid of the group as the collapse origin
-            long sumX = 0, sumY = 0, sumZ = 0;
-            for (BlockPos p : group) {
-                sumX += p.getX();
-                sumY += p.getY();
-                sumZ += p.getZ();
-            }
-            BlockPos center = new BlockPos(
-                    (int) (sumX / group.size()),
-                    (int) (sumY / group.size()),
-                    (int) (sumZ / group.size()));
-
-            // Build position list for Minecollapse
-            java.util.List<BlockPos> positions = new java.util.ArrayList<>(group);
-
-            // Radius: use override if set, otherwise compute from group extents
-            double radiusSq;
-            if (sd.caveInRadiusOverride() >= 0) {
-                double r = sd.caveInRadiusOverride();
-                radiusSq = r * r;
-            } else {
-                double maxDist = 1.0;
-                for (BlockPos p : group) maxDist = Math.max(maxDist, p.distSqr(center));
-                radiusSq = Math.max(maxDist, 9.0); // minimum 3-block radius
-            }
-
-            var collapse = new net.zerodind.minecollapse.util.Collapse(
-                    center, positions, radiusSq);
-            tracker.addCollapseData(collapse);
-        } catch (Exception e) {
-            LOGGER.error("[FailureDispatcher] Minecollapse cave-in failed: {} — crumbling instead", e.getMessage());
-            group.forEach(p -> executeCrumble(level, p));
+            spawnFragmentShip(level, component, representativeState, sd);
         }
     }
 
-    private static void executeFragment(ServerLevel level, Set<BlockPos> group,
-                                        BlockState representativeState, StructuralData sd) {
-        if (!VS2_LOADED || group.size() < sd.fragmentMinSize()) {
-            group.forEach(p -> executeCrumble(level, p));
-            return;
-        }
-        try {
-            // Determine failure direction: for falling blocks, downward;
-            // for lateral shear, find the direction with most air neighbours
-            net.minecraft.core.Direction failureDir = computeFailureDirection(level, group);
+    /**
+     * Assembles one already-connected component into a VS2 ship and applies
+     * its initial velocity impulse via {@link ShipFragmentLauncher}. This is
+     * exactly the single-ship assembly path the old (pre-split)
+     * {@code executeFragment} did directly on the whole group — now called
+     * once per surviving component instead of once for the whole
+     * (possibly-disconnected) input, and now sharing its VS2 assembly/impulse
+     * plumbing with {@code ImpactHandler}'s crater fragment launches instead
+     * of keeping its own private copy of that plumbing.
+     */
+    private static void spawnFragmentShip(ServerLevel level, Set<BlockPos> component,
+                                          BlockState representativeState, StructuralData sd) {
+        // Determine failure direction: for falling blocks, downward;
+        // for lateral shear, find the direction with most air neighbours.
+        // Computed per-component so e.g. one half of a split wall that's
+        // still resting on the ground doesn't get the same "downward"
+        // verdict as the half that's now floating.
+        net.minecraft.core.Direction failureDir = computeFailureDirection(level, component);
 
-            // Assemble the group as a VS2 ship
-            var positions = group.stream()
-                    .map(p -> new BlockPos(p.getX(), p.getY(), p.getZ()))
-                    .collect(java.util.stream.Collectors.toSet());
+        double speed = 2.0 * sd.fragmentInitialVelocityScale();
+        double mass = component.size() * 2400.0 * 9.81e-3;
+        org.joml.Vector3d impulse = new org.joml.Vector3d(
+                failureDir.getStepX(), failureDir.getStepY(), failureDir.getStepZ()
+        ).mul(speed).mul(mass * 0.5);
 
-            // assembleToShipFull returns the new ship; we then apply a velocity impulse
-            var ship = org.valkyrienskies.mod.common.assembly.ShipAssembler.INSTANCE
-                    .assembleToShipFull(level, positions, 1.0);
-
-            if (ship != null) {
-                // Apply initial velocity impulse in failure direction
-                double speed = 2.0 * sd.fragmentInitialVelocityScale();
-                org.joml.Vector3d impulse = new org.joml.Vector3d(
-                        failureDir.getStepX() * speed,
-                        failureDir.getStepY() * speed,
-                        failureDir.getStepZ() * speed
-                );
-                // PhysShip force application happens on the physics thread via attachment
-                // We use the safe applyInvariantForce path through PhysShip
-                var loadedShip = org.valkyrienskies.mod.common.VSGameUtilsKt
-                        .getLoadedShipManagingPos(level,
-                                group.iterator().next());
-                if (loadedShip instanceof org.valkyrienskies.core.api.ships.LoadedServerShip lss) {
-                    applyFragmentImpulse(level, group, impulse, group.size());
-                }
-            } else {
-                // Assembly failed — crumble
-                group.forEach(p -> executeCrumble(level, p));
-            }
-        } catch (Exception e) {
-            LOGGER.error("[FailureDispatcher] VS2 fragment assembly failed: {} — crumbling instead", e.getMessage());
-            group.forEach(p -> executeCrumble(level, p));
+        if (!ShipFragmentLauncher.assembleAndLaunch(level, component, impulse)) {
+            component.forEach(p -> executeCrumble(level, p));
         }
     }
 
@@ -311,82 +286,4 @@ public final class FailureDispatcher {
         return dirs[bestDir];
     }
 
-    /**
-     * Applies a one-tick impulse to a newly fragmented VS2 ship.
-     * Uses VS2's {@code BlockEntityPhysicsListener} registered at one of the
-     * group's block positions, fires once on the first physics tick, then
-     * unregisters itself.
-     */
-    private static void applyFragmentImpulse(ServerLevel level,
-                                             Set<BlockPos> group,
-                                             org.joml.Vector3d impulseDir,
-                                             int groupSize) {
-        if (group.isEmpty()) return;
-        BlockPos anchor = group.iterator().next().immutable();
-        String dimId = level.dimension().location().toString();
-
-        // Scale impulse by estimated mass so all fragment sizes feel similar
-        double mass = groupSize * 2400.0 * 9.81e-3;
-        org.joml.Vector3d scaledImpulse = new org.joml.Vector3d(impulseDir).mul(mass * 0.5);
-
-        // Register a one-shot BlockEntityPhysicsListener at the anchor position.
-        // VS2 will call physTick on the first physics tick after assembly.
-        var listener = new OneTickImpulseListener(scaledImpulse, dimId, anchor);
-        org.valkyrienskies.mod.common.ValkyrienSkiesMod.INSTANCE
-                .addBlockEntityPhysTicker(dimId, anchor, listener);
-    }
-
-    /**
-     * {@link org.valkyrienskies.mod.api.BlockEntityPhysicsListener} that fires
-     * a single force impulse on the first physics tick and then removes itself.
-     */
-    public static final class OneTickImpulseListener
-            implements org.valkyrienskies.mod.api.BlockEntityPhysicsListener {
-
-        private final org.joml.Vector3d impulse;
-        private final String dimId;
-        private final BlockPos anchor;
-        private boolean fired = false;
-
-        // BlockEntityPhysicsListener is a Kotlin interface with a 'dimension'
-        // property (getDimension / setDimension). We back it with a field.
-        private String dimension;
-
-        OneTickImpulseListener(org.joml.Vector3d impulse, String dimId, BlockPos anchor) {
-            this.impulse = impulse;
-            this.dimId = dimId;
-            this.anchor = anchor;
-            this.dimension = dimId;
-        }
-
-        // ── BlockEntityPhysicsListener property ────────────────────────────────
-
-        @Override
-        public String getDimension() {
-            return dimension;
-        }
-
-        @Override
-        public void setDimension(String value) {
-            this.dimension = value;
-        }
-
-        // ── Physics tick ──────────────────────────────────────────────────────
-
-        @Override
-        public void physTick(org.valkyrienskies.core.api.ships.PhysShip physShip,
-                             org.valkyrienskies.core.api.world.PhysLevel physLevel) {
-            if (fired) return;
-            fired = true;
-            physShip.applyInvariantForce(impulse);
-            // Schedule removal on the game thread (physTick is on the physics thread)
-            try {
-                net.minecraftforge.server.ServerLifecycleHooks.getCurrentServer()
-                        .execute(() -> org.valkyrienskies.mod.common.ValkyrienSkiesMod.INSTANCE
-                                .removeBlockEntityPhysTicker(anchor, dimId));
-            } catch (Exception ignored) {
-                // Server unavailable in edge cases — listener fires once then no-ops
-            }
-        }
-    }
 }

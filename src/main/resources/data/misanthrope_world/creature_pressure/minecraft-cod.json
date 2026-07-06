@@ -1,0 +1,14 @@
+{
+  "_comment": "Cod — a shallow-water fish; suffers crush damage below ~100 m (≈10 000 mbar total) and decompression damage when brought to high altitude/vacuum.",
+  "entity": "minecraft:cod",
+  "crush_threshold_mbar":              10000.0,
+  "crush_instant_kill_threshold_mbar": 30000.0,
+  "crush_damage_per_interval":         2.0,
+  "crush_instant_kill_damage":         999.0,
+  "vacuum_threshold_mbar":             500.0,
+  "vacuum_instant_kill_threshold_mbar": 100.0,
+  "vacuum_damage_per_interval":        1.0,
+  "vacuum_instant_kill_damage":        999.0,
+  "damage_interval_ticks":             40,
+  "respect_pressure_armour":           true
+}

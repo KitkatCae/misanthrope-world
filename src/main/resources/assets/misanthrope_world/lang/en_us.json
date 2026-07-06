@@ -1,0 +1,16 @@
+{
+  "_comment": "Misanthrope World — English (US) translations",
+  "death.attack.crush": "%1$s was crushed by the pressure",
+  "death.attack.crush.player": "%1$s was crushed to death while fighting %2$s",
+  "death.attack.vacuum": "%1$s was torn apart by the vacuum",
+  "death.attack.vacuum.player": "%1$s was torn apart by the vacuum while fighting %2$s",
+  "subtitles.misanthrope_world.entity.generic.hurt_pressure_crush": "Pressure crushes",
+  "subtitles.misanthrope_world.entity.generic.hurt_pressure_vacuum": "Vacuum hisses",
+  "subtitles.misanthrope_world.entity.generic.death_pressure_crush": "Crushed",
+  "subtitles.misanthrope_world.entity.generic.death_pressure_vacuum": "Decompressed",
+  "subtitles.misanthrope_world.sonic_boom_close": "Sonic boom (close)",
+  "subtitles.misanthrope_world.sonic_boom_medium": "Sonic boom (distant)",
+  "subtitles.misanthrope_world.sonic_boom_far": "Sonic boom (far away)",
+  "subtitles.misanthrope_world.supersonic_rumble": "Supersonic rumble",
+  "subtitles.misanthrope_world.reentry_roar": "Atmospheric roar"
+}

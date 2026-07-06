@@ -38,7 +38,7 @@ public final class PressureCrackSource implements ICrackSourceProvider {
     public PressureCrackSource(BlockPos pos, float crackPressure) {
         this.pos          = pos.immutable();
         this.crackPressure = Math.max(0f, Math.min(50f, crackPressure));
-        this.sourceId     = "misanthrope_vs_engine:pressure:" + pos.asLong();
+        this.sourceId     = "misanthrope_world:pressure:" + pos.asLong();
     }
 
     // ── ICrackSourceProvider ──────────────────────────────────────────────────

@@ -81,6 +81,23 @@ public class CrackEntry {
     }
 
     /**
+     * Jump directly to a given crack level, bypassing the normal one-step-
+     * per-advance() ramp. For violent, instantaneous causes — a fracture
+     * from an impact-driven crater cut shouldn't need to visually "heal up"
+     * through hairline/cracked over several propagation cycles before it
+     * looks like what it is. Clamped to [{@link #LEVEL_PRISTINE},
+     * {@link #LEVEL_COLLAPSED}]. Resets heal accumulation like advance() does.
+     *
+     * @param level    target level, clamped into range
+     * @param gameTick current server tick, recorded as lastDrivenTick
+     */
+    public void setLevelInstant(int level, long gameTick) {
+        this.level = Math.max(LEVEL_PRISTINE, Math.min(LEVEL_COLLAPSED, level));
+        this.healTicksAccumulated = 0;
+        this.lastDrivenTick = gameTick;
+    }
+
+    /**
      * Attempt one heal tick. Returns true if level decreased.
      */
     public boolean tickHeal() {

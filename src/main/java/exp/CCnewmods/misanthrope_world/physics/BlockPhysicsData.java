@@ -89,6 +89,30 @@ public final class BlockPhysicsData {
      */
     public final boolean electricallyConductive;
 
+    // ── Density ───────────────────────────────────────────────────────────────
+
+    /**
+     * Material density in kg/m³. Used for:
+     * <ul>
+     *   <li>Fluid hydrostatic column pressure (ρgh per block depth) in
+     *       {@link exp.CCnewmods.misanthrope_world.physics.pressure.FluidPressureSampler}</li>
+     *   <li>VS2 physics body mass calculation in MVS Engine</li>
+     *   <li>Column load calculation in {@code StructuralStressField}</li>
+     * </ul>
+     *
+     * <p>This is an intrinsic <em>material</em> property, not volumetric:
+     * a slab of granite has the same {@code densityKgM3} as a full block.
+     * Callers needing effective mass multiply by {@link #thicknessFraction} themselves.
+     *
+     * <p>Reference values: air ≈ 1.2, water = 1000, sandstone ≈ 1500,
+     * stone/concrete ≈ 2400, granite ≈ 2700, iron ≈ 7800, lead ≈ 11300, lava ≈ 3100.
+     *
+     * <p>For fluid blocks (water, lava, modded fluids), set this in
+     * {@code material_properties} JSON so {@code FluidPressureSampler} can
+     * compute the correct hydrostatic constant without a separate fluid registry.
+     */
+    public final double densityKgM3;
+
     // ── Thermal cracking ──────────────────────────────────────────────────────
 
     /**
@@ -162,6 +186,29 @@ public final class BlockPhysicsData {
     @Nullable
     public final PressureData pressure;
 
+    // ── pH / chemical reactivity ──────────────────────────────────────────────
+
+    /**
+     * Surface pH of this block (0–14, 7.0 = neutral). Always present —
+     * every block has a pH even if it never reacts to anything; this is the
+     * value an aqueous film on the block's surface settles to in a neutral
+     * atmosphere. Stone/concrete sit slightly alkaline (~9–10), most metals
+     * are inert (7.0), organic/biological blocks trend mildly acidic (~5–6).
+     *
+     * <p>This is distinct from {@link #phReactivity} — {@code phValue} is
+     * what the block <em>is</em>; {@code phReactivity} is how strongly it
+     * <em>responds</em> to ambient pH that differs from its own.
+     */
+    public final double phValue;
+
+    /**
+     * Chemical reactivity to ambient pH exposure. {@code null} = block is
+     * chemically inert (no corrosion/etching response regardless of ambient
+     * gas composition) — the correct default for most blocks.
+     */
+    @Nullable
+    public final PhReactivity phReactivity;
+
     // ── Misc flags ────────────────────────────────────────────────────────────
 
     public final boolean biological;
@@ -215,6 +262,7 @@ public final class BlockPhysicsData {
         this.adhesion = b.adhesion;
         this.thicknessFraction = b.thicknessFraction;
         this.electricallyConductive = b.electricallyConductive;
+        this.densityKgM3 = b.densityKgM3;
         this.thermalCrackThreshold = b.thermalCrackThreshold;
         this.thermalCrackRate = b.thermalCrackRate;
         this.emission = b.emission;
@@ -227,6 +275,8 @@ public final class BlockPhysicsData {
         this.lightEmission = b.lightEmission;
         this.structural = b.structural;
         this.pressure = b.pressure;
+        this.phValue = b.phValue;
+        this.phReactivity = b.phReactivity;
         this.biological = b.biological;
         this.passiveHeatOutput = b.passiveHeatOutput;
         this.heatDecoupled = b.heatDecoupled;
@@ -274,6 +324,7 @@ public final class BlockPhysicsData {
             .thermalMass(1.0).conductivity(0.0).insulationR(0.0)
             .dissipationRate(0.5).isAirtight(false).porousness(1.0).adhesion(0.0)
             .thicknessFraction(1.0).electricallyConductive(false)
+            .densityKgM3(1.2)
             .thermalCrackThreshold(Double.NaN).thermalCrackRate(0.0)
             .build();
 
@@ -281,6 +332,7 @@ public final class BlockPhysicsData {
             .thermalMass(40.0).conductivity(2.0).insulationR(0.4)
             .dissipationRate(0.05).isAirtight(true).porousness(0.0).adhesion(0.3)
             .thicknessFraction(1.0).electricallyConductive(false)
+            .densityKgM3(2400.0)
             .thermalCrackThreshold(200.0).thermalCrackRate(0.002)
             .build();
 
@@ -680,6 +732,105 @@ public final class BlockPhysicsData {
         CRUMBLE, VENT, SHATTER, IMPLODE, TEAR
     }
 
+    // =========================================================================
+    // PH / CHEMICAL REACTIVITY
+    // =========================================================================
+
+    /**
+     * Describes how a block's structural strength degrades under sustained
+     * exposure to ambient pH that differs from its own {@link #phValue}.
+     *
+     * <h3>Exposure model</h3>
+     * Each tick, {@code StructuralStressField} reads the cumulative acid/base
+     * "load" at a block's position via
+     * {@code exp.CCnewmods.mge.grid.EnvironmentGrid.getComposition(level, pos)}:
+     * for every gas present, {@code (7.0 - gas.phValue()) * partialPressureMbar}
+     * is summed. This is <em>not</em> a true pH average — it is a cumulative
+     * exposure load that scales directly with both how extreme a gas's pH is
+     * and how much of it is actually present. A trace of a strong acid gas and
+     * a large volume of a weak acid gas can produce comparable load.
+     *
+     * <p>Positive load = net acidic exposure; negative load = net alkaline
+     * exposure. The relevant rate ({@link #acidCorrosionRatePerLoad} or
+     * {@link #baseCorrosionRatePerLoad}) is selected by the sign of the load,
+     * then scaled by the magnitude.
+     *
+     * <h3>Effect on structural strength</h3>
+     * Accumulated corrosion is tracked as a fractional strength loss, applied
+     * the same way {@link StructuralData#strengthFractionAt} applies thermal
+     * weakening — as an additional multiplicative factor on
+     * {@code effectiveStress} in {@code StructuralStressField.evaluateBlock}.
+     * A block at 100% corrosion accumulation behaves as if its strength had
+     * fallen to {@link #minStrengthFraction} of nominal.
+     *
+     * <p>Corrosion accumulation is one-directional (it does not heal on its
+     * own) unless {@link #selfRepairFraction} is non-zero, mirroring
+     * {@link BlockPhysicsData#selfRepairRate} but scoped to chemical damage
+     * specifically (e.g. a self-sealing material, or a magical ward).
+     *
+     * <h3>JSON authoring guidance</h3>
+     * <pre>
+     *   Mild steel (iron-family):  acidRate=0.00004  baseRate=0.000005  resistance=1.0
+     *   Stainless / nickel alloys: acidRate=0.000006 baseRate=0.000002 resistance=1.0
+     *   Copper/bronze:             acidRate=0.00003  baseRate=0.00001  resistance=1.0
+     *   Limestone/marble:          acidRate=0.0002   baseRate=0.0      resistance=1.0
+     *   Cloth/fabric sail:         acidRate=0.0008   baseRate=0.0003   resistance=1.0
+     *   Glass:                     acidRate=0.00001  baseRate=0.00015  resistance=1.0 (etched by base, not acid)
+     * </pre>
+     * Resistant blocks should not omit {@code ph_reactivity} entirely if they
+     * still need a non-default {@link BlockPhysicsData#phValue} for some other
+     * block to react <em>to</em> them — omit only when the block neither reacts
+     * to pH nor needs to be a meaningful pH source itself.
+     */
+    public record PhReactivity(
+            /**
+             * Strength-loss fraction accumulated per tick, per unit of positive
+             * (acidic) cumulative load. A typical mild steel block exposed to a
+             * sustained SO₂ atmosphere accumulates noticeable corrosion over
+             * real-world-minutes of play time at this default scale.
+             */
+            double acidCorrosionRatePerLoad,
+            /**
+             * Strength-loss fraction accumulated per tick, per unit of negative
+             * (alkaline) cumulative load magnitude. Most materials resist base
+             * exposure far better than acid exposure — default asymmetric.
+             */
+            double baseCorrosionRatePerLoad,
+            /**
+             * Multiplier applied to both rates above. 1.0 = baseline material
+             * (use the rates as authored). Lower = more resistant (e.g. 0.05 for
+             * a corrosion-immune turbine fin alloy). This is the single field a
+             * "resistant variant" of an otherwise-identical material should
+             * override, keeping the base rates shared across a material family.
+             */
+            double resistanceFactor,
+            /**
+             * Floor on {@link StructuralData#strengthFractionAt}-style strength
+             * fraction once corrosion accumulation reaches 1.0 (fully corroded).
+             * Mirrors the thermal curve's behaviour of never quite reaching zero
+             * strength instantly. Default 0.05 (95% strength loss at full
+             * corrosion).
+             */
+            double minStrengthFraction,
+            /**
+             * Fractional self-repair of accumulated corrosion per tick (0–1).
+             * 0.0 = corrosion is permanent (the correct default for ordinary
+             * materials). Non-zero values represent self-sealing surfaces,
+             * passivation layers that regenerate, or magical wards.
+             */
+            double selfRepairFraction
+    ) {
+        /**
+         * Returns the accumulated-corrosion strength multiplier for a given
+         * corrosion accumulation fraction [0, 1], linearly interpolated between
+         * 1.0 (no corrosion) and {@link #minStrengthFraction} (fully corroded).
+         */
+        public double strengthFractionAt(double corrosionAccumulation) {
+            double c = Math.max(0.0, Math.min(1.0, corrosionAccumulation));
+            return 1.0 - c * (1.0 - minStrengthFraction);
+        }
+    }
+
     /**
      * Describes how a Snow Real Magic snow-overlay block modifies its host.
      *
@@ -727,6 +878,7 @@ public final class BlockPhysicsData {
         double adhesion = 0.3;
         double thicknessFraction = 1.0;
         boolean electricallyConductive = false;
+        double densityKgM3 = 2400.0; // generic stone/concrete default
         double thermalCrackThreshold = 200.0;
         double thermalCrackRate = 0.002;
         @Nullable
@@ -745,6 +897,9 @@ public final class BlockPhysicsData {
         StructuralData structural;
         @Nullable
         PressureData pressure;
+        double phValue = 7.0;
+        @Nullable
+        PhReactivity phReactivity;
         boolean biological = false;
         boolean passiveHeatOutput = false;
         boolean heatDecoupled = false;
@@ -783,6 +938,7 @@ public final class BlockPhysicsData {
             this.adhesion = src.adhesion;
             this.thicknessFraction = src.thicknessFraction;
             this.electricallyConductive = src.electricallyConductive;
+            this.densityKgM3 = src.densityKgM3;
             this.thermalCrackThreshold = src.thermalCrackThreshold;
             this.thermalCrackRate = src.thermalCrackRate;
             this.emission = src.emission;
@@ -794,6 +950,8 @@ public final class BlockPhysicsData {
             this.lightEmission = src.lightEmission;
             this.structural = src.structural;
             this.pressure = src.pressure;
+            this.phValue = src.phValue;
+            this.phReactivity = src.phReactivity;
             this.biological = src.biological;
             this.passiveHeatOutput = src.passiveHeatOutput;
             this.heatDecoupled = src.heatDecoupled;
@@ -856,6 +1014,11 @@ public final class BlockPhysicsData {
             return this;
         }
 
+        public Builder densityKgM3(double v) {
+            densityKgM3 = v;
+            return this;
+        }
+
         public Builder thermalCrackThreshold(double v) {
             thermalCrackThreshold = v;
             return this;
@@ -878,6 +1041,16 @@ public final class BlockPhysicsData {
 
         public Builder pressure(PressureData v) {
             pressure = v;
+            return this;
+        }
+
+        public Builder phValue(double v) {
+            phValue = v;
+            return this;
+        }
+
+        public Builder phReactivity(PhReactivity v) {
+            phReactivity = v;
             return this;
         }
 

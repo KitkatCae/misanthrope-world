@@ -1,0 +1,14 @@
+{
+  "_comment": "Tropical fish — reef dwellers, delicate. Implode under moderate deep pressure, pop from decompression more easily than cold-water fish.",
+  "entity": "minecraft:tropical_fish",
+  "crush_threshold_mbar":              6000.0,
+  "crush_instant_kill_threshold_mbar": 15000.0,
+  "crush_damage_per_interval":         3.0,
+  "crush_instant_kill_damage":         999.0,
+  "vacuum_threshold_mbar":             700.0,
+  "vacuum_instant_kill_threshold_mbar": 300.0,
+  "vacuum_damage_per_interval":        2.0,
+  "vacuum_instant_kill_damage":        999.0,
+  "damage_interval_ticks":             30,
+  "respect_pressure_armour":           true
+}

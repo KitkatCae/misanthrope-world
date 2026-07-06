@@ -1,0 +1,6 @@
+{
+  "message_id": "crush",
+  "scaling": "always",
+  "exhaustion": 0.0,
+  "effects": "hurt"
+}

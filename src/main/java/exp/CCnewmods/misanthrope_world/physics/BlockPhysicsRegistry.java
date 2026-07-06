@@ -97,6 +97,7 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
                          ResourceManager manager, ProfilerFiller profiler) {
         BY_BLOCK.clear();
         BY_TAG.clear();
+        exp.CCnewmods.mge.gas.GasRegistry.clearPhOverrides();
 
         int ok = 0, fail = 0;
         for (var entry : loaded.entrySet()) {
@@ -123,7 +124,25 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
 
     // ── Parsing ───────────────────────────────────────────────────────────────
 
+    /**
+     * Routes a {@code material_properties} entry to the block/tag physics
+     * parser, or — if it declares a {@code "gas"} key instead of
+     * {@code "block"}/{@code "tag"} — to the much smaller gas-properties path,
+     * which only ever sets a pH override on top of MGE's hardcoded
+     * {@link exp.CCnewmods.mge.gas.GasRegistry} chemistry.
+     *
+     * <p>Gas entries share this folder (rather than getting their own JSON
+     * namespace) so a single material-properties datapack file can describe
+     * both a block and the gas it off-gasses, side by side, with the same
+     * authoring tooling. The two paths are otherwise completely independent —
+     * a gas entry never touches {@link #BY_BLOCK}/{@link #BY_TAG}, and a
+     * block/tag entry never touches the gas registry.
+     */
     private static void parseAndStore(JsonObject j) {
+        if (j.has("gas") && !j.get("gas").isJsonNull()) {
+            parseAndStoreGas(j);
+            return;
+        }
         BlockPhysicsData data = parse(j);
         if (j.has("block") && !j.get("block").isJsonNull()) {
             BY_BLOCK.put(new ResourceLocation(j.get("block").getAsString()), data);
@@ -133,8 +152,31 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
             BY_TAG.put(tag, data);
         } else {
             throw new IllegalArgumentException(
-                    "material_properties entry must specify 'block' or 'tag'");
+                    "material_properties entry must specify 'block', 'tag', or 'gas'");
         }
+    }
+
+    /**
+     * Parses a gas-shaped {@code material_properties} entry. Deliberately
+     * tiny compared to {@link #parse} — gases are physical-chemistry constants
+     * defined in code ({@code GasRegistry}), not block-style content, so only
+     * {@code ph_value} is currently datapack-overridable. Unknown keys are
+     * silently ignored, same forward-compatibility policy as the block path.
+     *
+     * <pre>
+     *   { "gas": "mge:sulfur_dioxide", "ph_value": 1.2 }
+     * </pre>
+     */
+    private static void parseAndStoreGas(JsonObject j) {
+        ResourceLocation gasId = new ResourceLocation(j.get("gas").getAsString());
+        if (!j.has("ph_value")) return; // nothing to override
+        float ph = j.get("ph_value").getAsFloat();
+        exp.CCnewmods.mge.gas.GasRegistry.get(gasId).ifPresentOrElse(
+                gas -> exp.CCnewmods.mge.gas.GasRegistry.setPhOverride(gasId, ph),
+                () -> LOGGER.error(
+                        "[BlockPhysicsRegistry] material_properties gas entry references unknown gas '{}'",
+                        gasId)
+        );
     }
 
     /**
@@ -228,14 +270,43 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
             );
         }
 
+        // ── Density (top-level, preferred over structural sub-object) ─────────
+        // Present for any block — especially fluid blocks that have no structural
+        // data but need a correct hydrostatic constant for FluidPressureSampler.
+        // If both top-level and structural.density_kg_m3 are present, top-level wins
+        // (enforced below in parseStructural: it reads a local default of 2400 from
+        // the sub-object, but we override b.densityKgM3 here first, then the
+        // parseStructural call may overwrite it — so we apply the top-level AFTER
+        // the structural block).
+        boolean hasToplevelDensity = j.has("density_kg_m3");
+        if (hasToplevelDensity) {
+            b.densityKgM3(j.get("density_kg_m3").getAsDouble());
+        }
+
         // ── Structural ────────────────────────────────────────────────────
         if (j.has("structural") && j.get("structural").isJsonObject()) {
-            b.structural(parseStructural(j.getAsJsonObject("structural")));
+            JsonObject s = j.getAsJsonObject("structural");
+            b.structural(parseStructural(s));
+            // Propagate density from structural sub-object to the top-level field
+            // so FluidPressureSampler and VS2 mass can always read bpd.densityKgM3
+            // without needing to null-check bpd.structural.
+            if (!hasToplevelDensity) {
+                b.densityKgM3(gd(s, "density_kg_m3", 2400.0));
+            } else {
+                // top-level wins — re-apply it
+                b.densityKgM3(j.get("density_kg_m3").getAsDouble());
+            }
         }
 
         // ── Pressure mechanics ────────────────────────────────────────────
         if (j.has("pressure") && j.get("pressure").isJsonObject()) {
             b.pressure(parsePressure(j.getAsJsonObject("pressure")));
+        }
+
+        // ── pH / chemical reactivity ────────────────────────────────────
+        if (j.has("ph_value")) b.phValue(j.get("ph_value").getAsDouble());
+        if (j.has("ph_reactivity") && j.get("ph_reactivity").isJsonObject()) {
+            b.phReactivity(parsePhReactivity(j.getAsJsonObject("ph_reactivity")));
         }
 
         // ── Flags ─────────────────────────────────────────────────────────
@@ -420,6 +491,18 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
                 breachMode,
                 gf(p, "compression_multiplier",   1.0f),
                 gf(p, "crack_threshold_fraction", 0.6f)
+        );
+    }
+
+    // ── pH reactivity parser ─────────────────────────────────────────────────
+
+    private static BlockPhysicsData.PhReactivity parsePhReactivity(JsonObject p) {
+        return new BlockPhysicsData.PhReactivity(
+                gd(p, "acid_corrosion_rate_per_load", 0.00004),
+                gd(p, "base_corrosion_rate_per_load",  0.000005),
+                gd(p, "resistance_factor",             1.0),
+                gd(p, "min_strength_fraction",         0.05),
+                gd(p, "self_repair_fraction",          0.0)
         );
     }
 

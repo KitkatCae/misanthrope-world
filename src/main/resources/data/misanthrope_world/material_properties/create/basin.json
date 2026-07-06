@@ -1,0 +1,57 @@
+{
+  "block": "create:basin",
+
+  "_comment": "Create Basin. Heavy cast iron construction, shorter and wider than a cauldron with thicker walls — resists pressure well. The open top means internal over-pressure vents upward before the walls breach (VENT mode). Highest elastic yield of all vessel types. Two stages: the first is a resonant metallic groan, the second is structural deformation. The basin's wide base also means compression multiplier is very high — it's practically immune to being crushed from outside.",
+
+  "thermal_mass": 60,
+  "conductivity": 55,
+  "insulation_r": 0.2,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.10,
+  "electrically_conductive": true,
+
+  "structural": {
+    "compressive_strength_kpa": 220000,
+    "tensile_strength_kpa": 50000,
+    "shear_strength_kpa": 80000,
+    "fracture_toughness": 0.35,
+    "density_kg_m3": 7300,
+    "failure_mode": "CRUMBLE",
+    "blast_resistance_override": 8.0,
+    "shockwave_amplification": 1.2,
+    "shockwave_absorption": 0.15
+  },
+
+  "pressure": {
+    "_note": "Wide, thick-walled cast iron basin. Highest elastic yield threshold — a normal brew explosion barely registers. Open top means expansion pressure vents upward (VENT breach) before the walls give. The compression_multiplier reflects the basin's wide stable base: essentially indestructible from external crush. Primary failure mode is internal over-pressure (expansion) from a massively failed brew.",
+    "elastic_yield_mbar": 800,
+    "plastic_yield_mbar": 1400,
+    "ultimate_strength_mbar": 2800,
+    "deformation_stage_count": 2,
+    "stage_pause_ticks": 140,
+    "elastic_fatigue_rate": 0.00002,
+    "inflatable": false,
+    "max_inflation_fraction": 0.0,
+    "inflation_rate_per_mbar": 0.0,
+    "breach_mode": "VENT",
+    "compression_multiplier": 6.0,
+    "crack_threshold_fraction": 0.60
+  },
+
+  "alchemy": {
+    "ph_tolerance_min": 1.0,
+    "ph_tolerance_max": 13.5,
+    "max_temp_celsius": 800.0,
+    "can_hold_mixing": true,
+    "corrosion_fail_mode": "VESSEL_DAMAGE"
+  },
+
+  "ph_value": 7.0,
+  "ph_reactivity": {
+    "acid_corrosion_rate_per_load": 0.000035,
+    "base_corrosion_rate_per_load": 0.000004,
+    "resistance_factor": 0.9,
+    "min_strength_fraction": 0.05
+  }
+}

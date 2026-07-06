@@ -52,10 +52,25 @@ public final class KineticImpactHandler {
     private static final Logger LOGGER = LogManager.getLogger("MisanthropeCore/KineticImpact");
 
     /**
-     * KE (game-scaled J) → shockwave strength. Tuned so iron cannonball ~80 m/s → strength ~1.5
+     * KE (game-scaled J) → shockwave strength. Tuned so iron cannonball ~80 m/s → strength ~1.5.
+     * Public: {@link exp.CCnewmods.misanthrope_world.physics.structural.vs2.ImpactHandler}
+     * reuses this directly so ship-vs-terrain shockwaves are calibrated identically to
+     * every other kinetic-impact source in this file, rather than inventing a second,
+     * independently-tuned constant for what is physically the same kind of event.
      */
-    private static final float KE_TO_STRENGTH = 0.008f;
-    private static final double MIN_KE = 20.0;
+    public static final float KE_TO_STRENGTH = 0.008f;
+    public static final double MIN_KE = 20.0;
+
+    /**
+     * Scale applied to VS2 ship-collision KE specifically (both ship-vs-ship,
+     * here, and ship-vs-terrain, in ImpactHandler) — collisions between rigid
+     * hulls read as harder hits than the same KE delivered by a small dense
+     * projectile, so this is lower than the projectile path's implicit 1.0.
+     */
+    public static final float SHIP_COLLISION_STRENGTH_SCALE = 0.3f;
+
+    /** Below this, a shockwave wouldn't do anything worth the propagation cost. */
+    public static final float MIN_SHOCKWAVE_STRENGTH = 0.05f;
 
     private static final double ARROW_MASS = 0.03;
     private static final double CANNONBALL_MASS = 8.0;
@@ -376,6 +391,26 @@ public final class KineticImpactHandler {
 
     // ── VS2 ship collision ────────────────────────────────────────────────────
 
+    /**
+     * Handles VS2 collision events — but only ship-vs-ship. Ship-vs-terrain
+     * collisions are {@link exp.CCnewmods.misanthrope_world.physics.structural.vs2.ImpactHandler}'s
+     * exclusive domain (it already polls every ship's velocity each tick
+     * looking for exactly this), and ImpactHandler now calls
+     * {@link ShockwaveHandler#spawn} directly with its own precise
+     * speed/mass numbers once it resolves an impact — see its
+     * {@code resolveImpact}. Before this split, both systems reacted to the
+     * same physical event independently: ImpactHandler carved the crater
+     * with exact numbers, this class re-derived a cruder shockwave strength
+     * from the raw collision event for the same hit, at a possibly-different
+     * point (contact centroid vs. crater center). That's not wrong exactly,
+     * but it's two independent, uncoordinated opinions about the same event.
+     * <p>
+     * There's no reliable published sentinel for "no ship" on
+     * {@code CollisionEvent.getShipIdB()} across VS2 versions, so rather than
+     * assume one, this checks whether shipIdB actually resolves to a loaded
+     * ship — if it doesn't, this is terrain, and ImpactHandler already has it
+     * covered.
+     */
     private static void handleVS2Collision(
             org.valkyrienskies.core.api.events.CollisionEvent event) {
         var contactPoints = event.getContactPoints();
@@ -384,6 +419,8 @@ public final class KineticImpactHandler {
         String dimId = event.getDimensionId();
         ServerLevel level = findLevel(dimId);
         if (level == null) return;
+
+        if (!isLoadedShip(level, event.getShipIdB())) return; // ship-vs-terrain — ImpactHandler's job now
 
         double cx = 0, cy = 0, cz = 0;
         double maxVelSq = 0;
@@ -403,9 +440,22 @@ public final class KineticImpactHandler {
         double ke = 0.5 * mass * maxVelSq;
         if (ke < MIN_KE) return;
 
-        float strength = (float) (Math.sqrt(ke) * KE_TO_STRENGTH * 0.3f);
-        if (strength < 0.05f) return;
+        float strength = (float) (Math.sqrt(ke) * KE_TO_STRENGTH * SHIP_COLLISION_STRENGTH_SCALE);
+        if (strength < MIN_SHOCKWAVE_STRENGTH) return;
         ShockwaveHandler.spawn(level, centroid, strength);
+    }
+
+    /** Whether {@code shipId} currently resolves to a real loaded ship in {@code level}. */
+    private static boolean isLoadedShip(ServerLevel level, long shipId) {
+        try {
+            var shipWorld = org.valkyrienskies.mod.common.VSGameUtilsKt.getShipObjectWorld(level);
+            if (shipWorld == null) return false;
+            for (var s : shipWorld.getLoadedShips()) {
+                if (s.getId() == shipId) return true;
+            }
+        } catch (Exception ignored) {
+        }
+        return false;
     }
 
     private static double estimateShipMass(ServerLevel level, long shipId) {
@@ -414,9 +464,12 @@ public final class KineticImpactHandler {
                     .getShipObjectWorld(level);
             if (shipWorld == null) return 1000.0;
             for (var s : shipWorld.getLoadedShips()) {
-                if (s.getId() == shipId) {
-                    int chunks = s.getActiveChunksSet().getSize();
-                    return chunks * 4096 * 2400.0 * 9.81e-6;
+                if (s.getId() == shipId && s instanceof org.valkyrienskies.core.api.ships.ServerShip serverShip) {
+                    // Real ship mass, not a volumetric guess assuming uniform
+                    // stone density across every occupied chunk — bytecode-verified
+                    // against the actual VS2 api jar (ServerShip.getInertiaData()
+                    // .getShipMass():D).
+                    return serverShip.getInertiaData().getShipMass();
                 }
             }
         } catch (Exception ignored) {

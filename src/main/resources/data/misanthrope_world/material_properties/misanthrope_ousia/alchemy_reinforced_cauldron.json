@@ -1,0 +1,57 @@
+{
+  "block": "misanthrope_ousia:alchemy_reinforced_cauldron",
+
+  "_comment": "Reinforced cauldron (Dave's Potioneering). Heavy, thick-walled construction. Highest pressure resistance of all cauldrons — survives a single brew explosion in the elastic region or just barely entering plastic. Two stages: the first is a deep structural groan with minor deformation, the second is serious deformation before breach. Very high compression multiplier — designed to handle high-pressure brews safely.",
+
+  "thermal_mass": 80,
+  "conductivity": 55,
+  "insulation_r": 0.40,
+  "dissipation_rate": 0.04,
+  "is_airtight": true,
+  "porousness": 0.02,
+  "electrically_conductive": true,
+
+  "structural": {
+    "compressive_strength_kpa": 280000,
+    "tensile_strength_kpa": 80000,
+    "shear_strength_kpa": 120000,
+    "fracture_toughness": 0.4,
+    "density_kg_m3": 7800,
+    "failure_mode": "CRUMBLE",
+    "blast_resistance_override": 12.0,
+    "shockwave_amplification": 1.1,
+    "shockwave_absorption": 0.2
+  },
+
+  "pressure": {
+    "_note": "Thick reinforced walls: high elastic yield, only 2 stages (shows how serious this vessel takes damage), very high compression multiplier. A 800 mbar brew explosion barely touches the elastic region — this vessel is designed to survive brews. At ~1200 mbar it starts to visibly deform.",
+    "elastic_yield_mbar": 700,
+    "plastic_yield_mbar": 1200,
+    "ultimate_strength_mbar": 2400,
+    "deformation_stage_count": 2,
+    "stage_pause_ticks": 120,
+    "elastic_fatigue_rate": 0.00003,
+    "inflatable": false,
+    "max_inflation_fraction": 0.0,
+    "inflation_rate_per_mbar": 0.0,
+    "breach_mode": "CRUMBLE",
+    "compression_multiplier": 5.0,
+    "crack_threshold_fraction": 0.65
+  },
+
+  "alchemy": {
+    "ph_tolerance_min": 0.5,
+    "ph_tolerance_max": 13.5,
+    "max_temp_celsius": 900.0,
+    "can_hold_mixing": true,
+    "corrosion_fail_mode": "VESSEL_DAMAGE"
+  },
+
+  "ph_value": 7.0,
+  "ph_reactivity": {
+    "acid_corrosion_rate_per_load": 0.000025,
+    "base_corrosion_rate_per_load": 0.000003,
+    "resistance_factor": 0.6,
+    "min_strength_fraction": 0.05
+  }
+}

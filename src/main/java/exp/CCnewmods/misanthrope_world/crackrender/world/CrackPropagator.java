@@ -291,18 +291,16 @@ public class CrackPropagator {
                                        CrackStateMap stateMap,
                                        BlockPos pos,
                                        CrackEntry entry) {
-        // Attempt MineCollapse integration
-        boolean used = false;
-        if (net.minecraftforge.fml.ModList.get().isLoaded("minecollapse")) {
-            try {
-                used = net.zerodind.minecollapse.recipes.CollapseRecipe
-                        .collapseBlock(level, pos, level.getBlockState(pos), false);
-            } catch (Exception ignored) {
-            }
-        }
-        if (!used) {
-            level.destroyBlock(pos, true);
-        }
+        // Minecollapse was removed from the project entirely (see FailureDispatcher's
+        // CAVE_IN, which routes through VS2 fragmentation instead) — this used to have
+        // a leftover net.zerodind.minecollapse.recipes.CollapseRecipe call here that
+        // never got cleaned up when that removal happened, and would fail to compile
+        // once the dependency was actually gone. A fully-cracked block just breaks
+        // directly now; if this collapse should instead cascade through
+        // StructuralStressField/FailureDispatcher for a fragment/cave-in response
+        // rather than a plain destroy, that's a design question worth raising
+        // separately rather than assumed here.
+        level.destroyBlock(pos, true);
 
         // Remove entry after collapse is processed
         stateMap.remove(pos);

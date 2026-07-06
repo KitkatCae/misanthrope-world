@@ -12,6 +12,7 @@ import exp.CCnewmods.misanthrope_world.temperature.storage.ThermalStorageData;
 import exp.CCnewmods.misanthrope_world.temperature.storage.ThermalStorageRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageType;
@@ -75,6 +76,23 @@ public class ItemTemperatureTickHandler {
      * How often (ticks) we check player damage from held items.
      */
     private static final int DAMAGE_CHECK_INTERVAL = 20; // once per second
+
+    /**
+     * Generic cross-mod persistent-data contract for tool-mediated heat
+     * isolation (tongs, etc.). Deliberately not tied to any specific item
+     * class or mod — any mod can write these onto a player's persistent data
+     * each tick and get the same protection, no compile dependency needed
+     * either direction. Currently written by MCM's {@code MCMTongsHandler}.
+     * <p>
+     * {@code TONGS_HEAT_RESISTANCE_KEY} — °C the held tool is rated to safely
+     * grip. {@code TONGS_GRIP_STRENGTH_KEY} — 0–1, fraction of hand-held
+     * contact damage negated for items at or below that rating. Above the
+     * rating, full damage still applies — the tool doesn't make you
+     * fireproof, just lets you handle warm-to-hot items without a full burn.
+     */
+    private static final String TONGS_HEAT_RESISTANCE_KEY = "mcm:tongs_heat_resistance";
+    private static final String TONGS_GRIP_STRENGTH_KEY = "mcm:tongs_grip_strength";
+
 
     private static final double CERAMICS_CRACKING_CELSIUS = 650.0;
 
@@ -230,11 +248,30 @@ public class ItemTemperatureTickHandler {
         float totalHeatDamage = 0f;
         float totalFrostDamage = 0f;
 
+        // Tongs heat-isolation contract — see TONGS_HEAT_RESISTANCE_KEY javadoc.
+        CompoundTag persistent = player.getPersistentData();
+        float tongsHeatResistance = persistent.contains(TONGS_HEAT_RESISTANCE_KEY)
+                ? persistent.getFloat(TONGS_HEAT_RESISTANCE_KEY) : 0f;
+        float tongsGripStrength = persistent.contains(TONGS_GRIP_STRENGTH_KEY)
+                ? persistent.getFloat(TONGS_GRIP_STRENGTH_KEY) : 0f;
+
         // Mainhand + offhand
         for (var hand : net.minecraft.world.InteractionHand.values()) {
             ItemStack stack = player.getItemInHand(hand);
             if (stack.isEmpty()) continue;
             var result = computeContactDamage(stack);
+
+            if (tongsGripStrength > 0f && result[0] > 0f) {
+                // Only protects up to the tool's rated temperature — a
+                // manyullyn ingot beyond the jaws' rating still burns through.
+                double itemCelsius = stack.getCapability(ItemTemperatureCapability.CAPABILITY)
+                        .map(ItemTemperatureCapability::getCelsius)
+                        .orElse(Double.MAX_VALUE);
+                if (itemCelsius <= tongsHeatResistance) {
+                    result[0] *= (1f - tongsGripStrength);
+                }
+            }
+
             totalHeatDamage += result[0];
             totalFrostDamage += result[1];
         }

@@ -4,12 +4,14 @@
   "package": "exp.CCnewmods.misanthrope_world.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "misanthrope_world.refmap.json",
+  "plugin": "exp.CCnewmods.misanthrope_world.mixin.MisWorldMixinPlugin",
   "mixins": [
     "crackrender.ChunkCrackInjectorMixin",
     "crackrender.ModelBlockRendererCrackMixin",
     "wet_sand.FarmlandBlockMixin",
     "supplementaries.BellowsBlockTileMixin",
-    "wet_sand.SugarCaneBlockMixin"
+    "wet_sand.SugarCaneBlockMixin",
+    "explosionoverhaul.CraterDeformerMixin"
   ],
   "client": [
     "temperature.ItemTemperatureTintMixin",

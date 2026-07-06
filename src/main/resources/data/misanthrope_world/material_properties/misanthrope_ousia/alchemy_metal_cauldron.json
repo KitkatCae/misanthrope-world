@@ -1,0 +1,75 @@
+{
+  "block": "misanthrope_ousia:alchemy_metal_cauldron",
+
+  "_comment": "Scrap metal cauldron (Alex's Caves Exemplified). Cast from a 50/50 lead-iron alloy — dense, soft, and acoustically dead. Lead dramatically lowers the yield strength and ultimate strength of iron but adds enormous shockwave absorption (lead is used in radiation and blast shielding precisely for this reason). The cauldron deforms easily and permanently under pressure but absorbs rather than transmits the shockwave to adjacent blocks. Very high density. Corrodes rapidly under acid (lead dissolves in many acids). pH tolerance much narrower than iron alone.",
+
+  "thermal_mass": 65,
+  "_thermal_note": "High thermal mass — lead absorbs heat well",
+  "conductivity": 22,
+  "_conductivity_note": "Lead-iron alloy: lower than pure iron, lead is a poor conductor (~35 W/mK vs iron ~80)",
+  "insulation_r": 0.12,
+  "dissipation_rate": 0.05,
+  "is_airtight": false,
+  "porousness": 0.06,
+  "electrically_conductive": true,
+
+  "structural": {
+    "_note": "Lead-iron alloy: much lower compressive/tensile strength than iron alone. Lead is extremely soft (hardness ~1.5 Mohs). The alloy compressive strength is dominated by lead's contribution at 50% — roughly half that of cast iron. Fracture toughness is low: lead-iron doesn't work-harden, it just plastically deforms.",
+    "compressive_strength_kpa": 60000,
+    "tensile_strength_kpa": 25000,
+    "shear_strength_kpa": 20000,
+    "fracture_toughness": 0.25,
+    "density_kg_m3": 9500,
+    "_density_note": "50/50 lead (~11300) + iron (~7800) by volume ≈ 9550 kg/m³",
+    "failure_mode": "CRUMBLE",
+    "blast_resistance_override": 5.0,
+    "_blast_note": "High blast resistance — lead is an excellent blast absorber despite low structural strength",
+    "shockwave_amplification": 0.4,
+    "_shock_amp_note": "Lead-iron damps shockwaves: this cauldron absorbs the explosion rather than transmitting it to neighbours",
+    "shockwave_absorption": 0.75,
+    "_shock_abs_note": "Lead's primary property: 75% of incoming shockwave energy is absorbed rather than transmitted"
+  },
+
+  "pressure": {
+    "_note": "50/50 lead-iron: very low elastic yield (lead yields plastically almost immediately), low ultimate strength but the material flows rather than shatters. Stage pause is short — lead-iron doesn't tension-pause dramatically, it just creeps. Compression multiplier is low: lead has almost no compressive advantage over tension unlike cast iron. At 800 mbar brew explosion this is deep into plastic territory, likely hitting stage 3 of 4.",
+    "elastic_yield_mbar": 80,
+    "plastic_yield_mbar": 160,
+    "ultimate_strength_mbar": 480,
+    "deformation_stage_count": 4,
+    "stage_pause_ticks": 25,
+    "_stage_pause_note": "Short pause — lead creeps continuously, no dramatic tension groan like iron",
+    "elastic_fatigue_rate": 0.00025,
+    "_fatigue_note": "Lead fatigues very quickly — it's notoriously susceptible to creep fatigue",
+    "inflatable": false,
+    "max_inflation_fraction": 0.0,
+    "inflation_rate_per_mbar": 0.0,
+    "breach_mode": "VENT",
+    "_breach_note": "Lead-iron tears and folds rather than crumbling cleanly",
+    "compression_multiplier": 1.3,
+    "_compression_note": "Lead has almost no compression advantage: ~1.3x vs iron's ~3x",
+    "crack_threshold_fraction": 0.45,
+    "_crack_note": "Cracks register early — lead-iron alloys show surface fracturing before ultimate failure"
+  },
+
+  "alchemy": {
+    "_note": "Lead is highly reactive with many acids — narrow pH tolerance. The alloy also has a lower melting point than pure iron (lead melts at 327°C, so the alloy softens at relatively low temperatures). Good base tolerance since lead forms stable hydroxides.",
+    "ph_tolerance_min": 3.5,
+    "ph_tolerance_max": 12.5,
+    "max_temp_celsius": 280.0,
+    "_max_temp_note": "Lead-iron alloy begins to soften structurally well below iron's melting point",
+    "can_hold_mixing": true,
+    "corrosion_fail_mode": "VESSEL_DAMAGE"
+  },
+
+  "ph_value": 7.5,
+  "_ph_value_note": "Slightly alkaline — lead oxide surface layer",
+  "ph_reactivity": {
+    "_note": "Lead corrodes rapidly in acid: dilute acids dissolve it quickly. Also corrodes in some bases but more slowly. Resistance factor >1 because it's already a weak material.",
+    "acid_corrosion_rate_per_load": 0.00018,
+    "_acid_note": "Lead dissolves readily in many acids — ~4.5x faster than plain iron",
+    "base_corrosion_rate_per_load": 0.000012,
+    "resistance_factor": 1.5,
+    "min_strength_fraction": 0.05
+  }
+}
+

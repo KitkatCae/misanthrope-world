@@ -2,6 +2,7 @@ package exp.CCnewmods.misanthrope_world.physics;
 
 import exp.CCnewmods.misanthrope_world.physics.field.ThermalField;
 import exp.CCnewmods.misanthrope_world.physics.offgas.OffGasHandler;
+import exp.CCnewmods.misanthrope_world.physics.phase.PhaseTransitionHandler;
 import exp.CCnewmods.misanthrope_world.physics.structural.StructuralStressField;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.TickEvent;
@@ -95,5 +96,30 @@ public final class WorldSimulation {
      */
     public static void onThermalOffgasThreshold(ServerLevel level, net.minecraft.core.BlockPos pos) {
         OffGasHandler.markDirty(level, pos);
+    }
+
+    /**
+     * Called by ThermalField when a block's temperature crosses the threshold
+     * of any {@code on_melt}, {@code on_fire}, or {@code on_heat_above} entry
+     * in its {@code material_properties/} phase transition list.
+     *
+     * <p>Forwards to {@link PhaseTransitionHandler} which evaluates the block's
+     * full transition list and fires the first matching rule.
+     */
+    public static void onPhaseTransitionThermal(ServerLevel level, net.minecraft.core.BlockPos pos) {
+        PhaseTransitionHandler.markDirtyThermal(level, pos);
+    }
+
+    /**
+     * Called on {@code BlockEvent.NeighborNotifyEvent} when a fluid-bearing
+     * block change is detected adjacent to a block with {@code on_water_contact}
+     * defined. Triggers an immediate (non-queued) water-contact phase evaluation.
+     *
+     * <p>Water contact transitions are instantaneous — sodium touches water and
+     * reacts immediately, not on the next available budget slot.
+     */
+    public static void onPhaseTransitionWaterContact(ServerLevel level,
+                                                     net.minecraft.core.BlockPos pos) {
+        PhaseTransitionHandler.evaluateWaterContact(level, pos);
     }
 }

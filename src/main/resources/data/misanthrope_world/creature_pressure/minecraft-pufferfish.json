@@ -1,0 +1,11 @@
+{
+  "_comment": "Pufferfish — naturally pressurised to resist modest depth changes; fragile under extreme crush. Does NOT suffer vacuum damage (inflates like a balloon).",
+  "entity": "minecraft:pufferfish",
+  "crush_threshold_mbar":              8000.0,
+  "crush_instant_kill_threshold_mbar": 20000.0,
+  "crush_damage_per_interval":         3.0,
+  "crush_instant_kill_damage":         999.0,
+  "vacuum_threshold_mbar":             -1,
+  "damage_interval_ticks":             40,
+  "respect_pressure_armour":           true
+}
