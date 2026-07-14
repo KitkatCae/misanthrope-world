@@ -303,6 +303,15 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
             b.pressure(parsePressure(j.getAsJsonObject("pressure")));
         }
 
+        // ── Phasing / engulfing ───────────────────────────────────────────
+        // Flat top-level keys (not a sub-object, unlike structural/pressure) —
+        // matches material_properties_template.json. Omit both "phaseable"
+        // and "engulfing" entirely to disable (the default for nearly every
+        // block); only build a PhasingData when at least one is present.
+        if (j.has("phaseable") || j.has("engulfing")) {
+            b.phasing(parsePhasing(j));
+        }
+
         // ── pH / chemical reactivity ────────────────────────────────────
         if (j.has("ph_value")) b.phValue(j.get("ph_value").getAsDouble());
         if (j.has("ph_reactivity") && j.get("ph_reactivity").isJsonObject()) {
@@ -494,6 +503,22 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
         );
     }
 
+    // ── Phasing / engulfing parser ───────────────────────────────────────────
+
+    private static BlockPhysicsData.PhasingData parsePhasing(JsonObject j) {
+        return new BlockPhysicsData.PhasingData(
+                gb(j, "phaseable"),
+                gd(j, "phase_min_speed_mps", 15.0),
+                gd(j, "phase_max_speed_mps", 40.0),
+                gd(j, "phase_drag_per_tick", 0.9),
+                gb(j, "engulfing"),
+                gd(j, "engulf_drag_per_tick", 0.5),
+                !j.has("engulf_particle") || gb(j, "engulf_particle"), // default true
+                gdOrNaN(j, "engulf_min_speed_mps", Double.NaN),
+                gdOrNaN(j, "engulf_max_speed_mps", Double.NaN)
+        );
+    }
+
     // ── pH reactivity parser ─────────────────────────────────────────────────
 
     private static BlockPhysicsData.PhReactivity parsePhReactivity(JsonObject p) {
@@ -510,6 +535,18 @@ public final class BlockPhysicsRegistry extends SimpleJsonResourceReloadListener
 
     private static double gd(JsonObject o, String k, double def) {
         return o.has(k) ? o.get(k).getAsDouble() : def;
+    }
+
+    /**
+     * Like {@link #gd} but treats an explicit JSON {@code null} the same as an
+     * absent key (returns {@code def}) instead of throwing — for fields where
+     * {@code null} is a meaningful "use the fallback" value (e.g.
+     * {@code engulf_min_speed_mps}/{@code engulf_max_speed_mps}, matching the
+     * {@code isJsonNull()} guard convention used elsewhere in this file, e.g.
+     * {@code decay_into}, {@code black_hole_entity}).
+     */
+    private static double gdOrNaN(JsonObject o, String k, double def) {
+        return (o.has(k) && !o.get(k).isJsonNull()) ? o.get(k).getAsDouble() : def;
     }
 
     private static float gf(JsonObject o, String k, float def) {

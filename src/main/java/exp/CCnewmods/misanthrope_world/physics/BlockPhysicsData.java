@@ -186,6 +186,23 @@ public final class BlockPhysicsData {
     @Nullable
     public final PressureData pressure;
 
+    // ── Phasing / engulfing (MWorld/FullStop integration) ─────────────────────
+
+    /**
+     * Phase-through / engulfing behavior against fast-moving entities.
+     * {@code null} = normal solid collision always (the overwhelming majority
+     * of blocks). See {@link PhasingData} for field semantics.
+     *
+     * <p>This is a Misanthrope-owned reimplementation of FullStop's
+     * {@code fullstop:phaseable}/{@code fullstop:engulfing} tag behavior,
+     * keyed off our own material data instead of their tags — see
+     * {@code MWorld_FullStop_Integration_v1.md}. FullStop's own tags and
+     * mixin/tick-handler keep running unmodified for vanilla blocks; this is
+     * additive, only consulted for blocks that have this field set.
+     */
+    @Nullable
+    public final PhasingData phasing;
+
     // ── pH / chemical reactivity ──────────────────────────────────────────────
 
     /**
@@ -275,6 +292,7 @@ public final class BlockPhysicsData {
         this.lightEmission = b.lightEmission;
         this.structural = b.structural;
         this.pressure = b.pressure;
+        this.phasing = b.phasing;
         this.phValue = b.phValue;
         this.phReactivity = b.phReactivity;
         this.biological = b.biological;
@@ -733,6 +751,81 @@ public final class BlockPhysicsData {
     }
 
     // =========================================================================
+    // PHASING / ENGULFING (MWorld/FullStop integration)
+    // =========================================================================
+
+    /**
+     * Phase-through / engulfing behavior for fast-moving entities.
+     *
+     * <h3>Phasing</h3>
+     * When {@link #phaseable} is {@code true}, an entity whose speed falls in
+     * {@code [phaseMinSpeedMps, phaseMaxSpeedMps]} passes through this block
+     * with zero collision (no block breaking, no stop). <b>Below the minimum
+     * or above the maximum, the block is normal solid collision either way</b>
+     * — too slow to bother tunneling, too fast to trust tunneling through
+     * cleanly, so both ends of the range fail back to a wall. While inside,
+     * velocity is scaled by {@link #phaseDragPerTick} each tick (gentle
+     * bleed-off).
+     *
+     * <h3>Engulfing</h3>
+     * {@link #engulfing} implies phaseable behavior even if {@link #phaseable}
+     * is {@code false} — an entity has to be able to enter the block volume
+     * before it can get stuck inside it. Uses {@link #phaseMinSpeedMps}/
+     * {@link #phaseMaxSpeedMps} for the pass-through band unless
+     * {@link #engulfMinSpeedMps}/{@link #engulfMaxSpeedMps} are set (non-NaN),
+     * then applies {@link #engulfDragPerTick} instead of
+     * {@link #phaseDragPerTick} while inside. Once the entity's speed drops
+     * back below the effective minimum, it's now inside solid block geometry
+     * (collision resumes) and is stuck — same as FullStop's sand/gravel/snow,
+     * no separate "escape" mechanic beyond breaking the block.
+     *
+     * <p>Reimplemented internally rather than driven by FullStop's
+     * {@code fullstop:phaseable}/{@code fullstop:engulfing} tags — see
+     * {@code MWorld_FullStop_Integration_v1.md} §4–5 for the design rationale.
+     * FullStop's own tag-driven behavior keeps running unmodified for vanilla
+     * blocks; this only applies to blocks that set this field.
+     */
+    public record PhasingData(
+            boolean phaseable,
+
+            /** m/s. Below this speed: solid collision. FullStop's own default for leaves is 15.0. */
+            double phaseMinSpeedMps,
+
+            /** m/s. Above this speed: solid collision. Misanthrope-only addition — FullStop's original has no ceiling. */
+            double phaseMaxSpeedMps,
+
+            /** Velocity multiplier applied per tick while phasing. FullStop's own default for leaves is 0.9. */
+            double phaseDragPerTick,
+
+            boolean engulfing,
+
+            /** Heavier drag than phaseDragPerTick. FullStop's own default for sand/gravel/snow is 0.5. */
+            double engulfDragPerTick,
+
+            /** Spawn a block-particle "burrowing" effect + occasional hit sound each tick while engulfed. */
+            boolean engulfParticle,
+
+            /** Double.NaN = fall back to phaseMinSpeedMps. */
+            double engulfMinSpeedMps,
+
+            /** Double.NaN = fall back to phaseMaxSpeedMps. */
+            double engulfMaxSpeedMps
+    ) {
+        public double effectiveEngulfMinSpeedMps() {
+            return Double.isNaN(engulfMinSpeedMps) ? phaseMinSpeedMps : engulfMinSpeedMps;
+        }
+
+        public double effectiveEngulfMaxSpeedMps() {
+            return Double.isNaN(engulfMaxSpeedMps) ? phaseMaxSpeedMps : engulfMaxSpeedMps;
+        }
+
+        /** True if phasing (pass-through) applies at all — either explicitly phaseable, or implied by engulfing. */
+        public boolean passable() {
+            return phaseable || engulfing;
+        }
+    }
+
+    // =========================================================================
     // PH / CHEMICAL REACTIVITY
     // =========================================================================
 
@@ -897,6 +990,8 @@ public final class BlockPhysicsData {
         StructuralData structural;
         @Nullable
         PressureData pressure;
+        @Nullable
+        PhasingData phasing;
         double phValue = 7.0;
         @Nullable
         PhReactivity phReactivity;
@@ -950,6 +1045,7 @@ public final class BlockPhysicsData {
             this.lightEmission = src.lightEmission;
             this.structural = src.structural;
             this.pressure = src.pressure;
+            this.phasing = src.phasing;
             this.phValue = src.phValue;
             this.phReactivity = src.phReactivity;
             this.biological = src.biological;
@@ -1041,6 +1137,11 @@ public final class BlockPhysicsData {
 
         public Builder pressure(PressureData v) {
             pressure = v;
+            return this;
+        }
+
+        public Builder phasing(PhasingData v) {
+            phasing = v;
             return this;
         }
 

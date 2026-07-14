@@ -323,6 +323,34 @@
     "_crack_threshold_note": "Fraction of ultimate_strength_mbar at which crack sources are registered with CrackPropagator. Default 0.6"
   },
 
+  "_section_phasing": "=== PHASING & ENGULFING (MWorld/FullStop integration) ===",
+  "_phasing_note": "Reimplemented internally against FullStop's design (not the fullstop:phaseable/engulfing tags — those still run unmodified for vanilla blocks like leaves/sand, but our own blocks use these fields with our own mixin+tick-handler instead). Speed is read from FullStopCapability.getCurrentNativeVelocity() (vanilla blocks/tick scale). Omit this entire section for blocks with no phase behavior — this is the overwhelming majority of blocks.",
+
+  "phaseable": false,
+  "_phaseable_note": "When true, a getCollisionShape mixin (mirroring FullStop's own PhaseableBlockMixin, but keyed off this field) returns an empty collision shape for entities whose speed falls inside [phase_min_speed_mps, phase_max_speed_mps] — they pass through with zero collision. Below phase_min_speed_mps OR above phase_max_speed_mps, the block is normal solid collision either way — too slow to bother tunneling, too fast to trust tunneling through cleanly, so both ends of the range fail back to a wall.",
+
+  "phase_min_speed_mps": 15.0,
+  "_phase_min_note": "m/s. Below this speed: solid collision (FullStop's own default threshold for leaves is 15.0)",
+
+  "phase_max_speed_mps": 40.0,
+  "_phase_max_note": "m/s. Above this speed: solid collision. FullStop's original implementation has no ceiling at all — this is a Misanthrope-only addition. Pick a value comfortably above what a normal fast-moving entity/projectile should tunnel at, but below velocities you want to just slam into the block instead (e.g. a thrown item vs. a cannonball).",
+
+  "phase_drag_per_tick": 0.9,
+  "_phase_drag_note": "Velocity multiplier applied per tick while an entity's bounding box overlaps this block and it's within the phase band. FullStop's own default for leaves is 0.9 (gentle bleed-off).",
+
+  "engulfing": false,
+  "_engulfing_note": "Implies phaseable behavior even if phaseable above is left false — an entity has to be able to enter the block volume before it can get stuck inside it. Uses phase_min_speed_mps/phase_max_speed_mps for the pass-through band unless engulf_min_speed_mps/engulf_max_speed_mps below are set, then applies engulf_drag_per_tick instead of phase_drag_per_tick while inside. Once the entity's speed drops back below phase_min_speed_mps it's now inside solid block geometry (collision resumes) and is stuck — same as FullStop's sand/gravel/snow, no separate 'escape' mechanic beyond breaking the block.",
+
+  "engulf_drag_per_tick": 0.5,
+  "_engulf_drag_note": "Heavier drag than phase_drag_per_tick — FullStop's own default for sand/gravel/snow is 0.5.",
+
+  "engulf_particle": true,
+  "_engulf_particle_note": "Spawn a block-particle 'burrowing' effect plus an occasional block-hit sound each tick while engulfed, matching FullStop's feel (its BlockPhasing.burrowEffects).",
+
+  "engulf_min_speed_mps": null,
+  "engulf_max_speed_mps": null,
+  "_engulf_speed_note": "Optional override thresholds for engulfing specifically. null on either means fall back to phase_min_speed_mps/phase_max_speed_mps respectively. Leave both null unless a specific block needs a different speed band for engulfing than plain phasing would imply.",
+
   "_section_ph": "=== PH / CHEMICAL REACTIVITY ===",
   "_ph_note": "ph_value is always read (defaults to 7.0/neutral) — it's what the block IS. ph_reactivity is optional — it's how strongly the block RESPONDS to ambient pH that differs from ph_value. Omit ph_reactivity for chemically inert blocks (most blocks); set ph_value alone if you only need the block to register a non-neutral surface pH for some other system to read, without it corroding itself.",
 

@@ -8,7 +8,6 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.ProjectileImpactEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -35,8 +34,11 @@ import java.lang.reflect.Method;
  *       {@code VsCoreApi.getCollisionPersistEvent()} in {@link ModBusEvents}.
  *       Contact velocity + ship mass → shockwave at contact centroid.</li>
  *   <li><b>FullStop collision</b> — detected via {@code LivingHurtEvent} at low
- *       priority. FullStop's custom damage source carries velocity; we read it via
- *       reflection and spawn a shockwave at the attacker/block position.</li>
+ *       priority. Identified purely via the vanilla DamageSource/DamageType
+ *       registry API (checking for the "fullstop" namespace) — no FullStop
+ *       class is referenced, so this survives FullStop's internal rewrites.
+ *       We read attacker/victim velocity directly off the vanilla entity and
+ *       spawn a shockwave at the collision position.</li>
  *   <li><b>Kinetic Minecart</b> — detected via {@code LivingHurtEvent}. Kinetic
  *       Minecart uses {@code DamageSources.generic()} from a minecart entity as
  *       source; we identify it by the source entity type and compute KE from
@@ -94,23 +96,7 @@ public final class KineticImpactHandler {
     @Nullable
     private static Class<?> cbcProjectileClass;
 
-    /**
-     * FullStop Physics.velocityDifference(Entity, Entity) → double
-     */
-    @Nullable
-    private static Method fsVelocityDifference;
-    /**
-     * FullStop FullStopCapability → getCollision()
-     */
-    @Nullable
-    private static Method fsGetCollision;
-    @Nullable
-    private static Method fsCapGet;
-    @Nullable
-    private static java.lang.reflect.Field fsCapField;
-
     private static boolean reflectedCbc = false;
-    private static boolean reflectedFullStop = false;
 
     // ── VS2 + MOD bus events ──────────────────────────────────────────────────
 
@@ -146,27 +132,10 @@ public final class KineticImpactHandler {
             }
         }
 
-        // FullStop — Physics.velocityDifference is the per-entity velocity magnitude
-        // We actually don't need it — we read velocity directly from the entity.
-        // What we DO need is to identify FullStop's damage source.
-        // FullStop creates damage via DamageSources with a custom TextColor string
-        // containing "(going X.XX m/s)" — we detect it by checking damage source msgId.
-        if (FULLSTOP_LOADED && !reflectedFullStop) {
-            reflectedFullStop = true;
-            try {
-                Class<?> fsPhysics = Class.forName(
-                        "net.camacraft.fullstop.common.physics.Physics");
-                fsVelocityDifference = fsPhysics.getDeclaredMethod(
-                        "velocityDifference",
-                        net.minecraft.world.entity.Entity.class,
-                        net.minecraft.world.entity.Entity.class);
-                fsVelocityDifference.setAccessible(true);
-                LOGGER.info("[KineticImpactHandler] FullStop reflection initialised.");
-            } catch (Exception e) {
-                LOGGER.warn("[KineticImpactHandler] FullStop reflection failed: {}", e.getMessage());
-                fsVelocityDifference = null;
-            }
-        }
+        // FullStop — no reflection needed. We identify FullStop's kinetic damage
+        // purely through the vanilla DamageSource/DamageType API (see
+        // isFullStopDamage below), which works unchanged across FullStop's
+        // internal rewrites since it never touches a FullStop class directly.
     }
 
     // ── Projectile → block ────────────────────────────────────────────────────
@@ -249,87 +218,60 @@ public final class KineticImpactHandler {
         }
     }
 
+    // NOTE: the previous per-tick "FullStop block collision" scan (onLevelTick)
+    // was removed here. It hard-referenced
+    // net.camacraft.fullstop.common.capabilities.FullStopCapability by class
+    // literal — that package was renamed to .capability (singular) in FullStop's
+    // rewrite, so the literal reference threw NoClassDefFoundError (an Error,
+    // NOT an Exception — the surrounding `catch (Exception ignored)` never
+    // caught it), crashing the server tick loop.
+    //
+    // It's not being reinstated as-is because it was already non-functional
+    // before this update: it looked up "DELTAV_CAP" via
+    // FullStopCapability.class.getDeclaredField(...), but DELTAV_CAP has only
+    // ever been declared on the nested Provider class in both the old and new
+    // FullStop jars, never on FullStopCapability itself — so that reflective
+    // lookup always threw NoSuchFieldException and every entity was skipped,
+    // every tick, in every version we've shipped against. In other words this
+    // code never once produced a shockwave.
+    //
+    // FullStop's new build also no longer exposes a live per-entity
+    // CollisionType at all (no more `impact` field on the capability — block
+    // collisions are now resolved and consumed internally in
+    // server.physics.interaction.KineticBlockInteractions with no capability
+    // exposure), so there's no drop-in replacement using the same approach.
+    //
+    // If block-only (non-damaging) kinetic impacts should shockwave, the
+    // supportable replacement is a vanilla-only heuristic — per moving entity,
+    // check entity.horizontalCollision / entity.verticalCollision (stable
+    // vanilla Entity fields, no FullStop dependency at all) against the
+    // previous tick's speed — rather than reflecting into FullStop internals
+    // that may change shape again. Flagging this as a design decision rather
+    // than silently reintroducing new behavior.
+
     /**
-     * Catches FullStop block collisions (entity hitting a solid block at speed).
-     * FullStop detects these in Physics.collidingKinetically() each tick;
-     * we read the result via the FullStopCapability on each entity.
+     * Identifies FullStop kinetic damage purely via the vanilla DamageSource /
+     * DamageType registry API — no FullStop class is referenced, so this keeps
+     * working regardless of FullStop's internal package/class churn.
      * <p>
-     * This is separate from the LivingHurtEvent path (which catches entity-entity
-     * collisions that deal damage). Block collisions often deal no entity damage
-     * but still warrant a shockwave in the block.
+     * In FullStop's current (2026-07 rewrite) build, all of its damage types
+     * ({@code fullstop:kinetic}, {@code fullstop:kinetic_fall},
+     * {@code fullstop:pressure}, {@code fullstop:atmosphere}) live in the
+     * "fullstop" registry namespace, so checking the type holder's resource
+     * key namespace is a precise, stable match.
+     * <p>
+     * Note: FullStop's pre-rewrite build reused vanilla types
+     * ({@code minecraft:fall} / {@code minecraft:fly_into_wall}) for its
+     * kinetic damage and only customized the death message text, which is not
+     * observable from the DamageSource at all — so this same limitation
+     * (no reliable detection) existed on the old build too; this is not a
+     * regression, it's the first version where detection is actually possible.
      */
-    @SubscribeEvent(priority = EventPriority.LOW)
-    public static void onLevelTick(TickEvent.LevelTickEvent event) {
-        if (event.phase != TickEvent.Phase.START) return;
-        if (!FULLSTOP_LOADED) return;
-        if (!(event.level instanceof ServerLevel level)) return;
-
-        for (net.minecraft.world.entity.Entity entity : level.getAllEntities()) {
-            if (entity.isRemoved()) continue;
-            if (entity.getDeltaMovement().lengthSqr() < 0.04) continue;
-
-            try {
-                // FullStop capability field is DELTAV_CAP, not CAP
-                // Reflect DELTAV_CAP since fullstop is compileOnly
-                @SuppressWarnings("unchecked")
-                net.minecraftforge.common.capabilities.Capability<net.camacraft.fullstop.common.capabilities.FullStopCapability> deltaCap;
-                try {
-                    java.lang.reflect.Field f = net.camacraft.fullstop.common.capabilities.FullStopCapability.class
-                            .getDeclaredField("DELTAV_CAP");
-                    f.setAccessible(true);
-                    deltaCap = (net.minecraftforge.common.capabilities.Capability<net.camacraft.fullstop.common.capabilities.FullStopCapability>) f.get(null);
-                } catch (Exception ex) {
-                    continue;
-                }
-                var capOpt = entity.getCapability(deltaCap).resolve();
-                if (capOpt.isEmpty()) continue;
-                var cap = capOpt.get();
-
-                // 'impact' field stores the CollisionType from collidingKinetically()
-                // We reflect to get it since there's no public getter
-                if (fsVelocityDifference == null) continue;
-                java.lang.reflect.Field impactField =
-                        cap.getClass().getDeclaredField("impact");
-                impactField.setAccessible(true);
-                var collisionType = impactField.get(cap);
-                if (collisionType == null) continue;
-
-                // Only SOLID collisions (block hits, not entity-entity)
-                if (!collisionType.toString().equals("SOLID")) continue;
-
-                // Read previous velocity for KE calculation
-                var vel = cap.getPreviousVelocity();
-                if (vel == null) continue;
-                double speedSq = vel.lengthSqr();
-                if (speedSq < 0.04) continue;
-
-                double mass = estimateEntityMass(entity);
-                double ke = 0.5 * mass * speedSq;
-                if (ke < MIN_KE) continue;
-
-                float strength = (float) (Math.sqrt(ke) * KE_TO_STRENGTH * 0.6f);
-                if (strength < 0.05f) continue;
-
-                BlockPos hitPos = entity.blockPosition();
-                if (level.isLoaded(hitPos)) {
-                    ShockwaveHandler.spawn(level, hitPos, strength);
-                }
-            } catch (Exception ignored) {
-            }
-        }
-    }
-
     private static boolean isFullStopDamage(net.minecraft.world.damagesource.DamageSource source) {
-        // FullStop formats its damage message as "going X.XX m/s"
-        // The damage type key is the vanilla 'generic' type but FullStop adds
-        // a custom string component. We check if the entity direct attacker
-        // is null (block collision) or an entity, and if the source's message
-        // contains the FullStop velocity marker.
-        // Most reliable: check if the direct source location string in msgId
-        // contains FullStop's marker. Fall back to checking the raw type.
         try {
-            String typeKey = source.type().msgId();
-            return typeKey != null && (typeKey.contains("fullstop") || typeKey.contains("going "));
+            return source.typeHolder().unwrapKey()
+                    .map(key -> key.location().getNamespace().equals("fullstop"))
+                    .orElse(false);
         } catch (Exception e) {
             return false;
         }

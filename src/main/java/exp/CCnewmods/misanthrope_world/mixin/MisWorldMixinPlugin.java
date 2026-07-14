@@ -1,6 +1,6 @@
 package exp.CCnewmods.misanthrope_world.mixin;
 
-import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.LoadingModList;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -50,14 +50,27 @@ public class MisWorldMixinPlugin implements IMixinConfigPlugin {
         switch (mixinClassName) {
             case FD_COOKING_POT_TICK:
             case FD_HEATABLE_BE:
-                return ModList.get().isLoaded("farmersdelight");
+                return isModPresent("farmersdelight");
             case PIZZADELIGHT_RAW_PIZZA:
-                return ModList.get().isLoaded("pizzadelight");
+                return isModPresent("pizzadelight");
             case SUPPLEMENTARIES_BELLOWS:
-                return ModList.get().isLoaded("supplementaries");
+                return isModPresent("supplementaries");
             default:
                 return true;
         }
+    }
+
+    /**
+     * Mixin's PREPARE phase (where shouldApplyMixin runs) happens during early
+     * game bootstrap, well before FML has constructed mods and populated the
+     * runtime {@code net.minecraftforge.fml.ModList} — calling
+     * {@code ModList.get()} here returns null and throws.
+     * <p>
+     * {@link LoadingModList} is populated during mod file discovery/scanning,
+     * which happens earlier than mixin preparation, so it's safe to query here.
+     */
+    private static boolean isModPresent(String modId) {
+        return LoadingModList.get().getModFileById(modId) != null;
     }
 
     @Override

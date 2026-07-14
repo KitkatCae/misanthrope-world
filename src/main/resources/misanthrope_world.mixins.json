@@ -11,7 +11,8 @@
     "wet_sand.FarmlandBlockMixin",
     "supplementaries.BellowsBlockTileMixin",
     "wet_sand.SugarCaneBlockMixin",
-    "explosionoverhaul.CraterDeformerMixin"
+    "explosionoverhaul.CraterDeformerMixin",
+    "fullstop.PhaseableCollisionMixin"
   ],
   "client": [
     "temperature.ItemTemperatureTintMixin",

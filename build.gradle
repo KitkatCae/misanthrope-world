@@ -107,7 +107,7 @@ dependencies {
         exclude group: 'org.joml', module: ''
     }
     compileOnly fg.deobf("curse.maven:explosion-overhaul-a-new-level-of-destruction-1296203:7659431")
-    compileOnly fg.deobf("curse.maven:full-stop-1118198:6957594")
+    compileOnly fg.deobf("curse.maven:full-stop-1118198:8382712")
     implementation fg.deobf("curse.maven:flowing_fluids-1108809:7623778")
     compileOnly fg.deobf("curse.maven:farmers-delight-398521:8083474")
     compileOnly fg.deobf("curse.maven:supplementaries-412082:7884611")
