@@ -39,24 +39,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * tunneling through cleanly) — confirmed explicitly, this is not a "no
  * ceiling" design like FullStop's original.
  *
- * <h3>⚠ SRG name not yet verified</h3>
- * The method target below uses the mapped (parchment) name
- * {@code getCollisionShape(BlockGetter, BlockPos, CollisionContext)} with
- * {@code remap=false}. Per the project's established convention for
- * vanilla-method-target mixins (see {@code FarmlandBlockMixin}), this should
- * use the literal SRG identifier (an {@code m_XXXXX_}-style name) instead —
- * I don't have {@code output.srg}/{@code output.tsrg} in this session to look
- * it up. <b>Substitute the correct SRG id for {@code getCollisionShape}
- * (3-argument overload, taking {@code CollisionContext}) before this
- * compiles against the real build</b> — the descriptor below is
- * bytecode-verified against the mapped jar, only the method name string needs
- * the swap.
  */
 @Mixin(value = BlockBehaviour.BlockStateBase.class, remap = false)
 public abstract class PhaseableCollisionMixin {
 
     @Inject(
-            method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;", // TODO: replace with SRG id, see class javadoc
+            method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;",
             at = @At("HEAD"),
             cancellable = true,
             remap = false
