@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "misanthrope_world:block/log_pile_placeholder_cross"
+  }
+}

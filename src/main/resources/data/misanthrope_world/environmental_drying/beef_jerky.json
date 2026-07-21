@@ -1,0 +1,16 @@
+{
+  "_comment": "Replaces tinkers_thinking:drying_rack beef jerky. Requires warm dry conditions.",
+  "type": "misanthrope_world:environmental_drying",
+  "ingredient": {
+    "item": "minecraft:beef"
+  },
+  "result": {
+    "item": "misanthrope_core:dried_food"
+  },
+  "base_ticks": 3600,
+  "min_temp_celsius": 25.0,
+  "max_humidity_mbar": 10.0,
+  "requires_airflow": true,
+  "open_air_allowed": true,
+  "rack_speed_multiplier": 1.5
+}

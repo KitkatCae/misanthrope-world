@@ -237,7 +237,11 @@ public final class FailureDispatcher {
         net.minecraft.core.Direction failureDir = computeFailureDirection(level, component);
 
         double speed = 2.0 * sd.fragmentInitialVelocityScale();
-        double mass = component.size() * 2400.0 * 9.81e-3;
+        // Real per-block density (material_properties via BlockPhysicsRegistry) instead of the
+        // previous component.size() * 2400.0 uniform-stone-density approximation. Same 9.81e-3
+        // tuned scale factor kept as-is — that constant was presumably tuned against the old
+        // formula's feel, not against a physically exact impulse; only the mass input changes.
+        double mass = FragmentSplitter.massAndCenterOfMass(level, component).totalMassKg() * 9.81e-3;
         org.joml.Vector3d impulse = new org.joml.Vector3d(
                 failureDir.getStepX(), failureDir.getStepY(), failureDir.getStepZ()
         ).mul(speed).mul(mass * 0.5);

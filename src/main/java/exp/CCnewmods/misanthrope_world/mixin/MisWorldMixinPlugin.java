@@ -35,6 +35,13 @@ public class MisWorldMixinPlugin implements IMixinConfigPlugin {
             "exp.CCnewmods.misanthrope_world.mixin.farmersdelight.RawPizzaBlockMixin";
     private static final String SUPPLEMENTARIES_BELLOWS =
             "exp.CCnewmods.misanthrope_world.mixin.supplementaries.BellowsBlockTileMixin";
+    // Moved from misanthrope_core, where the late-mixins config was
+    // "required": false at the config level (so an absent tinkers_thinking
+    // was silently tolerated). This config is "required": true, so it needs
+    // an explicit gate here to avoid a ClassNotFoundError crash when
+    // tinkers_thinking isn't installed.
+    private static final String TINKERSTHINKING_DRYING_RACK =
+            "exp.CCnewmods.misanthrope_world.mixin.tinkersthinking.DryingRackBlockEntityMixin";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -55,6 +62,8 @@ public class MisWorldMixinPlugin implements IMixinConfigPlugin {
                 return isModPresent("pizzadelight");
             case SUPPLEMENTARIES_BELLOWS:
                 return isModPresent("supplementaries");
+            case TINKERSTHINKING_DRYING_RACK:
+                return isModPresent("tinkers_thinking");
             default:
                 return true;
         }

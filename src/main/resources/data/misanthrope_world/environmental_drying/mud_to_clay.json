@@ -1,0 +1,15 @@
+{
+  "type": "misanthrope_world:environmental_drying",
+  "ingredient": {
+    "item": "minecraft:mud"
+  },
+  "result": {
+    "item": "minecraft:clay"
+  },
+  "base_ticks": 2400,
+  "min_temp_celsius": 10.0,
+  "max_humidity_mbar": 15.0,
+  "requires_airflow": true,
+  "open_air_allowed": true,
+  "rack_speed_multiplier": 1.0
+}

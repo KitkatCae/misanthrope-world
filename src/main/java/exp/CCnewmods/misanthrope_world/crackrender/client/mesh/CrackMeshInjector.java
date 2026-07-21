@@ -1,15 +1,10 @@
 package exp.CCnewmods.misanthrope_world.crackrender.client.mesh;
 
 import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import exp.CCnewmods.misanthrope_world.crackrender.client.ClientCrackCache;
 import exp.CCnewmods.misanthrope_world.crackrender.data.CrackEntry;
 import exp.CCnewmods.misanthrope_world.crackrender.data.VeinSegment;
-import net.minecraft.client.renderer.ChunkBufferBuilderPack;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.client.renderer.chunk.RenderChunkRegion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,26 +12,42 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Field;
+import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.Set;
 
 /**
- * Injects crack trough geometry into the chunk mesh buffers during compile().
+ * Injects crack trough geometry directly into vanilla's own open chunk-mesh
+ * BufferBuilders during {@code compile()} — WHILE they're still being written
+ * to, before vanilla calls {@code endOrDiscardIfEmpty()} on them.
  * <p>
  * ── Called from ───────────────────────────────────────────────────────────────
- * ChunkCrackInjectorMixin.misanthrope_injectCrackGeometry(), which is an
- *
- * @Inject at RETURN of RebuildTask.compile().
+ * {@code ChunkCrackInjectorMixin.misanthrope_injectCrackGeometryBeforeEnd()},
+ * a {@code @Redirect} on {@code BufferBuilder.endOrDiscardIfEmpty()} inside
+ * {@code RebuildTask.compile()}. See that class's doc for the full reasoning
+ * on why this replaced an earlier RETURN-based approach that never actually
+ * ran (region field read after being nulled) and, even fixed, would have
+ * clobbered vanilla terrain geometry (renderedLayers is a Map, not a Set —
+ * a post-hoc put() would replace the section's real buffer, not extend it).
+ * <p>
+ * Because we now write into the SAME BufferBuilder instances vanilla itself
+ * populated and will later close, {@code solidBuf}/{@code cutoutBuf} here are
+ * literally vanilla's own buffers, still mid-batch. We don't begin() them
+ * (vanilla already did, if it's using them at all) and we don't end() them
+ * (the mixin's real endOrDiscardIfEmpty() call does that immediately after
+ * this returns) — we just append quads.
  * <p>
  * ── What this does ────────────────────────────────────────────────────────────
- * 1. Gets the section origin from the parent RenderChunk.
- * 2. Queries ClientCrackCache for all entries in this 16³ section.
- * 3. For each cracked block, for each VeinSegment, for each face the segment
- * crosses: calls CrackTroughGeometry.emitFace() writing into the solid and
- * cutout BufferBuilders from the ChunkBufferBuilderPack.
- * 4. Adds RenderType.solid() and RenderType.cutout() to CompileResults.renderedLayers
- * if any geometry was written (so the chunk uploader picks up the buffers).
+ * 1. Queries ClientCrackCache for all entries in this 16³ section.
+ * 2. For each cracked block, for each VeinSegment, for each face the segment
+ * crosses: calls CrackTroughGeometry.emitFace() writing into whichever of
+ * solidBuf/cutoutBuf are non-null.
+ * <p>
+ * Either parameter may be null if vanilla never opened that RenderType for
+ * this section (e.g. a section with no cutout-rendered blocks at all) — the
+ * mixin already checked BufferBuilder.building() before calling in. In that
+ * case we just skip geometry that would have gone to the missing layer
+ * (e.g. a severe crack's void gap, which lives in cutout) rather than force
+ * -opening a buffer nothing would ever close.
  * <p>
  * ── Face visibility check ─────────────────────────────────────────────────────
  * Before emitting geometry for a face, we check that the adjacent block is not
@@ -45,59 +56,37 @@ import java.util.Set;
  * <p>
  * ── Thread safety ─────────────────────────────────────────────────────────────
  * This runs on a chunk compile worker thread. It only reads from ClientCrackCache
- * (ConcurrentHashMap, safe for concurrent reads) and writes to the BufferBuilder
- * instances from the pack (which are per-task, not shared between threads).
+ * (ConcurrentHashMap, safe for concurrent reads) and writes to BufferBuilder
+ * instances that are per-task, not shared between threads.
  */
 public final class CrackMeshInjector {
 
     private static final Logger LOGGER = LogManager.getLogger("MisanthropeCore/CrackMeshInjector");
 
-    // Reflection cache for renderedLayers field on CompileResults
-    private static Field renderedLayersField;
-
-    static {
-        try {
-            Class<?> compileResultsClass = Class.forName(
-                    "net.minecraft.client.renderer.chunk.ChunkRenderDispatcher$RenderChunk$RebuildTask$CompileResults");
-            renderedLayersField = compileResultsClass.getDeclaredField("renderedLayers");
-            renderedLayersField.setAccessible(true);
-        } catch (Exception e) {
-            LOGGER.error("[CrackMeshInjector] Failed to cache renderedLayers field: {}", e.getMessage());
-        }
-    }
-
     private CrackMeshInjector() {
     }
 
     /**
-     * Main injection entry point. Called by the mixin after vanilla compile() returns.
+     * Main injection entry point. Called by the mixin redirect just before
+     * vanilla finalizes this section's BufferBuilders.
      *
      * @param region        the RenderChunkRegion for this section (block state queries)
      * @param sectionOrigin the BlockPos origin of this 16³ section
-     * @param buffers       the ChunkBufferBuilderPack being written
-     * @param results       the CompileResults to add renderedLayers to
+     * @param solidBuf      vanilla's open solid-layer BufferBuilder, or null if not open this section
+     * @param cutoutBuf     vanilla's open cutout-layer BufferBuilder, or null if not open this section
      */
-    @SuppressWarnings("unchecked")
     public static void inject(RenderChunkRegion region,
-                              BlockPos sectionOrigin,
-                              ChunkBufferBuilderPack buffers,
-                              Object results) {
+                               BlockPos sectionOrigin,
+                               @Nullable BufferBuilder solidBuf,
+                               @Nullable BufferBuilder cutoutBuf) {
+        if (solidBuf == null && cutoutBuf == null) return;
+
         int sx = sectionOrigin.getX() >> 4;
         int sy = sectionOrigin.getY() >> 4;
         int sz = sectionOrigin.getZ() >> 4;
 
         Collection<CrackEntry> entries = ClientCrackCache.getEntriesInSection(sx, sy, sz);
         if (entries.isEmpty()) return;
-
-        BufferBuilder solidBuf = buffers.builder(RenderType.solid());
-        BufferBuilder cutoutBuf = buffers.builder(RenderType.cutout());
-
-        boolean wroteToSolid = false;
-        boolean wroteToCutout = false;
-
-        // Ensure builders are in drawing state — beginLayer() if not already begun
-        boolean solidStarted = ensureBegun(solidBuf, RenderType.solid());
-        boolean cutoutStarted = ensureBegun(cutoutBuf, RenderType.cutout());
 
         PoseStack pose = new PoseStack();
 
@@ -119,34 +108,14 @@ public final class CrackMeshInjector {
                 // Emit geometry for the entry face if this block isn't the origin
                 if (segment.entryFace() != null) {
                     if (isFaceVisible(region, blockPos, segment.entryFace())) {
-                        float[][] uvs = null; // BakedQuad UVs — extracted by face suppression mixin
-                        CrackTroughGeometry.emitFace(
-                                solidBuf, cutoutBuf, pose.last(),
-                                entry, segment,
-                                segment.entryFace(),
-                                uvs,
-                                combinedLight(blockPos),
-                                combinedOverlay()
-                        );
-                        wroteToSolid = true;
-                        if (entry.isSevere()) wroteToCutout = true;
+                        emit(solidBuf, cutoutBuf, pose, entry, segment, segment.entryFace(), blockPos);
                     }
                 }
 
                 // Emit geometry for the exit face if this block isn't the terminus
                 if (segment.exitFace() != null) {
                     if (isFaceVisible(region, blockPos, segment.exitFace())) {
-                        float[][] uvs = null;
-                        CrackTroughGeometry.emitFace(
-                                solidBuf, cutoutBuf, pose.last(),
-                                entry, segment,
-                                segment.exitFace(),
-                                uvs,
-                                combinedLight(blockPos),
-                                combinedOverlay()
-                        );
-                        wroteToSolid = true;
-                        if (entry.isSevere()) wroteToCutout = true;
+                        emit(solidBuf, cutoutBuf, pose, entry, segment, segment.exitFace(), blockPos);
                     }
                 }
 
@@ -154,15 +123,7 @@ public final class CrackMeshInjector {
                 if (segment.isOrigin()) {
                     for (Direction face : Direction.values()) {
                         if (isFaceVisible(region, blockPos, face)) {
-                            CrackTroughGeometry.emitFace(
-                                    solidBuf, cutoutBuf, pose.last(),
-                                    entry, segment,
-                                    face,
-                                    null,
-                                    combinedLight(blockPos),
-                                    combinedOverlay()
-                            );
-                            wroteToSolid = true;
+                            emit(solidBuf, cutoutBuf, pose, entry, segment, face, blockPos);
                         }
                     }
                 }
@@ -170,17 +131,30 @@ public final class CrackMeshInjector {
 
             pose.popPose();
         }
+    }
 
-        // Add the render types we wrote to CompileResults.renderedLayers
-        if (results != null && renderedLayersField != null) {
-            try {
-                Set<RenderType> layers = (Set<RenderType>) renderedLayersField.get(results);
-                if (wroteToSolid) layers.add(RenderType.solid());
-                if (wroteToCutout) layers.add(RenderType.cutout());
-            } catch (Exception e) {
-                LOGGER.warn("[CrackMeshInjector] Could not add to renderedLayers: {}", e.getMessage());
-            }
-        }
+    /**
+     * Thin wrapper around CrackTroughGeometry.emitFace() that tolerates a
+     * null solidBuf or cutoutBuf (see class doc) by substituting a no-op
+     * sink so CrackTroughGeometry doesn't need to know about the null case.
+     */
+    private static void emit(@Nullable BufferBuilder solidBuf,
+                              @Nullable BufferBuilder cutoutBuf,
+                              PoseStack pose,
+                              CrackEntry entry,
+                              VeinSegment segment,
+                              Direction face,
+                              BlockPos blockPos) {
+        if (solidBuf == null && cutoutBuf == null) return;
+        CrackTroughGeometry.emitFace(
+                solidBuf != null ? solidBuf : NoOpVertexConsumer.INSTANCE,
+                cutoutBuf != null ? cutoutBuf : NoOpVertexConsumer.INSTANCE,
+                pose.last(),
+                entry, segment, face,
+                null, // uvs — BakedQuad UVs, extracted by the face-suppression mixin elsewhere
+                combinedLight(blockPos),
+                combinedOverlay()
+        );
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
@@ -196,33 +170,6 @@ public final class CrackMeshInjector {
             return !adjState.isSolidRender(region, adjacent);
         } catch (Exception e) {
             return true; // default to visible on error
-        }
-    }
-
-    /**
-     * Ensure a BufferBuilder is in drawing state for the BLOCK vertex format.
-     * Returns true if we called begin() (so the caller knows to call
-     * storeRenderedBuffer when done if needed).
-     * <p>
-     * Note: in 1.20.1 Forge, the chunk compile already calls beginLayer() on
-     * each buffer before calling renderBatched. We check isCurrentBatchEmpty()
-     * rather than starting fresh — if the buffer is already open we just append.
-     */
-    private static boolean ensureBegun(BufferBuilder builder, RenderType type) {
-        try {
-            // If buffer isn't building yet, begin it
-            // We check via the building field — if false, call begin()
-            Field buildingField = BufferBuilder.class.getDeclaredField("building");
-            buildingField.setAccessible(true);
-            boolean building = buildingField.getBoolean(builder);
-            if (!building) {
-                builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            // Assume it's already begun — better to append than to crash
-            return false;
         }
     }
 

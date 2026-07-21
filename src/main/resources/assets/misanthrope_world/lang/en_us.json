@@ -12,5 +12,8 @@
   "subtitles.misanthrope_world.sonic_boom_medium": "Sonic boom (distant)",
   "subtitles.misanthrope_world.sonic_boom_far": "Sonic boom (far away)",
   "subtitles.misanthrope_world.supersonic_rumble": "Supersonic rumble",
-  "subtitles.misanthrope_world.reentry_roar": "Atmospheric roar"
+  "subtitles.misanthrope_world.reentry_roar": "Atmospheric roar",
+  "block.misanthrope_world.log_pile": "Log Pile",
+  "block.misanthrope_world.charcoal_layer": "Charcoal",
+  "item.misanthrope_world.cut_wood": "Cut Wood"
 }

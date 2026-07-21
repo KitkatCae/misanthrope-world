@@ -138,38 +138,53 @@ public final class FragmentSplitter {
     // -------------------------------------------------------------------------
 
     /**
-     * Mass-weighted center of mass of {@code group}, in world block-center
-     * coordinates (each block's contribution centered at {@code pos + 0.5}
-     * on all three axes). Weights by {@code densityKgM3} from
-     * {@link BlockPhysicsRegistry} where available, falling back to a
-     * generic 2400 kg/m³ (stone/concrete) for blocks with no structural data
-     * — same fallback density {@code StructuralStressField.computeColumnLoad}
-     * already uses for the same reason.
+     * Combined density-weighted total mass and center of mass for {@code group} — one pass instead
+     * of two. {@code centerOfMass} below delegates to this and discards the mass; use this directly
+     * when the caller needs both (e.g. {@code FailureDispatcher.spawnFragmentShip}'s launch impulse,
+     * which used to approximate mass as {@code group.size() * 2400.0} instead of reading this).
      *
-     * <p>vox3D computes this per-component during {@code b3F_splitPiece};
-     * this is that step, generalized to read real per-block density instead
-     * of a uniform material density (vox3D's chunk material table is one
-     * density per whole body).
+     * <p>Reads {@link BlockPhysicsData#densityKgM3} directly (top-level, not
+     * {@code data.structural.densityKgM3()}) — that field is deliberately kept in sync with the
+     * structural sub-object by {@code BlockPhysicsRegistry.parse} specifically so any caller needing
+     * density for mass purposes can read it unconditionally, without null-checking
+     * {@code data.structural} first (see that parser's own comment). Falls back to the same generic
+     * 2400 kg/m³ default {@code BlockPhysicsData}'s own builder already uses for blocks with no
+     * authored density.
      */
-    public static Vector3dc centerOfMass(ServerLevel level, Set<BlockPos> group) {
+    public record MassAndCenter(double totalMassKg, Vector3dc centerOfMass) {
+    }
+
+    public static MassAndCenter massAndCenterOfMass(ServerLevel level, Set<BlockPos> group) {
         double sumX = 0, sumY = 0, sumZ = 0, totalMass = 0;
 
         for (BlockPos pos : group) {
-            double density = 2400.0;
-            if (level.isLoaded(pos)) {
-                BlockPhysicsData data = BlockPhysicsRegistry.get(level.getBlockState(pos));
-                if (data.structural != null) {
-                    density = data.structural.densityKgM3();
-                }
-            }
+            double density = level.isLoaded(pos)
+                    ? BlockPhysicsRegistry.get(level.getBlockState(pos)).densityKgM3
+                    : 2400.0;
             sumX += (pos.getX() + 0.5) * density;
             sumY += (pos.getY() + 0.5) * density;
             sumZ += (pos.getZ() + 0.5) * density;
             totalMass += density;
         }
 
-        if (totalMass <= 0) totalMass = 1.0; // guard against empty group
-        return new Vector3d(sumX / totalMass, sumY / totalMass, sumZ / totalMass);
+        double safeMass = totalMass <= 0 ? 1.0 : totalMass; // guard against empty group
+        return new MassAndCenter(totalMass, new Vector3d(sumX / safeMass, sumY / safeMass, sumZ / safeMass));
+    }
+
+    /**
+     * Mass-weighted center of mass of {@code group}, in world block-center
+     * coordinates (each block's contribution centered at {@code pos + 0.5}
+     * on all three axes).
+     *
+     * <p>vox3D computes this per-component during {@code b3F_splitPiece};
+     * this is that step, generalized to read real per-block density instead
+     * of a uniform material density (vox3D's chunk material table is one
+     * density per whole body).
+     *
+     * @see #massAndCenterOfMass if the total mass is also needed — avoids a second pass over group.
+     */
+    public static Vector3dc centerOfMass(ServerLevel level, Set<BlockPos> group) {
+        return massAndCenterOfMass(level, group).centerOfMass();
     }
 
     // -------------------------------------------------------------------------

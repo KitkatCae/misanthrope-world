@@ -39,18 +39,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * tunneling through cleanly) — confirmed explicitly, this is not a "no
  * ceiling" design like FullStop's original.
  *
+ * <p>Target uses the SRG id {@code m_60742_} (the 3-arg overload of
+ * {@code getCollisionShape}, taking {@code CollisionContext}), matching the
+ * project's convention for vanilla-method-target mixins with
+ * {@code remap=false} (see {@code FarmlandBlockMixin}).
  */
 @Mixin(value = BlockBehaviour.BlockStateBase.class, remap = false)
 public abstract class PhaseableCollisionMixin {
 
     @Inject(
-            method = "getCollisionShape(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;",
+            method = "m_60742_(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/shapes/CollisionContext;)Lnet/minecraft/world/phys/shapes/VoxelShape;",
             at = @At("HEAD"),
             cancellable = true,
             remap = false
     )
     private void misanthrope$phaseableCollision(BlockGetter level, BlockPos pos, CollisionContext context,
-                                                 CallbackInfoReturnable<VoxelShape> cir) {
+                                                CallbackInfoReturnable<VoxelShape> cir) {
         if (!(context instanceof EntityCollisionContext entityContext)) return;
         Entity entity = entityContext.getEntity();
         if (!(entity instanceof LivingEntity living)) return;

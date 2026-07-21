@@ -1,0 +1,16 @@
+{
+  "_comment": "Wet sponge — no environmental restrictions, just needs any rack.",
+  "type": "misanthrope_world:environmental_drying",
+  "ingredient": {
+    "item": "minecraft:wet_sponge"
+  },
+  "result": {
+    "item": "minecraft:sponge"
+  },
+  "base_ticks": 1200,
+  "min_temp_celsius": -999,
+  "max_humidity_mbar": 999,
+  "requires_airflow": false,
+  "open_air_allowed": false,
+  "rack_speed_multiplier": 1.0
+}

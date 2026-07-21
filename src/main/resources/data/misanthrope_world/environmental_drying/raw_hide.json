@@ -1,0 +1,15 @@
+{
+  "type": "misanthrope_world:environmental_drying",
+  "ingredient": {
+    "item": "misanthrope_core:raw_hide"
+  },
+  "result": {
+    "item": "misanthrope_core:dried_hide"
+  },
+  "base_ticks": 4800,
+  "min_temp_celsius": 15.0,
+  "max_humidity_mbar": 12.0,
+  "requires_airflow": true,
+  "open_air_allowed": false,
+  "rack_speed_multiplier": 1.0
+}

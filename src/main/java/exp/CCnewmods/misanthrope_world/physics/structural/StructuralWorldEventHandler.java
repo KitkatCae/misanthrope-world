@@ -1,9 +1,13 @@
 package exp.CCnewmods.misanthrope_world.physics.structural;
 
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
+import exp.CCnewmods.misanthrope_world.physics.structural.grid.CompressiveStressSimulator;
+import exp.CCnewmods.misanthrope_world.physics.structural.grid.TensileStressSimulator;
+import exp.CCnewmods.misanthrope_world.pos.WorldPos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,6 +66,41 @@ public final class StructuralWorldEventHandler {
 
         if (BlockPhysicsRegistry.get(state).structural != null) {
             StructuralStressField.markDirty(level, pos);
+        }
+
+        // Stage 2 (StressGrid_Design_v1.md): break/place invalidation for the
+        // persistent compressive channel. Unconditional — unlike the dirty-
+        // queue marking above, this doesn't gate on the BROKEN block having
+        // structural data, since what matters is the column BELOW it, which
+        // may well have structural data even if this block didn't.
+        CompressiveStressSimulator.invalidateAndPropagate(level, WorldPos.fromBlockPos(pos));
+
+        // Stage 3: tensile channel invalidation — see TensileStressSimulator's
+        // doc for why this is a region clear rather than a precise propagation.
+        TensileStressSimulator.invalidateRegion(level, WorldPos.fromBlockPos(pos));
+    }
+
+    /**
+     * Stage 2: mirrors {@link #onBlockBreak} for placement. Also handles
+     * {@code EntityMultiPlaceEvent} (beds, doors, etc.) — it extends
+     * {@code EntityPlaceEvent}, so this same handler receives both; multi
+     * -place additionally invalidates every replaced position, not just the
+     * event's own single {@code getPos()}.
+     */
+    @SubscribeEvent
+    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        if (!(event.getLevel() instanceof ServerLevel level)) return;
+
+        if (event instanceof BlockEvent.EntityMultiPlaceEvent multi) {
+            for (BlockSnapshot snapshot : multi.getReplacedBlockSnapshots()) {
+                WorldPos changed = WorldPos.fromBlockPos(snapshot.getPos());
+                CompressiveStressSimulator.invalidateAndPropagate(level, changed);
+                TensileStressSimulator.invalidateRegion(level, changed);
+            }
+        } else {
+            WorldPos changed = WorldPos.fromBlockPos(event.getPos());
+            CompressiveStressSimulator.invalidateAndPropagate(level, changed);
+            TensileStressSimulator.invalidateRegion(level, changed);
         }
     }
 

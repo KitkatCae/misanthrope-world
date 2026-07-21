@@ -12,7 +12,10 @@
     "supplementaries.BellowsBlockTileMixin",
     "wet_sand.SugarCaneBlockMixin",
     "explosionoverhaul.CraterDeformerMixin",
-    "fullstop.PhaseableCollisionMixin"
+    "fullstop.PhaseableCollisionMixin",
+    "coldsweat.BiomeTempModifierMixin",
+    "coldsweat.CaveBiomeTempModifierMixin",
+    "tinkersthinking.DryingRackBlockEntityMixin"
   ],
   "client": [
     "temperature.ItemTemperatureTintMixin",

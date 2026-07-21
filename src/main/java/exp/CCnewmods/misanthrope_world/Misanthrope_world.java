@@ -1,6 +1,9 @@
 package exp.CCnewmods.misanthrope_world;
 
 import exp.CCnewmods.misanthrope_world.altitude.AltitudeSetup;
+import exp.CCnewmods.misanthrope_world.charcoal_pit.CharcoalPitRegistration;
+import exp.CCnewmods.misanthrope_world.drying.EnvironmentalDryingRecipeType;
+import exp.CCnewmods.misanthrope_world.log_splitting.LogSplittingRegistration;
 import exp.CCnewmods.misanthrope_world.config.MisWorldConfig;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
 import exp.CCnewmods.misanthrope_world.physics.WorldSimulation;
@@ -107,6 +110,11 @@ public class Misanthrope_world {
         // ── Temperature (always on — core purpose of this mod) ────────────────
         TemperatureSystemSetup.register(modEventBus);
         MisWorldSounds.register(modEventBus);
+
+        // ── Charcoal pit / log splitting / drying (moved from misanthrope_core) ─
+        LogSplittingRegistration.register(modEventBus);
+        CharcoalPitRegistration.register(modEventBus);
+        EnvironmentalDryingRecipeType.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.addListener(this::onAddReloadListeners);

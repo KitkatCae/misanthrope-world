@@ -5,7 +5,12 @@ import exp.CCnewmods.misanthrope_world.crackrender.data.CrackEntry;
 import exp.CCnewmods.misanthrope_world.crackrender.data.ICrackSourceProvider;
 import exp.CCnewmods.misanthrope_world.crackrender.network.CrackSyncPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.TicketType;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Server-side tick driver for the global crack system.
@@ -59,6 +65,24 @@ public class CrackPropagator {
      * Blocks changed this propagation tick, collected for sync.
      */
     private static final Set<BlockPos> DIRTY_POSITIONS = new LinkedHashSet<>();
+
+    // ── Cross-boundary chunk loading ────────────────────────────────────────────
+    // Boundary candidates can legitimately land in a chunk that isn't currently
+    // resident (either unloaded-but-generated, or never generated). We must never
+    // block the server tick waiting on that — instead we request the chunk via a
+    // vanilla loading ticket (async, non-blocking) and let it surface naturally
+    // on a later propagation cycle via the getChunkNow() fast path below.
+    // Staggered: at most MAX_INFLIGHT_CHUNK_REQUESTS outstanding at once, deduped
+    // per chunk, with a self-expiring timeout purely to free stuck bookkeeping —
+    // it does not cancel the underlying vanilla ticket/load.
+    private static final int MAX_INFLIGHT_CHUNK_REQUESTS = 12;
+    private static final long INFLIGHT_BOOKKEEPING_TIMEOUT_TICKS = 600; // 30s safety net
+    private static final TicketType<ChunkPos> CRACK_BOUNDARY_TICKET =
+            TicketType.create("misanthrope_world:crack_boundary_load", Comparator.comparingLong(ChunkPos::toLong), 300);
+
+    private record ChunkKey(ResourceKey<Level> dimension, long chunkPosLong) {}
+
+    private static final Map<ChunkKey, Long> INFLIGHT_CHUNK_REQUESTS = new ConcurrentHashMap<>();
 
     // ── Source registration ───────────────────────────────────────────────────
 
@@ -187,7 +211,21 @@ public class CrackPropagator {
 
                     BlockPos p = new BlockPos(x, y, z);
                     if (stateMap.hasCracks(p)) continue; // already tracked
-                    if (level.getBlockState(p).isSolid()) {
+
+                    int chunkX = x >> 4;
+                    int chunkZ = z >> 4;
+                    ChunkAccess chunk = level.getChunkSource().getChunkNow(chunkX, chunkZ);
+                    if (chunk == null) {
+                        // Not resident — never block the tick on it. Fire a staggered,
+                        // deduped async request and let a later propagation cycle
+                        // (collectCandidates reruns from scratch every PROPAGATION_INTERVAL)
+                        // pick this boundary back up once the chunk loads/generates.
+                        requestChunkAsync(level, chunkX, chunkZ);
+                        continue;
+                    }
+                    clearInflight(level, chunkX, chunkZ); // now resident — free its budget slot if held
+
+                    if (chunk.getBlockState(p).isSolid()) {
                         result.add(p);
                         sampled++;
                         if (sampled > 32) break outer; // cap new origins per tick
@@ -201,6 +239,42 @@ public class CrackPropagator {
             return result.subList(0, 256);
         }
         return result;
+    }
+
+    /**
+     * Requests async load/generation of a chunk needed by a boundary sample, without
+     * blocking the current tick. Deduped per chunk and capped globally at
+     * MAX_INFLIGHT_CHUNK_REQUESTS so a huge or degenerate zone can't fire off an
+     * unbounded burst of tickets in one cycle. NOTE: unverified against this project's
+     * actual Forge 47.4.20 parchment mappings — javap ServerChunkCache#addRegionTicket
+     * and TicketType#create before compiling; adjust the overload/arg types if they differ.
+     */
+    private static void requestChunkAsync(ServerLevel level, int chunkX, int chunkZ) {
+        ChunkKey key = new ChunkKey(level.dimension(), ChunkPos.asLong(chunkX, chunkZ));
+        long now = level.getGameTime();
+
+        Long requestedAt = INFLIGHT_CHUNK_REQUESTS.get(key);
+        if (requestedAt != null) {
+            if (now - requestedAt < INFLIGHT_BOOKKEEPING_TIMEOUT_TICKS) {
+                return; // already requested and still within the timeout window — dedupe
+            }
+            // Stale bookkeeping (chunk never showed up as resident) — drop it so the
+            // slot can be reused; does not cancel the underlying vanilla ticket.
+            INFLIGHT_CHUNK_REQUESTS.remove(key);
+        }
+
+        if (INFLIGHT_CHUNK_REQUESTS.size() >= MAX_INFLIGHT_CHUNK_REQUESTS) {
+            return; // budget exhausted this cycle — try again once slots free up
+        }
+
+        if (INFLIGHT_CHUNK_REQUESTS.putIfAbsent(key, now) == null) {
+            ChunkPos pos = new ChunkPos(chunkX, chunkZ);
+            level.getChunkSource().addRegionTicket(CRACK_BOUNDARY_TICKET, pos, 0, pos);
+        }
+    }
+
+    private static void clearInflight(ServerLevel level, int chunkX, int chunkZ) {
+        INFLIGHT_CHUNK_REQUESTS.remove(new ChunkKey(level.dimension(), ChunkPos.asLong(chunkX, chunkZ)));
     }
 
     // ── Weighted block selection ──────────────────────────────────────────────

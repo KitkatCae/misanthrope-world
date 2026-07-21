@@ -47,6 +47,8 @@ public final class MisWorldConfig {
     // [structural]
     private static final ForgeConfigSpec.IntValue STRUCTURAL_BACKGROUND_BLOCKS_PER_TICK;
     private static final ForgeConfigSpec.IntValue CRACK_PROPAGATION_INTERVAL_TICKS;
+    private static final ForgeConfigSpec.IntValue STRESS_GRID_TENSILE_RADIUS;
+    private static final ForgeConfigSpec.IntValue STRESS_GRID_REGEN_THRESHOLD_BLOCKS;
 
     // [altitude]
     private static final ForgeConfigSpec.ConfigValue<String> ALTITUDE_BANDS_FILE;
@@ -131,6 +133,28 @@ public final class MisWorldConfig {
                 )
                 .defineInRange("crackPropagationIntervalTicks", 20, 1, 200);
 
+        STRESS_GRID_TENSILE_RADIUS = builder
+                .comment(
+                        "How many blocks the tensile (span/cantilever) stress channel",
+                        "searches outward from a changed block, in either direction.",
+                        "Replaces the old hardcoded MAX_SPAN_RADIUS constant (was 16).",
+                        "Higher = more accurate cantilever detection at range, at the cost",
+                        "of a larger invalidation radius on every tensile-relevant change.",
+                        "Range: 1–32"
+                )
+                .defineInRange("stressGridTensileRadius", 16, 1, 32);
+
+        STRESS_GRID_REGEN_THRESHOLD_BLOCKS = builder
+                .comment(
+                        "When a single burst (explosion, kinetic impact, mass failure)",
+                        "changes at least this many blocks at once, the stress grid",
+                        "regenerates the affected bounding region wholesale instead of",
+                        "patching each changed position individually — cheaper for large",
+                        "bursts, since per-position patching cost adds up fast at scale.",
+                        "Range: 1–200"
+                )
+                .defineInRange("stressGridRegenThresholdBlocks", 20, 1, 200);
+
         builder.pop();
 
         // ── [altitude] ────────────────────────────────────────────────────────
@@ -192,6 +216,8 @@ public final class MisWorldConfig {
 
     public static int structuralBackgroundBlocksPerTick() { return STRUCTURAL_BACKGROUND_BLOCKS_PER_TICK.get(); }
     public static int crackPropagationIntervalTicks()     { return CRACK_PROPAGATION_INTERVAL_TICKS.get(); }
+    public static int stressGridTensileRadius()            { return STRESS_GRID_TENSILE_RADIUS.get(); }
+    public static int stressGridRegenThresholdBlocks()     { return STRESS_GRID_REGEN_THRESHOLD_BLOCKS.get(); }
 
     public static String altitudeBandsFile()              { return ALTITUDE_BANDS_FILE.get(); }
     public static double altitudeWindSensitivity()        { return ALTITUDE_WIND_SENSITIVITY.get(); }

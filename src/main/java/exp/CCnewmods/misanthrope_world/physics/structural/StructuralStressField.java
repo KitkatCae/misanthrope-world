@@ -1,11 +1,15 @@
 package exp.CCnewmods.misanthrope_world.physics.structural;
 
+import exp.CCnewmods.misanthrope_world.config.MisWorldConfig;
 import exp.CCnewmods.misanthrope_world.crackrender.data.CrackCause;
 import exp.CCnewmods.misanthrope_world.crackrender.data.ICrackSourceProvider;
 import exp.CCnewmods.misanthrope_world.crackrender.world.CrackPropagator;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsData;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsData.StructuralData;
 import exp.CCnewmods.misanthrope_world.physics.BlockPhysicsRegistry;
+import exp.CCnewmods.misanthrope_world.physics.structural.grid.CompressiveStressSimulator;
+import exp.CCnewmods.misanthrope_world.physics.structural.grid.TensileStressSimulator;
+import exp.CCnewmods.misanthrope_world.pos.WorldPos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -16,9 +20,11 @@ import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.event.level.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import exp.CCnewmods.misanthrope_world.physics.perf.PerfSampler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -38,7 +44,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
  *       below) enqueues the changed block and its immediate neighbours.
  *       Processed every tick from a {@link ConcurrentLinkedDeque}.</li>
  *   <li><b>Option B — ambient:</b> A slow background walk through loaded chunk
- *       sections re-evaluates {@link #BACKGROUND_BLOCKS_PER_TICK} randomly
+ *       sections re-evaluates {@link #backgroundBlocksPerTick()} randomly
  *       selected blocks per tick. This lets naturally generated structures
  *       (stalactites, cliff overhangs) fail over time even when nothing nearby
  *       changes.</li>
@@ -84,18 +90,71 @@ public final class StructuralStressField {
 
     /**
      * Max air-span BFS width for tensile analysis.
+     *
+     * @deprecated No longer read internally — {@code computeSpan} now
+     * delegates to {@code TensileStressSimulator}, which uses
+     * {@code MisWorldConfig.stressGridTensileRadius()} instead. Left in
+     * place (not deleted) since this is a {@code public} constant and
+     * cross-mod code (MCT, Ousia, etc. — not verifiable from this codebase
+     * alone) may reference it; safe to remove once confirmed nothing does.
      */
+    @Deprecated
     public static final int MAX_SPAN_RADIUS = 16;
 
     /**
      * Background scan: blocks re-evaluated per tick across all loaded levels.
+     * <p>
+     * Previously hardcoded to 4, silently ignoring
+     * {@code MisWorldConfig.structuralBackgroundBlocksPerTick()} (default 8,
+     * range 1–64) even though that config option exists specifically for
+     * this. Fixed to actually read it — this is also now the fastest lever
+     * for tuning background-scan cost without a rebuild.
      */
-    private static final int BACKGROUND_BLOCKS_PER_TICK = 4;
+    private static int backgroundBlocksPerTick() {
+        return MisWorldConfig.structuralBackgroundBlocksPerTick();
+    }
 
     /**
      * When a background failure fires, BFS radius for connected failure set.
      */
     public static final int MAX_CONNECTED_FAILURE_RADIUS = 8;
+
+    /**
+     * ── Per-tick BFS burst cap ─────────────────────────────────────────────────
+     * connectedFailureBFS itself has no cap on how many times it can fire
+     * within one tick — every one of this tick's (up to 32 dirty + N
+     * background) evaluateBlock calls that finds shouldFail=true triggers
+     * its own BFS synchronously, inline, with no throughput limit. In a mass
+     * -failure burst (many positions crossing threshold in the same tick —
+     * e.g. right after a chunk loads into a physics regime it wasn't
+     * generated under) that's effectively unbounded work in one tick even
+     * with the per-position budgets capping how many evaluations start.
+     * <p>
+     * The tick-scoped {@code computeColumnLoad} memo cache (see that
+     * method's doc) should already collapse most of the *redundant* part of
+     * this cost. These two caps are the backstop for what's left: once
+     * either is hit, further shouldFail positions this tick are deferred —
+     * re-queued via {@link #markDirty} for next tick — instead of run now.
+     * Deferred failures aren't lost, just spread across a couple of ticks
+     * instead of landing in one, which is the actual fix for "can't even
+     * move" during a big collapse event.
+     */
+    private static final int MAX_BFS_INVOCATIONS_PER_TICK = 6;
+    private static final int MAX_BFS_NODES_VISITED_PER_TICK = 400;
+
+    private static final Map<ServerLevel, Integer> BFS_INVOCATIONS_THIS_TICK = new ConcurrentHashMap<>();
+    private static final Map<ServerLevel, Integer> BFS_NODES_VISITED_THIS_TICK = new ConcurrentHashMap<>();
+
+    /** True if this tick still has BFS budget left for another failure group. */
+    private static boolean hasBfsBudget(ServerLevel level) {
+        return BFS_INVOCATIONS_THIS_TICK.getOrDefault(level, 0) < MAX_BFS_INVOCATIONS_PER_TICK
+                && BFS_NODES_VISITED_THIS_TICK.getOrDefault(level, 0) < MAX_BFS_NODES_VISITED_PER_TICK;
+    }
+
+    private static void recordBfsUsage(ServerLevel level, int nodesVisited) {
+        BFS_INVOCATIONS_THIS_TICK.merge(level, 1, Integer::sum);
+        BFS_NODES_VISITED_THIS_TICK.merge(level, nodesVisited, Integer::sum);
+    }
 
     /**
      * Consecutive evaluations a block must be found at/above its failure
@@ -183,6 +242,27 @@ public final class StructuralStressField {
      */
     public static void unregisterExternalSupport(BlockPos pos) {
         EXTERNAL_SUPPORTS.remove(pos);
+    }
+
+    /**
+     * Read-only accessor for {@link #G_GAME}. Added for
+     * {@code CompressiveStressSimulator} (the new persistent stress-grid
+     * write path) so it can match this file's exact gravity scaling instead
+     * of duplicating the constant — nothing here changes existing behavior.
+     */
+    public static double gGame() {
+        return G_GAME;
+    }
+
+    /**
+     * Read-only accessor for {@link #EXTERNAL_SUPPORTS}. Same rationale as
+     * {@link #gGame()} — {@code CompressiveStressSimulator} needs to check
+     * the same support registry this file's own column walk already
+     * consults, without a second, possibly-diverging copy of it.
+     */
+    @Nullable
+    public static Double getExternalSupportCapacity(BlockPos pos) {
+        return EXTERNAL_SUPPORTS.get(pos);
     }
 
     /**
@@ -320,6 +400,18 @@ public final class StructuralStressField {
         if (event.phase != TickEvent.Phase.END) return;
         if (!(event.level instanceof ServerLevel level)) return;
 
+        // Emergency off-switch: existing config toggles (crackSystem /
+        // collapseSystem) were never actually wired to this tick before —
+        // they gated crack propagation and collapse *dispatch*, but not the
+        // stress evaluation that feeds them. Wired in now so either can be
+        // flipped off in-config (no rebuild) if this ever needs to be killed
+        // fast again.
+        if (!MisWorldConfig.isCrackSystemEnabled() && !MisWorldConfig.isCollapseSystemEnabled()) return;
+
+        PerfSampler.maybeLogAndReset(level.getGameTime());
+        BFS_INVOCATIONS_THIS_TICK.put(level, 0);
+        BFS_NODES_VISITED_THIS_TICK.put(level, 0);
+
         // Option A: drain dirty queue
         ConcurrentLinkedDeque<BlockPos> dirty = DIRTY.get(level);
         if (dirty != null) {
@@ -335,7 +427,7 @@ public final class StructuralStressField {
 
         // Option B: background scan
         BackgroundScanner scanner = BACKGROUND.computeIfAbsent(level, BackgroundScanner::new);
-        List<BlockPos> candidates = scanner.next(BACKGROUND_BLOCKS_PER_TICK);
+        List<BlockPos> candidates = scanner.next(backgroundBlocksPerTick());
         for (BlockPos pos : candidates) {
             evaluateBlock(level, pos);
         }
@@ -378,6 +470,16 @@ public final class StructuralStressField {
      * only for the case that was actually missing group failure.
      */
     private static void evaluateBlock(ServerLevel level, BlockPos pos) {
+        if (!PerfSampler.ENABLED) {
+            evaluateBlockInner(level, pos);
+            return;
+        }
+        long t0 = System.nanoTime();
+        evaluateBlockInner(level, pos);
+        PerfSampler.record("structural.evaluateBlock", System.nanoTime() - t0);
+    }
+
+    private static void evaluateBlockInner(ServerLevel level, BlockPos pos) {
         if (!level.isLoaded(pos)) return;
         BlockState state = level.getBlockState(pos);
         if (state.isAir()) return;
@@ -432,7 +534,16 @@ public final class StructuralStressField {
 
         // ── Dispatch ─────────────────────────────────────────────────────────
         if (shouldFail) {
+            if (!hasBfsBudget(level)) {
+                // This tick's BFS budget is spent — defer to next tick rather
+                // than run an unbounded-cost group failure right now. The
+                // block is still overloaded; it'll be picked up again very
+                // shortly (next tick's dirty drain), just not this instant.
+                markDirty(level, pos);
+                return;
+            }
             Set<BlockPos> failSet = connectedFailureBFS(level, pos, sd.failureThresholdFraction());
+            recordBfsUsage(level, failSet.size());
             for (BlockPos failPos : failSet) {
                 exp.CCnewmods.misanthrope_world.physics.persist.CorrosionStateMap
                         .get(level).remove(failPos);
@@ -506,118 +617,44 @@ public final class StructuralStressField {
     /**
      * Sums the weight of all solid blocks in a downward column above {@code pos},
      * stopping at bedrock or a structural frame block (which re-routes the load).
+     * <p>
+     * Delegates to {@link CompressiveStressSimulator}, which persists results
+     * in {@link exp.CCnewmods.misanthrope_world.physics.structural.grid.StressGrid}
+     * instead of the tick-scoped memo cache this used before (see
+     * {@code StressGrid_Design_v1.md}, Stage 2 → cutover). The tick-scoped
+     * cache and its own walk implementation are gone — fully superseded, not
+     * kept alongside this.
      *
      * @return load in kN (game-scaled)
      */
     static double computeColumnLoad(ServerLevel level, BlockPos pos) {
-        double totalKN = 0.0;
-        BlockPos cursor = pos.above();
-
-        for (int i = 0; i < MAX_COLUMN_DEPTH; i++) {
-            if (!level.isLoaded(cursor)) break;
-            BlockState above = level.getBlockState(cursor);
-            if (above.isAir()) break; // open sky — no load above this
-
-            // ── External support check ────────────────────────────────────────
-            // If this position has a registered external support (e.g. a hydraulic
-            // cylinder), it carries up to its capacity and terminates the column.
-            Double supportCapacityKN = EXTERNAL_SUPPORTS.get(cursor);
-            if (supportCapacityKN != null) {
-                // Add the support member's own weight (approximate: treat as steel beam)
-                totalKN += 7800 * G_GAME; // steel density default
-                // The support carries the load above — cap total at the remaining
-                // load or support capacity, whichever is less, then stop walking.
-                // If support capacity > accumulated load, everything above is carried
-                // and the blocks below this pos see zero load from above.
-                // If support capacity < accumulated load, excess passes through.
-                if (totalKN <= supportCapacityKN) {
-                    return 0.0; // cylinder carries all load — blocks below are stress-free
-                } else {
-                    totalKN -= supportCapacityKN; // partial relief: remainder passes through
-                    break;
-                }
-            }
-            // ── End external support check ────────────────────────────────────
-
-            BlockPhysicsData d = BlockPhysicsRegistry.get(above);
-            StructuralData sd = d.structural;
-
-            if (sd != null) {
-                totalKN += sd.densityKgM3() * G_GAME;
-                if (sd.isStructuralFrame()) {
-                    // Frame redistributes load laterally — this column terminates here
-                    // but we add the frame's own contribution
-                    break;
-                }
-            } else {
-                // No structural data: use density from core data (stone default ~2400)
-                totalKN += 2400 * G_GAME;
-            }
-            cursor = cursor.above();
+        if (!PerfSampler.ENABLED) {
+            return CompressiveStressSimulator.effectiveLoad(level, WorldPos.fromBlockPos(pos));
         }
-
-        // Lateral load transfer from structural frame neighbours
-        for (Direction horizontal : new Direction[]{Direction.NORTH, Direction.SOUTH,
-                Direction.EAST, Direction.WEST}) {
-            BlockPos neighbour = pos.relative(horizontal);
-            if (!level.isLoaded(neighbour)) continue;
-            BlockPhysicsData nd = BlockPhysicsRegistry.get(level.getBlockState(neighbour));
-            if (nd.structural != null && nd.structural.isStructuralFrame()) {
-                // Frame neighbours share the load — reduce effective column load
-                totalKN *= (1.0 - 0.25 * nd.structural.loadTransferRange());
-                totalKN = Math.max(0, totalKN);
-            }
-        }
-
-        return totalKN;
+        long t0 = System.nanoTime();
+        double result = CompressiveStressSimulator.effectiveLoad(level, WorldPos.fromBlockPos(pos));
+        PerfSampler.record("structural.computeColumnLoad", System.nanoTime() - t0);
+        return result;
     }
 
     // ── Span analysis (tensile) ───────────────────────────────────────────────
 
     /**
-     * Estimates the unsupported horizontal span of the block at {@code pos}.
-     * BFS fills the contiguous air space below, measures its width.
-     *
-     * @return span in blocks (0 if block is directly supported)
+     * Air-cavity flood-fill span below {@code pos} — see
+     * {@code TensileStressSimulator}'s doc for the exact shape (X/Z-radius
+     * -bounded, Y-unbounded within a node cap, never explores upward).
+     * Delegates to {@link TensileStressSimulator}, which persists results in
+     * the stress grid (see {@code StressGrid_Design_v1.md}, Stage 3 →
+     * cutover) instead of recomputing the full BFS on every call.
      */
     static double computeSpan(ServerLevel level, BlockPos pos) {
-        // Quick check: if block below is solid, span = 0
-        BlockPos below = pos.below();
-        if (level.isLoaded(below) && !level.getBlockState(below).isAir()) return 0.0;
-
-        // BFS the air space below
-        Queue<BlockPos> queue = new ArrayDeque<>();
-        Set<Long> visited = new HashSet<>();
-        queue.add(below);
-        visited.add(below.asLong());
-
-        int minX = below.getX(), maxX = below.getX();
-        int minZ = below.getZ(), maxZ = below.getZ();
-        int count = 0;
-
-        while (!queue.isEmpty() && count < 400) {
-            BlockPos cur = queue.poll();
-            count++;
-            minX = Math.min(minX, cur.getX());
-            maxX = Math.max(maxX, cur.getX());
-            minZ = Math.min(minZ, cur.getZ());
-            maxZ = Math.max(maxZ, cur.getZ());
-
-            for (Direction d : Direction.values()) {
-                if (d == Direction.UP) continue; // don't go back up
-                BlockPos next = cur.relative(d);
-                if (!level.isLoaded(next)) continue;
-                if (!visited.add(next.asLong())) continue;
-                // Stop at radius limit
-                if (Math.abs(next.getX() - pos.getX()) > MAX_SPAN_RADIUS) continue;
-                if (Math.abs(next.getZ() - pos.getZ()) > MAX_SPAN_RADIUS) continue;
-                if (level.getBlockState(next).isAir()) queue.add(next);
-            }
+        if (!PerfSampler.ENABLED) {
+            return TensileStressSimulator.effectiveSpan(level, WorldPos.fromBlockPos(pos));
         }
-
-        double spanX = maxX - minX + 1;
-        double spanZ = maxZ - minZ + 1;
-        return Math.max(spanX, spanZ);
+        long t0 = System.nanoTime();
+        double result = TensileStressSimulator.effectiveSpan(level, WorldPos.fromBlockPos(pos));
+        PerfSampler.record("structural.computeSpan", System.nanoTime() - t0);
+        return result;
     }
 
     // ── Connected-failure BFS (Option B) ─────────────────────────────────────
@@ -671,6 +708,28 @@ public final class StructuralStressField {
      *                         defensive caller can still return 0)
      */
     static Set<BlockPos> connectedFailureBFS(ServerLevel level, BlockPos origin,
+                                             double failThreshold,
+                                             java.util.function.ToDoubleFunction<BlockPos> stressFractionFn) {
+        if (!PerfSampler.ENABLED) {
+            return connectedFailureBFSInner(level, origin, failThreshold, stressFractionFn);
+        }
+        long t0 = System.nanoTime();
+        Set<BlockPos> result = connectedFailureBFSInner(level, origin, failThreshold, stressFractionFn);
+        PerfSampler.record("structural.connectedFailureBFS", System.nanoTime() - t0);
+        PerfSampler.record("structural.connectedFailureBFS.groupSize." + bucket(result.size()), 0);
+        return result;
+    }
+
+    /** Buckets group size into a probe-name suffix so the log shows a rough
+     *  histogram (1, 2-4, 5-16, 17+) instead of one line per distinct size. */
+    private static String bucket(int size) {
+        if (size <= 1) return "01";
+        if (size <= 4) return "02-04";
+        if (size <= 16) return "05-16";
+        return "17+";
+    }
+
+    private static Set<BlockPos> connectedFailureBFSInner(ServerLevel level, BlockPos origin,
                                              double failThreshold,
                                              java.util.function.ToDoubleFunction<BlockPos> stressFractionFn) {
         Set<BlockPos> result = new LinkedHashSet<>();

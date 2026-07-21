@@ -1,0 +1,12 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "misanthrope_world:block/log_pile_placeholder_side"
+    },
+    {
+      "type": "minecraft:single",
+      "resource": "misanthrope_world:block/log_pile_placeholder_cross"
+    }
+  ]
+}
